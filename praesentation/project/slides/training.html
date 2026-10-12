@@ -1,0 +1,28 @@
+<section id="training" data-transition="fade" style="background:#F6F1E7;color:#1E1B18;font-family:'DM Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:36px">
+<p style="font-size:24px;color:#9A5F0B;letter-spacing:2px;text-transform:uppercase">Lernen</p>
+<h2 style="font-family:'Domine', Georgia, serif;font-size:64px;font-weight:600;line-height:1.1">Training: raten, messen, nachbessern</h2>
+<div style="display:flex;gap:32px">
+<div style="flex:1;display:flex;flex-direction:column;gap:14px;background:#FFFDF8;padding:32px;border:1px solid #DDD3C0;border-radius:16px">
+<p style="font-size:44px;font-weight:700;color:#9A5F0B">1</p>
+<p style="font-size:32px;font-weight:700">Raten</p>
+<p style="font-size:28px;line-height:1.35;color:#5B5348">Das Netz berechnet für alle 230 Beispiele eine Antwort.</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:14px;background:#FFFDF8;padding:32px;border:1px solid #DDD3C0;border-radius:16px">
+<p style="font-size:44px;font-weight:700;color:#9A5F0B">2</p>
+<p style="font-size:32px;font-weight:700">Fehler messen</p>
+<p style="font-size:28px;line-height:1.35;color:#5B5348">Vermutung minus richtige Antwort: P − Y.</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:14px;background:#FFFDF8;padding:32px;border:1px solid #DDD3C0;border-radius:16px">
+<p style="font-size:44px;font-weight:700;color:#9A5F0B">3</p>
+<p style="font-size:32px;font-weight:700">Schuld verteilen</p>
+<p style="font-size:28px;line-height:1.35;color:#5B5348">Der Fehler wandert rückwärts zu jedem Gewicht (Backpropagation).</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:14px;background:#FFFDF8;padding:32px;border:1px solid #DDD3C0;border-radius:16px">
+<p style="font-size:44px;font-weight:700;color:#9A5F0B">4</p>
+<p style="font-size:32px;font-weight:700">Korrigieren</p>
+<p style="font-size:28px;line-height:1.35;color:#5B5348">Jedes Gewicht macht einen kleinen Schritt gegen seine Schuld.</p>
+</div>
+</div>
+<p style="font-size:34px;line-height:1.4">Das Ganze 1500-mal. Start: Zufallszahlen. Ende: Gewichte, die zu den Beispielen passen.</p>
+<aside>Die Gewichte werden nicht berechnet, sondern schrittweise gelernt. Am Anfang sind sie zufällig. In jeder der 1500 Runden raten wir, messen den Fehler, verteilen die Schuld rückwärts und schieben jedes Gewicht ein kleines Stück in die Richtung, die den Fehler verkleinert. Das ist Gradientenabstieg, derselbe Mechanismus wie beim Training großer Modelle.</aside>
+</section>

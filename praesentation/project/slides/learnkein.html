@@ -1,0 +1,52 @@
+<section id="learnkein" data-transition="fade" style="background:#1E1B18;color:#F6F1E7;font-family:'DM Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:24px">
+<p style="font-size:24px;color:#E0A23B;letter-spacing:2px;text-transform:uppercase">Lernen im Kleinen</p>
+<h2 style="font-family:'Domine', Georgia, serif;font-size:64px;font-weight:600;line-height:1.1">Wie „kein“ gelernt wird</h2>
+<div style="display:flex;flex-direction:column;gap:14px">
+<div style="display:flex;align-items:center;gap:32px;background:#2A2621;padding:14px 32px;border-radius:14px">
+<p style="width:40px;font-size:44px;font-weight:700;color:#E0A23B">1</p>
+<div style="width:340px;display:flex;flex-direction:column;gap:2px">
+<p style="font-size:34px;font-weight:700">Eingabe</p>
+<p style="font-size:24px;color:#BDB5A6">im Chat beibringen</p>
+</div>
+<p style="width:400px;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px;color:#E0A23B">[start] kein bier = wein</p>
+<p style="flex:1;font-size:26px;line-height:1.3">Der Gast sagt dem Barkeeper, was richtig gewesen wäre: Satz, Kontext und die richtige Antwort.</p>
+</div>
+<div style="display:flex;align-items:center;gap:32px;background:#2A2621;padding:14px 32px;border-radius:14px">
+<p style="width:40px;font-size:44px;font-weight:700;color:#E0A23B">2</p>
+<div style="width:340px;display:flex;flex-direction:column;gap:2px">
+<p style="font-size:34px;font-weight:700">Speichern</p>
+<p style="font-size:24px;color:#BDB5A6">neue Zeile in <i>examples</i></p>
+</div>
+<p style="width:400px;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px;color:#E0A23B">start | kein bier | wein</p>
+<p style="flex:1;font-size:26px;line-height:1.3">Das Beispiel kommt in die Datenbank zu den bisherigen Beispielen. Es ist die Lernvorlage, noch nichts am Netz ändert sich.</p>
+</div>
+<div style="display:flex;align-items:center;gap:32px;background:#2A2621;padding:14px 32px;border-radius:14px">
+<p style="width:40px;font-size:44px;font-weight:700;color:#E0A23B">3</p>
+<div style="width:340px;display:flex;flex-direction:column;gap:2px">
+<p style="font-size:34px;font-weight:700">Neue Spalte</p>
+<p style="font-size:24px;color:#BDB5A6">Wort „kein“ ins Vokabular</p>
+</div>
+<p style="width:400px;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px;color:#E0A23B">W1: Spalte „kein“</p>
+<p style="flex:1;font-size:26px;line-height:1.3">Vorher war „kein“ unbekannt und wurde ignoriert. Jetzt bekommt es eine eigene Spalte in W1, mit einem Zufallsstart pro Konzept.</p>
+</div>
+<div style="display:flex;align-items:center;gap:32px;background:#2A2621;padding:14px 32px;border-radius:14px;border-left:8px solid #E0A23B">
+<p style="width:40px;font-size:44px;font-weight:700;color:#E0A23B">4</p>
+<div style="width:340px;display:flex;flex-direction:column;gap:2px">
+<p style="font-size:34px;font-weight:700">Neu trainieren</p>
+<p style="font-size:24px;color:#BDB5A6">alle Beispiele, 1500 Runden</p>
+</div>
+<p style="width:400px;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px;color:#E0A23B">Fehler → Backprop</p>
+<p style="flex:1;font-size:26px;line-height:1.3">Das Netz rät für jeden Satz, misst den Fehler und schiebt die Gewichte (Folien 10 und 11). Bei „kein bier“ zieht das Training die Gewichte von „kein“ so, dass sie bier-Stimmen bremsen und wein-Stimmen anschieben.</p>
+</div>
+<div style="display:flex;align-items:center;gap:32px;background:#2A2621;padding:14px 32px;border-radius:14px">
+<p style="width:40px;font-size:44px;font-weight:700;color:#E0A23B">5</p>
+<div style="width:340px;display:flex;flex-direction:column;gap:2px">
+<p style="font-size:34px;font-weight:700">Ergebnis</p>
+<p style="font-size:24px;color:#BDB5A6">das Gelernte steckt in den Gewichten</p>
+</div>
+<p style="width:400px;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px;color:#E0A23B">bier 99.9 % → wein 98.9 %</p>
+<p style="flex:1;font-size:26px;line-height:1.3">„kein“ ist kein Eintrag in einer Liste, sondern steckt in den Zahlen von W1 und W2. Der Satz „kein bier“ ergibt jetzt wein.</p>
+</div>
+</div>
+<aside>So wird aus einem Satz ein gelernter Zusammenhang. Der Gast tippt im Chat "kein bier = wein". Das Beispiel wird in der Tabelle examples gespeichert. Weil "kein" im Vokabular noch fehlt, entsteht eine neue Spalte in W1. Dann wird das gesamte Netz neu trainiert: aus dem Zufallsstart, mit allen gespeicherten Beispielen, 1500 Runden. Es wird also nicht nur das Wort "kein" geändert, sondern alle Gewichte werden neu berechnet. Wie genau die Gewichte dabei geschoben werden, zeigen die Folien zu Backpropagation. Wichtig: Das Netz bekommt keine Regel "kein dreht die Antwort um". Es findet Gewichte, die für die Beispiele funktionieren. Deshalb braucht es mehrere Beispiele, in unserem Modell sind es 14 mit "kein", damit auch ähnliche Sätze wie "kein wein" oder "bitte kein bier" richtig laufen. Die Zahlen unten stammen aus einem Modell mit diesen 14 Beispielen im Vergleich zu einem Modell ganz ohne sie.</aside>
+</section>

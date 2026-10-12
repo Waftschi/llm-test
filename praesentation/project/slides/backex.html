@@ -1,0 +1,35 @@
+<section id="backex" data-transition="fade" style="background:#F6F1E7;color:#1E1B18;font-family:'DM Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:28px">
+<p style="font-size:24px;color:#9A5F0B;letter-spacing:2px;text-transform:uppercase">Lernen</p>
+<h2 style="font-family:'Domine', Georgia, serif;font-size:64px;font-weight:600;line-height:1.1">Rechenbeispiel: D2 und D1</h2>
+<div style="display:flex;gap:48px">
+<div style="width:640px;display:flex;flex-direction:column;gap:12px;background:#FFFDF8;padding:24px 28px;border:1px solid #DDD3C0;border-radius:16px">
+<p style="font-size:32px;font-weight:700;color:#9A5F0B">Ausgangslage</p>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px;line-height:1.4">Richtig: bier, Y = [0, 1, 0]<br>Aktivierung h = [+0.9, −0.5]</p>
+<table style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px">
+<tr style="background:#EAE2D0"><th style="width:40%">Konzept</th><th style="width:30%">c0</th><th style="width:30%">c1</th></tr>
+<tr><td><b>Aktivierung h</b></td><td><b>+0.9</b></td><td><b>−0.5</b></td></tr>
+<tr><td>W2 gruss</td><td>0.1</td><td>0.2</td></tr>
+<tr><td>W2 bier</td><td>0.5</td><td>−0.5</td></tr>
+<tr><td>W2 wein</td><td>1.5</td><td>−0.4</td></tr>
+</table>
+<p style="font-size:28px;line-height:1.35">Vermutung P = [0.13, 0.26, 0.61]. Das Netz rät <b>wein (61 %)</b>, richtig wäre bier.</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:20px">
+<div style="display:flex;flex-direction:column;gap:8px;background:#FFFDF8;padding:20px 28px;border:1px solid #DDD3C0;border-radius:16px">
+<p style="font-size:30px;font-weight:700;color:#9A5F0B">1 · D2 = P − Y</p>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px">gruss +0.13   bier <span style="color:#1F6F8B">−0.74</span>   wein +0.61</p>
+<p style="font-size:26px;color:#5B5348">Positiv = Antwort zu stark, negativ = zu schwach.</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:8px;background:#FFFDF8;padding:20px 28px;border:1px solid #DDD3C0;border-radius:16px">
+<p style="font-size:30px;font-weight:700;color:#9A5F0B">2 · D2 · W2: Beitrag jedes Konzepts zur Schuld</p>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px;line-height:1.4">c0: 0.13·0.1 + (−0.74)·0.5 + 0.61·1.5 = <b>+0.56</b><br>c1: 0.13·0.2 + (−0.74)·(−0.5) + 0.61·(−0.4) = <b>+0.15</b></p>
+</div>
+<div style="display:flex;flex-direction:column;gap:8px;background:#FFFDF8;padding:20px 28px;border:1px solid #DDD3C0;border-radius:16px">
+<p style="font-size:30px;font-weight:700;color:#9A5F0B">3 · × (1 − h²): Wie beweglich ist das Konzept?</p>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px;line-height:1.4">c0: h = +0.9 → 1 − 0.9² = 0.19 → 0.56 × 0.19 = <b>0.11</b><br>c1: h = −0.5 → 1 − 0.5² = 0.75 → 0.15 × 0.75 = <b>0.11</b></p>
+<p style="font-size:26px;color:#5B5348">c0: Aktivierung +0.9 liegt nahe am Maximum +1: flache Kurve, kleiner Faktor.</p>
+</div>
+</div>
+</div>
+<aside>Ein winziges Beispiel mit drei Antworten und zwei Konzepten. Das Netz rät wein mit 61 Prozent, richtig wäre bier. Schritt 1: D2 ist Vermutung minus richtige Antwort. Bier ist mit minus 0.74 viel zu schwach, wein mit plus 0.61 viel zu stark. Schritt 2: Wir geben diese Fehler über die Gewichte W2 an die Konzepte weiter. Für jedes Konzept werden alle Antwort-Fehler mit dem Gewicht dieses Konzepts in die jeweilige Antwort multipliziert und addiert. Konzept 0 stimmt mit Gewicht 1.5 stark für wein und bekommt deshalb viel Schuld, plus 0.56. Schritt 3: Der Faktor 1 minus h hoch 2 ist die Steigung von tanh. Konzept 0 hat die Aktivierung 0.9 und sitzt fast am Anschlag, der Faktor ist nur 0.19. Konzept 1 liegt mit minus 0.5 in der Mitte, der Faktor ist 0.75. Am Ende haben beide Konzepte die gleiche Schuld, 0.11. Daraus werden dann die Änderungen der Gewichte berechnet, das zeigt die nächste Folie.</aside>
+</section>

@@ -1,0 +1,1198 @@
+{
+  "info": "Seed-Daten für barkeeper.py. Kontexte: start + Getränke. Preise in Euro.",
+  "intents": {
+    "gruss": {
+      "replies": [
+        "Servus! Was darf's sein?",
+        "Grüß Gott! Was trinkst du?",
+        "Guten Abend, schön dass du da bist!"
+      ],
+      "price": 0,
+      "context": null
+    },
+    "bier": {
+      "replies": [
+        "Ein frisches Helles, kommt sofort!",
+        "Eine Halbe Helles, bitte schön."
+      ],
+      "price": 4.8,
+      "context": "bier"
+    },
+    "weissbier": {
+      "replies": [
+        "Ein Weißbier, frisch eingeschenkt!",
+        "Weißbier kommt, mit schöner Schaumkrone."
+      ],
+      "price": 5.2,
+      "context": "weissbier"
+    },
+    "radler": {
+      "replies": [
+        "Ein Radler, schön erfrischend!",
+        "Radler kommt sofort."
+      ],
+      "price": 4.6,
+      "context": "radler"
+    },
+    "wein": {
+      "replies": [
+        "Ein Glas Rotwein, bitte schön.",
+        "Rotwein, ein guter Tropfen!"
+      ],
+      "price": 6.5,
+      "context": "wein"
+    },
+    "weisswein": {
+      "replies": [
+        "Ein Glas Weißwein, gut gekühlt.",
+        "Weißwein kommt!"
+      ],
+      "price": 6.5,
+      "context": "weisswein"
+    },
+    "aperol": {
+      "replies": [
+        "Ein Aperol Spritz, Prost!",
+        "Aperol kommt, mit extra Orange."
+      ],
+      "price": 8.5,
+      "context": "aperol"
+    },
+    "schnaps": {
+      "replies": [
+        "Ein Obstler, aufs Haus geht's leider nicht.",
+        "Ein Schnaps, zum Wohl!"
+      ],
+      "price": 4.0,
+      "context": "schnaps"
+    },
+    "wasser": {
+      "replies": [
+        "Ein Wasser, bitte sehr.",
+        "Mineralwasser kommt."
+      ],
+      "price": 3.0,
+      "context": "wasser"
+    },
+    "cola": {
+      "replies": [
+        "Eine Cola mit Eis.",
+        "Cola kommt sofort."
+      ],
+      "price": 3.5,
+      "context": "cola"
+    },
+    "schorle": {
+      "replies": [
+        "Eine Apfelschorle, bitte schön.",
+        "Apfelschorle kommt."
+      ],
+      "price": 3.5,
+      "context": "schorle"
+    },
+    "kaffee": {
+      "replies": [
+        "Ein Kaffee, frisch gebrüht.",
+        "Kaffee kommt, Milch und Zucker stehen da."
+      ],
+      "price": 3.2,
+      "context": "kaffee"
+    },
+    "brezn": {
+      "replies": [
+        "Eine Brezn, frisch aus dem Ofen!",
+        "Brezn kommt, mit Butter?"
+      ],
+      "price": 2.5,
+      "context": null
+    },
+    "nichts_bestellt": {
+      "replies": [
+        "Du hast doch noch gar nichts bestellt!",
+        "Erst mal was bestellen, dann sehen wir weiter."
+      ],
+      "price": 0,
+      "context": null
+    },
+    "zahlen": {
+      "replies": [
+        "Das macht {bill:.2f} €. Danke dir!",
+        "Zusammen {bill:.2f} €, bitte."
+      ],
+      "price": 0,
+      "context": "start"
+    },
+    "speisekarte": {
+      "replies": [
+        "Wir haben Helles, Weißbier, Radler, Rot- und Weißwein, Aperol, Schnaps, Wasser, Cola, Schorle, Kaffee und Brezn."
+      ],
+      "price": 0,
+      "context": null
+    },
+    "empfehlung": {
+      "replies": [
+        "Heute ist das Helles besonders gut.",
+        "Probier den Aperol, perfekt für den Abend!",
+        "Ein Weißbier geht immer."
+      ],
+      "price": 0,
+      "context": null
+    },
+    "alkoholfrei": {
+      "replies": [
+        "Alkoholfrei haben wir Wasser, Cola, Apfelschorle und Kaffee."
+      ],
+      "price": 0,
+      "context": null
+    },
+    "danke": {
+      "replies": [
+        "Gern geschehen!",
+        "Passt scho!",
+        "Bitte, bitte!"
+      ],
+      "price": 0,
+      "context": null
+    },
+    "wie_gehts": {
+      "replies": [
+        "Mir geht's gut, viel los heute! Und dir?",
+        "Passt, danke! Was darf's sein?"
+      ],
+      "price": 0,
+      "context": null
+    },
+    "toilette": {
+      "replies": [
+        "Die Toiletten sind hinten links, die Treppe runter."
+      ],
+      "price": 0,
+      "context": null
+    },
+    "wlan": {
+      "replies": [
+        "Das WLAN heißt 'Bar-Gast', das Passwort steht auf der Karte."
+      ],
+      "price": 0,
+      "context": null
+    },
+    "oeffnungszeiten": {
+      "replies": [
+        "Wir haben bis 1 Uhr offen, am Wochenende bis 3."
+      ],
+      "price": 0,
+      "context": null
+    },
+    "tschuess": {
+      "replies": [
+        "Mach's gut, bis bald!",
+        "Pfiat di, komm gut heim!",
+        "Ciao, schönen Abend noch!"
+      ],
+      "price": 0,
+      "context": "start"
+    }
+  },
+  "examples": [
+    [
+      "start",
+      "hallo",
+      "gruss"
+    ],
+    [
+      "start",
+      "servus",
+      "gruss"
+    ],
+    [
+      "start",
+      "grüß gott",
+      "gruss"
+    ],
+    [
+      "start",
+      "guten abend",
+      "gruss"
+    ],
+    [
+      "start",
+      "moin",
+      "gruss"
+    ],
+    [
+      "start",
+      "hi",
+      "gruss"
+    ],
+    [
+      "start",
+      "ein bier bitte",
+      "bier"
+    ],
+    [
+      "start",
+      "ein helles",
+      "bier"
+    ],
+    [
+      "start",
+      "eine halbe",
+      "bier"
+    ],
+    [
+      "start",
+      "ich hätte gern ein bier",
+      "bier"
+    ],
+    [
+      "start",
+      "ein pils bitte",
+      "bier"
+    ],
+    [
+      "start",
+      "ein weißbier",
+      "weissbier"
+    ],
+    [
+      "start",
+      "weißbier bitte",
+      "weissbier"
+    ],
+    [
+      "start",
+      "ein weizen",
+      "weissbier"
+    ],
+    [
+      "start",
+      "ein hefeweizen",
+      "weissbier"
+    ],
+    [
+      "start",
+      "ein radler",
+      "radler"
+    ],
+    [
+      "start",
+      "radler bitte",
+      "radler"
+    ],
+    [
+      "start",
+      "ein alster",
+      "radler"
+    ],
+    [
+      "start",
+      "ein rotwein",
+      "wein"
+    ],
+    [
+      "start",
+      "ein glas rotwein",
+      "wein"
+    ],
+    [
+      "start",
+      "rotwein bitte",
+      "wein"
+    ],
+    [
+      "start",
+      "ein glas wein",
+      "wein"
+    ],
+    [
+      "start",
+      "ein weißwein",
+      "weisswein"
+    ],
+    [
+      "start",
+      "ein glas weißwein",
+      "weisswein"
+    ],
+    [
+      "start",
+      "weißwein bitte",
+      "weisswein"
+    ],
+    [
+      "start",
+      "ein aperol",
+      "aperol"
+    ],
+    [
+      "start",
+      "aperol spritz",
+      "aperol"
+    ],
+    [
+      "start",
+      "einen spritz bitte",
+      "aperol"
+    ],
+    [
+      "start",
+      "einen schnaps",
+      "schnaps"
+    ],
+    [
+      "start",
+      "einen obstler",
+      "schnaps"
+    ],
+    [
+      "start",
+      "einen kurzen bitte",
+      "schnaps"
+    ],
+    [
+      "start",
+      "ein wasser",
+      "wasser"
+    ],
+    [
+      "start",
+      "wasser bitte",
+      "wasser"
+    ],
+    [
+      "start",
+      "ein mineralwasser",
+      "wasser"
+    ],
+    [
+      "start",
+      "stilles wasser",
+      "wasser"
+    ],
+    [
+      "start",
+      "eine cola",
+      "cola"
+    ],
+    [
+      "start",
+      "cola bitte",
+      "cola"
+    ],
+    [
+      "start",
+      "eine coke",
+      "cola"
+    ],
+    [
+      "start",
+      "eine apfelschorle",
+      "schorle"
+    ],
+    [
+      "start",
+      "eine schorle",
+      "schorle"
+    ],
+    [
+      "start",
+      "apfelschorle bitte",
+      "schorle"
+    ],
+    [
+      "start",
+      "einen kaffee",
+      "kaffee"
+    ],
+    [
+      "start",
+      "kaffee bitte",
+      "kaffee"
+    ],
+    [
+      "start",
+      "einen espresso",
+      "kaffee"
+    ],
+    [
+      "start",
+      "einen cappuccino",
+      "kaffee"
+    ],
+    [
+      "start",
+      "eine brezn",
+      "brezn"
+    ],
+    [
+      "start",
+      "eine brezel",
+      "brezn"
+    ],
+    [
+      "start",
+      "habt ihr was zu essen",
+      "brezn"
+    ],
+    [
+      "start",
+      "ich hab hunger",
+      "brezn"
+    ],
+    [
+      "start",
+      "was habt ihr",
+      "speisekarte"
+    ],
+    [
+      "start",
+      "die karte bitte",
+      "speisekarte"
+    ],
+    [
+      "start",
+      "was gibt es",
+      "speisekarte"
+    ],
+    [
+      "start",
+      "was kann ich bestellen",
+      "speisekarte"
+    ],
+    [
+      "start",
+      "was empfiehlst du",
+      "empfehlung"
+    ],
+    [
+      "start",
+      "was ist gut",
+      "empfehlung"
+    ],
+    [
+      "start",
+      "was soll ich nehmen",
+      "empfehlung"
+    ],
+    [
+      "start",
+      "was trinkst du gern",
+      "empfehlung"
+    ],
+    [
+      "start",
+      "was habt ihr ohne alkohol",
+      "alkoholfrei"
+    ],
+    [
+      "start",
+      "etwas alkoholfreies",
+      "alkoholfrei"
+    ],
+    [
+      "start",
+      "ich muss noch fahren",
+      "alkoholfrei"
+    ],
+    [
+      "start",
+      "danke",
+      "danke"
+    ],
+    [
+      "start",
+      "vielen dank",
+      "danke"
+    ],
+    [
+      "start",
+      "dankeschön",
+      "danke"
+    ],
+    [
+      "start",
+      "wie geht's",
+      "wie_gehts"
+    ],
+    [
+      "start",
+      "wie geht es dir",
+      "wie_gehts"
+    ],
+    [
+      "start",
+      "alles gut bei dir",
+      "wie_gehts"
+    ],
+    [
+      "start",
+      "wo ist die toilette",
+      "toilette"
+    ],
+    [
+      "start",
+      "wo ist das klo",
+      "toilette"
+    ],
+    [
+      "start",
+      "wo sind die toiletten",
+      "toilette"
+    ],
+    [
+      "start",
+      "habt ihr wlan",
+      "wlan"
+    ],
+    [
+      "start",
+      "wie ist das wlan passwort",
+      "wlan"
+    ],
+    [
+      "start",
+      "gibt es wifi",
+      "wlan"
+    ],
+    [
+      "start",
+      "wie lange habt ihr offen",
+      "oeffnungszeiten"
+    ],
+    [
+      "start",
+      "wann macht ihr zu",
+      "oeffnungszeiten"
+    ],
+    [
+      "start",
+      "bis wann ist offen",
+      "oeffnungszeiten"
+    ],
+    [
+      "start",
+      "tschüss",
+      "tschuess"
+    ],
+    [
+      "start",
+      "ich gehe",
+      "tschuess"
+    ],
+    [
+      "start",
+      "ciao",
+      "tschuess"
+    ],
+    [
+      "start",
+      "pfiat di",
+      "tschuess"
+    ],
+    [
+      "start",
+      "schönen abend noch",
+      "tschuess"
+    ],
+    [
+      "bier",
+      "noch eins",
+      "bier"
+    ],
+    [
+      "bier",
+      "noch eins bitte",
+      "bier"
+    ],
+    [
+      "bier",
+      "nochmal das gleiche",
+      "bier"
+    ],
+    [
+      "bier",
+      "dasselbe nochmal",
+      "bier"
+    ],
+    [
+      "bier",
+      "noch so eins",
+      "bier"
+    ],
+    [
+      "bier",
+      "zahlen bitte",
+      "zahlen"
+    ],
+    [
+      "bier",
+      "die rechnung bitte",
+      "zahlen"
+    ],
+    [
+      "bier",
+      "ich möchte zahlen",
+      "zahlen"
+    ],
+    [
+      "bier",
+      "was macht das",
+      "zahlen"
+    ],
+    [
+      "bier",
+      "wie viel kostet das",
+      "zahlen"
+    ],
+    [
+      "weissbier",
+      "noch eins",
+      "weissbier"
+    ],
+    [
+      "weissbier",
+      "noch eins bitte",
+      "weissbier"
+    ],
+    [
+      "weissbier",
+      "nochmal das gleiche",
+      "weissbier"
+    ],
+    [
+      "weissbier",
+      "dasselbe nochmal",
+      "weissbier"
+    ],
+    [
+      "weissbier",
+      "noch so eins",
+      "weissbier"
+    ],
+    [
+      "weissbier",
+      "zahlen bitte",
+      "zahlen"
+    ],
+    [
+      "weissbier",
+      "die rechnung bitte",
+      "zahlen"
+    ],
+    [
+      "weissbier",
+      "ich möchte zahlen",
+      "zahlen"
+    ],
+    [
+      "weissbier",
+      "was macht das",
+      "zahlen"
+    ],
+    [
+      "weissbier",
+      "wie viel kostet das",
+      "zahlen"
+    ],
+    [
+      "radler",
+      "noch eins",
+      "radler"
+    ],
+    [
+      "radler",
+      "noch eins bitte",
+      "radler"
+    ],
+    [
+      "radler",
+      "nochmal das gleiche",
+      "radler"
+    ],
+    [
+      "radler",
+      "dasselbe nochmal",
+      "radler"
+    ],
+    [
+      "radler",
+      "noch so eins",
+      "radler"
+    ],
+    [
+      "radler",
+      "zahlen bitte",
+      "zahlen"
+    ],
+    [
+      "radler",
+      "die rechnung bitte",
+      "zahlen"
+    ],
+    [
+      "radler",
+      "ich möchte zahlen",
+      "zahlen"
+    ],
+    [
+      "radler",
+      "was macht das",
+      "zahlen"
+    ],
+    [
+      "radler",
+      "wie viel kostet das",
+      "zahlen"
+    ],
+    [
+      "wein",
+      "noch eins",
+      "wein"
+    ],
+    [
+      "wein",
+      "noch eins bitte",
+      "wein"
+    ],
+    [
+      "wein",
+      "nochmal das gleiche",
+      "wein"
+    ],
+    [
+      "wein",
+      "dasselbe nochmal",
+      "wein"
+    ],
+    [
+      "wein",
+      "noch so eins",
+      "wein"
+    ],
+    [
+      "wein",
+      "zahlen bitte",
+      "zahlen"
+    ],
+    [
+      "wein",
+      "die rechnung bitte",
+      "zahlen"
+    ],
+    [
+      "wein",
+      "ich möchte zahlen",
+      "zahlen"
+    ],
+    [
+      "wein",
+      "was macht das",
+      "zahlen"
+    ],
+    [
+      "wein",
+      "wie viel kostet das",
+      "zahlen"
+    ],
+    [
+      "weisswein",
+      "noch eins",
+      "weisswein"
+    ],
+    [
+      "weisswein",
+      "noch eins bitte",
+      "weisswein"
+    ],
+    [
+      "weisswein",
+      "nochmal das gleiche",
+      "weisswein"
+    ],
+    [
+      "weisswein",
+      "dasselbe nochmal",
+      "weisswein"
+    ],
+    [
+      "weisswein",
+      "noch so eins",
+      "weisswein"
+    ],
+    [
+      "weisswein",
+      "zahlen bitte",
+      "zahlen"
+    ],
+    [
+      "weisswein",
+      "die rechnung bitte",
+      "zahlen"
+    ],
+    [
+      "weisswein",
+      "ich möchte zahlen",
+      "zahlen"
+    ],
+    [
+      "weisswein",
+      "was macht das",
+      "zahlen"
+    ],
+    [
+      "weisswein",
+      "wie viel kostet das",
+      "zahlen"
+    ],
+    [
+      "aperol",
+      "noch eins",
+      "aperol"
+    ],
+    [
+      "aperol",
+      "noch eins bitte",
+      "aperol"
+    ],
+    [
+      "aperol",
+      "nochmal das gleiche",
+      "aperol"
+    ],
+    [
+      "aperol",
+      "dasselbe nochmal",
+      "aperol"
+    ],
+    [
+      "aperol",
+      "noch so eins",
+      "aperol"
+    ],
+    [
+      "aperol",
+      "zahlen bitte",
+      "zahlen"
+    ],
+    [
+      "aperol",
+      "die rechnung bitte",
+      "zahlen"
+    ],
+    [
+      "aperol",
+      "ich möchte zahlen",
+      "zahlen"
+    ],
+    [
+      "aperol",
+      "was macht das",
+      "zahlen"
+    ],
+    [
+      "aperol",
+      "wie viel kostet das",
+      "zahlen"
+    ],
+    [
+      "schnaps",
+      "noch eins",
+      "schnaps"
+    ],
+    [
+      "schnaps",
+      "noch eins bitte",
+      "schnaps"
+    ],
+    [
+      "schnaps",
+      "nochmal das gleiche",
+      "schnaps"
+    ],
+    [
+      "schnaps",
+      "dasselbe nochmal",
+      "schnaps"
+    ],
+    [
+      "schnaps",
+      "noch so eins",
+      "schnaps"
+    ],
+    [
+      "schnaps",
+      "zahlen bitte",
+      "zahlen"
+    ],
+    [
+      "schnaps",
+      "die rechnung bitte",
+      "zahlen"
+    ],
+    [
+      "schnaps",
+      "ich möchte zahlen",
+      "zahlen"
+    ],
+    [
+      "schnaps",
+      "was macht das",
+      "zahlen"
+    ],
+    [
+      "schnaps",
+      "wie viel kostet das",
+      "zahlen"
+    ],
+    [
+      "wasser",
+      "noch eins",
+      "wasser"
+    ],
+    [
+      "wasser",
+      "noch eins bitte",
+      "wasser"
+    ],
+    [
+      "wasser",
+      "nochmal das gleiche",
+      "wasser"
+    ],
+    [
+      "wasser",
+      "dasselbe nochmal",
+      "wasser"
+    ],
+    [
+      "wasser",
+      "noch so eins",
+      "wasser"
+    ],
+    [
+      "wasser",
+      "zahlen bitte",
+      "zahlen"
+    ],
+    [
+      "wasser",
+      "die rechnung bitte",
+      "zahlen"
+    ],
+    [
+      "wasser",
+      "ich möchte zahlen",
+      "zahlen"
+    ],
+    [
+      "wasser",
+      "was macht das",
+      "zahlen"
+    ],
+    [
+      "wasser",
+      "wie viel kostet das",
+      "zahlen"
+    ],
+    [
+      "cola",
+      "noch eins",
+      "cola"
+    ],
+    [
+      "cola",
+      "noch eins bitte",
+      "cola"
+    ],
+    [
+      "cola",
+      "nochmal das gleiche",
+      "cola"
+    ],
+    [
+      "cola",
+      "dasselbe nochmal",
+      "cola"
+    ],
+    [
+      "cola",
+      "noch so eins",
+      "cola"
+    ],
+    [
+      "cola",
+      "zahlen bitte",
+      "zahlen"
+    ],
+    [
+      "cola",
+      "die rechnung bitte",
+      "zahlen"
+    ],
+    [
+      "cola",
+      "ich möchte zahlen",
+      "zahlen"
+    ],
+    [
+      "cola",
+      "was macht das",
+      "zahlen"
+    ],
+    [
+      "cola",
+      "wie viel kostet das",
+      "zahlen"
+    ],
+    [
+      "schorle",
+      "noch eins",
+      "schorle"
+    ],
+    [
+      "schorle",
+      "noch eins bitte",
+      "schorle"
+    ],
+    [
+      "schorle",
+      "nochmal das gleiche",
+      "schorle"
+    ],
+    [
+      "schorle",
+      "dasselbe nochmal",
+      "schorle"
+    ],
+    [
+      "schorle",
+      "noch so eins",
+      "schorle"
+    ],
+    [
+      "schorle",
+      "zahlen bitte",
+      "zahlen"
+    ],
+    [
+      "schorle",
+      "die rechnung bitte",
+      "zahlen"
+    ],
+    [
+      "schorle",
+      "ich möchte zahlen",
+      "zahlen"
+    ],
+    [
+      "schorle",
+      "was macht das",
+      "zahlen"
+    ],
+    [
+      "schorle",
+      "wie viel kostet das",
+      "zahlen"
+    ],
+    [
+      "kaffee",
+      "noch eins",
+      "kaffee"
+    ],
+    [
+      "kaffee",
+      "noch eins bitte",
+      "kaffee"
+    ],
+    [
+      "kaffee",
+      "nochmal das gleiche",
+      "kaffee"
+    ],
+    [
+      "kaffee",
+      "dasselbe nochmal",
+      "kaffee"
+    ],
+    [
+      "kaffee",
+      "noch so eins",
+      "kaffee"
+    ],
+    [
+      "kaffee",
+      "zahlen bitte",
+      "zahlen"
+    ],
+    [
+      "kaffee",
+      "die rechnung bitte",
+      "zahlen"
+    ],
+    [
+      "kaffee",
+      "ich möchte zahlen",
+      "zahlen"
+    ],
+    [
+      "kaffee",
+      "was macht das",
+      "zahlen"
+    ],
+    [
+      "kaffee",
+      "wie viel kostet das",
+      "zahlen"
+    ],
+    [
+      "start",
+      "noch eins",
+      "nichts_bestellt"
+    ],
+    [
+      "start",
+      "noch eins bitte",
+      "nichts_bestellt"
+    ],
+    [
+      "start",
+      "nochmal das gleiche",
+      "nichts_bestellt"
+    ],
+    [
+      "start",
+      "dasselbe nochmal",
+      "nichts_bestellt"
+    ],
+    [
+      "start",
+      "noch so eins",
+      "nichts_bestellt"
+    ],
+    [
+      "start",
+      "zahlen bitte",
+      "nichts_bestellt"
+    ],
+    [
+      "start",
+      "die rechnung bitte",
+      "nichts_bestellt"
+    ],
+    [
+      "start",
+      "ich möchte zahlen",
+      "nichts_bestellt"
+    ],
+    [
+      "start",
+      "was macht das",
+      "nichts_bestellt"
+    ],
+    [
+      "start",
+      "wie viel kostet das",
+      "nichts_bestellt"
+    ]
+  ]
+}

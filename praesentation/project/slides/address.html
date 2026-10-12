@@ -1,0 +1,18 @@
+<section id="address" data-transition="fade" style="background:#1E1B18;color:#F6F1E7;font-family:'DM Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:32px">
+<p style="font-size:24px;color:#E0A23B;letter-spacing:2px;text-transform:uppercase">Lernen</p>
+<h2 style="font-family:'Domine', Georgia, serif;font-size:64px;font-weight:600;line-height:1.1">Welches Gewicht ändert sich?</h2>
+<div style="background:#2A2621;padding:28px 36px;border-radius:16px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:34px;color:#E0A23B;line-height:1.4">Änderung von W[i, j] = Fehler an Ausgang i × Wert von Eingang j</p>
+</div>
+<p style="font-size:30px;color:#BDB5A6">Beispiel: Gewicht W2[bier, c0], Aktivierung von c0 = +1.00, Lernrate 0.5, Momentum 0.9</p>
+<table style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:30px">
+<tr style="background:#2A2621"><th style="width:14%">Runde</th><th style="width:20%">P(bier)</th><th style="width:26%">Fehler P−Y</th><th style="width:40%">Schritt (Momentum)</th></tr>
+<tr><td>1</td><td>0.30</td><td style="color:#6DB6D1">−0.70</td><td style="color:#E0A23B">+0.350</td></tr>
+<tr><td>2</td><td>0.50</td><td style="color:#6DB6D1">−0.50</td><td style="color:#E0A23B">+0.565</td></tr>
+</table>
+<ul style="font-size:32px;line-height:1.4">
+<li>Fehler negativ und Konzept aktiv: das Gewicht steigt.</li>
+<li>Eingang = 0 (Wort nicht im Satz): Änderung genau 0.</li>
+</ul>
+<aside>Das ist die Antwort auf die Frage, wie der Fehler die richtige Stelle in der Matrix findet. Jedes Gewicht hat eine Adresse aus Ausgang und Eingang. Es ändert sich nur, wenn der Fehler an seinem Ausgang ankommt und sein Eingang aktiv war. Bei Wörtern, die im Satz nicht vorkommen, ist der Eingang 0, also bleibt das Gewicht unberührt. Der Schritt ergibt sich aus 0.9 mal dem alten Schritt minus 0.5 mal dem Gradienten: Runde 1 gibt 0.35, Runde 2 gibt 0.9 mal 0.35 plus 0.25, also 0.565. In Wirklichkeit wird der Gradient über alle 230 Beispiele gemittelt, hier zur Veranschaulichung nur ein Beispiel.</aside>
+</section>

@@ -1,0 +1,14 @@
+<section id="vsllm" data-transition="fade" style="background:#F6F1E7;color:#1E1B18;font-family:'DM Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:32px">
+<p style="font-size:24px;color:#9A5F0B;letter-spacing:2px;text-transform:uppercase">Einordnung</p>
+<h2 style="font-family:'Domine', Georgia, serif;font-size:64px;font-weight:600;line-height:1.1">Vom Barkeeper zum LLM</h2>
+<table style="font-size:30px">
+<tr style="background:#EAE2D0"><th style="width:20%">Aspekt</th><th style="width:35%">Barkeeper</th><th style="width:45%">LLM</th></tr>
+<tr><td><b>Gewichte</b></td><td>rund 4.000</td><td>Milliarden</td></tr>
+<tr><td><b>Eingabe</b></td><td>1 Spalte pro Wort</td><td>Embeddings (Bedeutungsvektoren)</td></tr>
+<tr><td><b>Aufgabe</b></td><td>1 von 34 Antworten wählen</td><td>nächstes Token vorhersagen</td></tr>
+<tr><td><b>Daten</b></td><td>230 Beispiele</td><td>Billionen Tokens</td></tr>
+<tr><td><b>Schichten</b></td><td>2</td><td>Dutzende bis Hunderte</td></tr>
+</table>
+<p style="font-size:34px;line-height:1.4;color:#9A5F0B"><b>Gleich geblieben:</b> Zufallsstart, Softmax, Fehler messen und die Gewichte per Gradient nachbessern.</p>
+<aside>Der wichtigste Unterschied neben der Größe ist die Eingabe. Im Barkeeper ist jedes Wort eine eigene Spalte ohne Beziehung zu den anderen. Ein LLM lernt Embeddings: Wörter mit ähnlicher Verwendung, etwa "kein" und "no", bekommen ähnliche Vektoren, und alles, was über das eine Wort gelernt wurde, gilt auch für das andere. Außerdem sagt ein LLM das nächste Wort voraus, statt eine feste Antwort aus 34 zu wählen. Die Lernmechanik ist aber dieselbe wie in diesem Vortrag.</aside>
+</section>

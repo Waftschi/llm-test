@@ -1,0 +1,24 @@
+<section id="twolayers" data-transition="fade" style="background:#1E1B18;color:#F6F1E7;font-family:'DM Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:36px">
+<p style="font-size:24px;color:#E0A23B;letter-spacing:2px;text-transform:uppercase">Einordnung</p>
+<h2 style="font-family:'Domine', Georgia, serif;font-size:64px;font-weight:600;line-height:1.1">Warum zwei Schichten?</h2>
+<div style="display:flex;gap:64px">
+<div style="flex:1;display:flex;flex-direction:column;gap:28px">
+<p style="font-size:32px;line-height:1.4">Eine einzelne Matrix addiert unabhängige Wortstimmen. „kein“ und „bier“ können nicht zusammenwirken, „kein bier“ würde weiter für Bier stimmen.</p>
+<p style="font-size:32px;line-height:1.4">Ein Konzept kann so gelernt werden, dass es nur ausschlägt, wenn „kein“ und „bier“ zusammen vorkommen, und dann für Wein stimmt.</p>
+</div>
+<div style="width:640px;display:flex;flex-direction:column;gap:24px">
+<div style="background:#2A2621;padding:24px 32px;border-radius:16px;display:flex;flex-direction:column;gap:6px">
+<p style="font-size:28px;color:#BDB5A6">Eine Matrix · 12 neue Sätze</p>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:64px;font-weight:600;color:#6DB6D1">8 / 12</p>
+<p style="font-size:26px;color:#BDB5A6">Training: 223 / 230</p>
+</div>
+<div style="background:#2A2621;padding:24px 32px;border-radius:16px;display:flex;flex-direction:column;gap:6px">
+<p style="font-size:28px;color:#BDB5A6">Zwei Schichten · 12 neue Sätze</p>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:64px;font-weight:600;color:#E0A23B">12 / 12</p>
+<p style="font-size:26px;color:#BDB5A6">Training: 230 / 230</p>
+</div>
+</div>
+</div>
+<p style="font-size:28px;line-height:1.4;color:#BDB5A6">Test mit 12 Sätzen, die das Netz nie gesehen hat (Befehl „vergleich“). Die Matrix scheitert bei „bier bitte“, „wein bitte“, „ich will wein“ und „heute ein wein“.</p>
+<aside>Das ist der Grund für die versteckte Schicht. Ohne sie kann das Netz Kombinationen wie "kein" plus "bier" nicht sauber abbilden. Die großen Zahlen sind der aussagekräftige Test: zwölf Sätze, die in keinem Trainingsbeispiel vorkamen, zum Beispiel "kein bier bitte" oder "ich will wein". Die Matrix erkennt acht davon, zwei Schichten alle zwölf. Die kleinen Zahlen darunter sind nur die Trainingsbeispiele: Dort liegt die Matrix bei 223 von 230, zwei Schichten bei 230 von 230. Das zeigt nur, wie gut das Netz die Beispiele abbilden kann. Ob es auch bei neuen Sätzen funktioniert, zeigt erst der Test. Alle Zahlen stammen aus dem Befehl vergleich im aktuellen Modell und ändern sich mit den Daten. Die Testsätze sind im Code festgelegt, es sind nur zwölf, die Zahl ist also ein Hinweis und kein Beweis.</aside>
+</section>

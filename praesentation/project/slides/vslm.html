@@ -1,0 +1,17 @@
+<section id="vslm" data-transition="fade" style="background:#F6F1E7;color:#1E1B18;font-family:'DM Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:28px">
+<p style="font-size:24px;color:#9A5F0B;letter-spacing:2px;text-transform:uppercase">Einordnung</p>
+<h2 style="font-family:'Domine', Georgia, serif;font-size:64px;font-weight:600;line-height:1.1">Klassifikator oder Sprachmodell?</h2>
+<table style="font-size:28px">
+<tr style="background:#EAE2D0"><th style="width:18%">Aspekt</th><th style="width:41%">Barkeeper (Klassifikator)</th><th style="width:41%">Sprachmodell</th></tr>
+<tr><td><b>Frage</b></td><td>Welche der 34 Antworten passt?</td><td>Welches Wort kommt als Nächstes?</td></tr>
+<tr><td><b>Eingabe</b></td><td>Wörter als 0/1, Reihenfolge egal</td><td>Wortfolge mit Positionen</td></tr>
+<tr><td><b>Ausgabe</b></td><td>1 aus 34 Antworten</td><td>1 aus zehntausenden Wörtern</td></tr>
+<tr><td><b>Antworttext</b></td><td>fest vorgegeben</td><td>wird Wort für Wort erzeugt</td></tr>
+<tr><td><b>Lernen mit</b></td><td>230 beschrifteten Beispielen</td><td>Text ohne Beschriftung (der nächste Satz ist die Lösung)</td></tr>
+</table>
+<div style="display:flex;flex-direction:column;gap:8px;background:#FFFDF8;padding:24px 32px;border:1px solid #DDD3C0;border-radius:16px">
+<p style="font-size:32px;font-weight:700;color:#9A5F0B">Was sich überträgt</p>
+<p style="font-size:30px;line-height:1.35">Das Prinzip bleibt gleich: gewichtete Summen, Aktivierung, Softmax, Fehler messen, Gewichte nachbessern. Nur die Eingabe (Embeddings und Position) und die Ausgabe (Vokabular statt 34 Antworten) ändern sich.</p>
+</div>
+<aside>Unser Barkeeper ist ein Klassifikator: Er ordnet einen Satz einer von 34 festen Antworten zu und kennt keine Wortreihenfolge. Ein Sprachmodell beantwortet eine andere Frage, nämlich welches Wort als Nächstes kommt, und erzeugt Text Wort für Wort. Das Prinzip lässt sich übertragen: Man könnte unser Netz umbauen, indem man die Ausgabeschicht auf alle bekannten Wörter legt und es darauf trainiert, aus den vorigen Wörtern das nächste vorherzusagen. Der Vorteil: Dafür braucht man keine von Hand beschrifteten Beispiele, der Text selbst liefert die richtige Antwort. Mit 230 Beispielen wäre das Ergebnis aber kaum brauchbar, echte Sprachmodelle brauchen Milliarden Gewichte und Billionen Wörter.</aside>
+</section>

@@ -1,0 +1,29 @@
+<section id="backprop" data-transition="fade" style="background:#1E1B18;color:#F6F1E7;font-family:'DM Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:28px">
+<p style="font-size:24px;color:#E0A23B;letter-spacing:2px;text-transform:uppercase">Lernen</p>
+<h2 style="font-family:'Domine', Georgia, serif;font-size:64px;font-weight:600;line-height:1.1">Backpropagation: Fehler rückwärts</h2>
+<div style="display:flex;flex-direction:column;gap:16px">
+<div style="display:flex;align-items:center;gap:16px">
+<p style="width:220px;font-size:26px;color:#BDB5A6">Vorwärts: raten</p>
+<p style="flex:1;font-size:30px;background:#2A2621;padding:18px 24px;border-radius:12px;text-align:center">Wörter x</p>
+<x-shape kind="arrow-right" style="width:48px;height:32px;background:#BDB5A6"></x-shape>
+<p style="flex:1;font-size:30px;background:#2A2621;padding:18px 24px;border-radius:12px;text-align:center">Konzepte h</p>
+<x-shape kind="arrow-right" style="width:48px;height:32px;background:#BDB5A6"></x-shape>
+<p style="flex:1;font-size:30px;background:#2A2621;padding:18px 24px;border-radius:12px;text-align:center">Antwort p</p>
+</div>
+<div style="display:flex;align-items:center;gap:16px">
+<p style="width:220px;font-size:26px;color:#E0A23B">Rückwärts: Schuld</p>
+<p style="flex:1;font-size:30px;color:#E0A23B;border:2px solid #E0A23B;padding:16px 24px;border-radius:12px;text-align:center">Schuld der W1-Gewichte</p>
+<x-shape kind="arrow-left" style="width:48px;height:32px;background:#E0A23B"></x-shape>
+<p style="flex:1;font-size:30px;color:#E0A23B;border:2px solid #E0A23B;padding:16px 24px;border-radius:12px;text-align:center">Schuld der Konzepte</p>
+<x-shape kind="arrow-left" style="width:48px;height:32px;background:#E0A23B"></x-shape>
+<p style="flex:1;font-size:30px;color:#E0A23B;border:2px solid #E0A23B;padding:16px 24px;border-radius:12px;text-align:center">Fehler P − Y</p>
+</div>
+</div>
+<p style="font-size:28px;line-height:1.35"><b>Was ist das?</b> Der Fehler am Ausgang wird Schicht für Schicht rückwärts verteilt, bis jedes Gewicht seinen Anteil an der Schuld kennt.</p>
+<p style="font-size:28px;line-height:1.35"><b>Wie?</b> Jedes Konzept wird gefragt: Wie viel hast du zur falschen Antwort beigetragen? Danach weiß jedes Gewicht, in welche Richtung und wie stark es sich ändern muss.</p>
+<div style="display:flex;flex-direction:column;gap:8px;background:#2A2621;padding:16px 32px;border-radius:16px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:28px;color:#E0A23B;line-height:1.5">D2 = P − Y      D1 = (D2 · W2) × (1 − h²)</p>
+<p style="font-size:26px;line-height:1.35;color:#BDB5A6">Y = richtige Antwort · P = Vermutung · D2 = Fehler am Ausgang · h = Aktivierung der Konzepte · W2 = Gewichte Schicht 2 · D1 = Schuld der Konzepte</p>
+</div>
+<aside>Backpropagation heißt Rückwärts-Weitergabe des Fehlers. Beim Raten läuft die Rechnung vorwärts von den Wörtern über die Konzepte zur Antwort. Beim Lernen läuft die Schuld den umgekehrten Weg. Zuerst wird der Fehler am Ausgang gemessen: Vermutung minus richtige Antwort, das ist D2. Dann wird er durch W2 zurück zu den Konzepten gereicht: Jedes Konzept bekommt den Teil der Schuld, den es über seine Gewichte zur falschen Antwort beigetragen hat. Der Faktor 1 minus h hoch 2 ist die Steigung von tanh, ein Konzept, das schon fast bei plus oder minus 1 klebt, ändert sich kaum. Daraus ergibt sich die Schuld jedes Gewichts in W1 und W2, die nächste Folie zeigt, welche Gewichte sich dabei konkret ändern. Dieser Mechanismus ist in großen Sprachmodellen derselbe.</aside>
+</section>

@@ -1,0 +1,31 @@
+<section id="example" data-transition="fade" style="background:#F6F1E7;color:#1E1B18;font-family:'DM Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:36px">
+<p style="font-size:24px;color:#9A5F0B;letter-spacing:2px;text-transform:uppercase">Das Beispiel</p>
+<h2 style="font-family:'Domine', Georgia, serif;font-size:64px;font-weight:600;line-height:1.1">Die Aufgabe: Sätze verstehen</h2>
+<div style="display:flex;gap:32px">
+<div style="flex:1;display:flex;flex-direction:column;gap:10px;background:#FFFDF8;padding:36px;border:1px solid #DDD3C0;border-radius:16px">
+<p style="font-size:24px;color:#5B5348">Eingabe · Kontext [start]</p>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:40px;font-weight:600">kein bier</p>
+<hr style="border-top:1px solid #DDD3C0">
+<p style="font-size:24px;color:#5B5348">Vor dem Lernen: falsch</p>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:40px;font-weight:600;color:#1F6F8B">bier</p>
+<p style="font-size:24px;color:#5B5348">Nach „kein bier = wein“: richtig</p>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:40px;font-weight:600;color:#9A5F0B">wein</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:10px;background:#FFFDF8;padding:36px;border:1px solid #DDD3C0;border-radius:16px">
+<p style="font-size:24px;color:#5B5348">Eingabe · Kontext [bier]</p>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:40px;font-weight:600">noch eins</p>
+<hr style="border-top:1px solid #DDD3C0">
+<p style="font-size:24px;color:#5B5348">Antwort</p>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:40px;font-weight:600;color:#9A5F0B">bier</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:10px;background:#FFFDF8;padding:36px;border:1px solid #DDD3C0;border-radius:16px">
+<p style="font-size:24px;color:#5B5348">Eingabe · Kontext [start]</p>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:40px;font-weight:600">noch eins</p>
+<hr style="border-top:1px solid #DDD3C0">
+<p style="font-size:24px;color:#5B5348">Antwort</p>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:40px;font-weight:600;color:#9A5F0B">nichts_bestellt</p>
+</div>
+</div>
+<p style="font-size:32px;line-height:1.4;color:#1E1B18">Kein LLM, sondern ein kleines neuronales Netz: 230 Beispiele, 141 Wörter, 34 mögliche Antworten, 4.258 Gewichte. Dieselben Prinzipien, nur klein genug, um jede Zahl zu sehen.</p>
+<aside>Links ein Beispiel für das Lernen: Ohne Beispiel für "kein" erkennt der Barkeeper nur das Wort "bier" und antwortet falsch mit bier. Erst nachdem wir ihm "kein bier = wein" beigebracht haben, antwortet er richtig mit wein. Der Barkeeper bekommt einen Satz und den Kontext, also was bisher bestellt wurde. Derselbe Satz "noch eins" bedeutet je nach Kontext etwas anderes: nach einem Bier noch ein Bier, am Anfang dagegen "du hast noch nichts bestellt". Wichtig zu sagen: Das ist kein LLM, aber es verwendet dieselben Bausteine. Zahlen stammen vom aktuellen Modell und ändern sich, wenn man neue Beispiele beibringt.</aside>
+</section>
