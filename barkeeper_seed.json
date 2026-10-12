@@ -1,5 +1,5 @@
 {
-  "info": "Seed-Daten für barkeeper.py. Kontexte: start + Getränke. Preise in Euro.",
+  "info": "Seed-Daten für den Barkeeper. Kontexte: start + Getränke. Preise in Euro.",
   "intents": {
     "gruss": {
       "replies": [

@@ -9,7 +9,6 @@ um jeden Schritt nachzuvollziehen.
 
 | Datei | Zweck |
 |---|---|
-| `barkeeper.py` | Erste Version: eine Matrix (Wörter → Antwort) |
 | `barkeeper2.py` | Zwei Schichten (Wörter → Konzepte → Antwort), Konsole |
 | `barkeeper_server.py` | Webserver mit Chat, Teachen und Entscheidungs-Log |
 | `barkeeper_chat.html` | Browser-Oberfläche (wird vom Server ausgeliefert) |

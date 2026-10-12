@@ -1,6 +1,6 @@
 """Barkeeper with TWO LAYERS.
 
-Same as barkeeper.py (same seed file, same commands), but the model is
+A small intent classifier (seed file, chat commands), the model is
     h = tanh(W1 · x + b1)      layer 1: words + context -> hidden concepts
     p = softmax(W2 · h + b2)   layer 2: concepts -> what the barkeeper does
 so it can learn combinations like "kein bier" (-> not beer!).
@@ -13,7 +13,7 @@ import sqlite3, random, json, os, sys
 # "python3 barkeeper2.py simple" starts a tiny model with its own database
 PROFILE   = os.environ.get("BARKEEPER_PROFILE") or (sys.argv[1] if len(sys.argv) > 1 else "")
 SIMPLE    = PROFILE == "simple"
-DB_FILE   = "barkeeper_simple.db" if SIMPLE else "barkeeper2.db"   # the old barkeeper.db stays untouched
+DB_FILE   = "barkeeper_simple.db" if SIMPLE else "barkeeper2.db"
 SEED_FILE = "barkeeper_simple_seed.json" if SIMPLE else "barkeeper_seed.json"
 HIDDEN    = 24                             # number of hidden concepts (layer 1 size)
 
