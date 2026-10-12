@@ -5,6 +5,8 @@ Kein echtes LLM, sondern ein neuronales Netz mit knapp 4000 Gewichten. Es nutzt 
 Grundideen wie ein LLM (Zahlen, Gewichte, Softmax, Gradientenabstieg), ist aber klein genug,
 um jeden Schritt nachzuvollziehen.
 
+English version: [README.en.md](README.en.md)
+
 ## Dateien
 
 | Datei | Zweck |

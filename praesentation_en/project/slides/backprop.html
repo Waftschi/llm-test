@@ -1,0 +1,29 @@
+<section id="backprop" data-transition="fade" style="background:#1E1B18;color:#F6F1E7;font-family:'DM Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:28px">
+<p style="font-size:24px;color:#E0A23B;letter-spacing:2px;text-transform:uppercase">Lernen</p>
+<h2 style="font-family:'Domine', Georgia, serif;font-size:64px;font-weight:600;line-height:1.1">Backpropagation: the error flows backwards</h2>
+<div style="display:flex;flex-direction:column;gap:16px">
+<div style="display:flex;align-items:center;gap:16px">
+<p style="width:220px;font-size:26px;color:#BDB5A6">Forward: guess</p>
+<p style="flex:1;font-size:30px;background:#2A2621;padding:18px 24px;border-radius:12px;text-align:center">Words x</p>
+<x-shape kind="arrow-right" style="width:48px;height:32px;background:#BDB5A6"></x-shape>
+<p style="flex:1;font-size:30px;background:#2A2621;padding:18px 24px;border-radius:12px;text-align:center">Concepts h</p>
+<x-shape kind="arrow-right" style="width:48px;height:32px;background:#BDB5A6"></x-shape>
+<p style="flex:1;font-size:30px;background:#2A2621;padding:18px 24px;border-radius:12px;text-align:center">Answer p</p>
+</div>
+<div style="display:flex;align-items:center;gap:16px">
+<p style="width:220px;font-size:26px;color:#E0A23B">Backward: blame</p>
+<p style="flex:1;font-size:30px;color:#E0A23B;border:2px solid #E0A23B;padding:16px 24px;border-radius:12px;text-align:center">Blame of the W1 weights</p>
+<x-shape kind="arrow-left" style="width:48px;height:32px;background:#E0A23B"></x-shape>
+<p style="flex:1;font-size:30px;color:#E0A23B;border:2px solid #E0A23B;padding:16px 24px;border-radius:12px;text-align:center">Blame of the concepts</p>
+<x-shape kind="arrow-left" style="width:48px;height:32px;background:#E0A23B"></x-shape>
+<p style="flex:1;font-size:30px;color:#E0A23B;border:2px solid #E0A23B;padding:16px 24px;border-radius:12px;text-align:center">Error P − Y</p>
+</div>
+</div>
+<p style="font-size:28px;line-height:1.35"><b>What is it?</b> The error at the output is distributed backwards, layer by layer, until every weight knows its share of the blame.</p>
+<p style="font-size:28px;line-height:1.35"><b>How?</b> Every concept is asked: how much did you contribute to the wrong answer? After that every weight knows in which direction and how strongly it has to change.</p>
+<div style="display:flex;flex-direction:column;gap:8px;background:#2A2621;padding:16px 32px;border-radius:16px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:28px;color:#E0A23B;line-height:1.5">D2 = P − Y      D1 = (D2 · W2) × (1 − h²)</p>
+<p style="font-size:26px;line-height:1.35;color:#BDB5A6">Y = correct answer · P = guess · D2 = error at the output · h = activation of the concepts · W2 = layer 2 weights · D1 = blame of the concepts</p>
+</div>
+<aside>Backpropagation means passing the error backwards. When guessing, the calculation runs forward from the words through the concepts to the answer. When learning, the blame takes the opposite way. First the error at the output is measured: guess minus correct answer, that is D2. Then it is passed back through W2 to the concepts: every concept gets the part of the blame it contributed to the wrong answer through its weights. The factor 1 minus h squared is the slope of tanh; a concept that already sits close to plus or minus 1 hardly changes. From this we get the blame of every weight in W1 and W2; the next slide shows which weights change concretely. This mechanism is the same in large language models.</aside>
+</section>

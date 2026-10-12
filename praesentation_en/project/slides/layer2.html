@@ -1,0 +1,17 @@
+<section id="layer2" data-transition="fade" style="background:#F6F1E7;color:#1E1B18;font-family:'DM Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:28px">
+<p style="font-size:24px;color:#9A5F0B;letter-spacing:2px;text-transform:uppercase">Step 3 · Layer 2</p>
+<h2 style="font-family:'Domine', Georgia, serif;font-size:64px;font-weight:600;line-height:1.1">Concepts vote for answers</h2>
+<table style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:30px">
+<tr><th style="width:20%">Answer</th><th style="width:10%">c0</th><th style="width:10%">c2</th><th style="width:10%">c1</th><th style="width:10%">c3</th><th style="width:13%">Σ</th><th style="width:13%">+ bias</th><th style="width:14%">Score</th></tr>
+<tr style="background:#EAE2D0"><td>Activation</td><td>+1.00</td><td>+0.91</td><td>−0.61</td><td>+0.42</td><td></td><td></td><td></td></tr>
+<tr><td><b>bier</b></td><td>+4.3</td><td>+3.5</td><td>+1.8</td><td>+0.1</td><td>+9.6</td><td>−1.2</td><td style="color:#9A5F0B"><b>+8.4</b></td></tr>
+<tr><td><b>wein</b></td><td>−2.3</td><td>−2.7</td><td>0.0</td><td>−1.7</td><td>−6.7</td><td>+2.1</td><td style="color:#1F6F8B"><b>−4.6</b></td></tr>
+</table>
+<div style="display:flex;flex-direction:column;gap:8px;background:#FFFDF8;padding:24px 32px;border:1px solid #DDD3C0;border-radius:16px">
+<p style="font-size:32px;font-weight:700;color:#9A5F0B">What are c0, c1, c2, c3?</p>
+<p style="font-size:28px;line-height:1.35">Concepts from layer 1: each one a yes/no question about the sentence, +1 means yes, −1 means no. The network learned them itself. Shown are the 4 most active of 24, sorted by activation. They have no names, only numbers.</p>
+</div>
+<p style="font-size:34px;line-height:1.4">Vote = weight W2[answer, concept] × activation of the concept</p>
+<p style="font-size:30px;line-height:1.4;color:#5B5348">Example c0 → bier: learned weight ≈ +4.3 × activation +1.00 = vote +4.3</p>
+<aside>The columns c0 to c3 are concepts from layer 1. A concept is a kind of yes/no question about the sentence: near +1 it was answered with yes, near −1 with no. Which questions exist was worked out by the network during training, so they have no names, only numbers. Only the four most active of 24 concepts are shown. Every concept votes for every answer with its own weight. Concept 0, for example, says “yes, bier” with +4.3 and “no, wein” with −2.3. We add up all the votes, add the bias, and get a score for every answer. Here bier wins with +8.4 against wein with −4.6. The weights were back-calculated from the rounded log numbers; the exact values are in show_matrix.py. Note: these numbers come from an earlier run and do not exactly match the next slide.</aside>
+</section>

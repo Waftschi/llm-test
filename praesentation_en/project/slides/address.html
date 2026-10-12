@@ -1,0 +1,18 @@
+<section id="address" data-transition="fade" style="background:#1E1B18;color:#F6F1E7;font-family:'DM Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:32px">
+<p style="font-size:24px;color:#E0A23B;letter-spacing:2px;text-transform:uppercase">Learning</p>
+<h2 style="font-family:'Domine', Georgia, serif;font-size:64px;font-weight:600;line-height:1.1">Which weight changes?</h2>
+<div style="background:#2A2621;padding:28px 36px;border-radius:16px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:34px;color:#E0A23B;line-height:1.4">Change of W[i, j] = error at output i × value of input j</p>
+</div>
+<p style="font-size:30px;color:#BDB5A6">Example: weight W2[bier, c0], activation of c0 = +1.00, learning rate 0.5, momentum 0.9</p>
+<table style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:30px">
+<tr style="background:#2A2621"><th style="width:14%">Round</th><th style="width:20%">P(bier)</th><th style="width:26%">Error P−Y</th><th style="width:40%">Step (momentum)</th></tr>
+<tr><td>1</td><td>0.30</td><td style="color:#6DB6D1">−0.70</td><td style="color:#E0A23B">+0.350</td></tr>
+<tr><td>2</td><td>0.50</td><td style="color:#6DB6D1">−0.50</td><td style="color:#E0A23B">+0.565</td></tr>
+</table>
+<ul style="font-size:32px;line-height:1.4">
+<li>Error negative and concept active: the weight goes up.</li>
+<li>Input = 0 (word not in the sentence): change exactly 0.</li>
+</ul>
+<aside>This is the answer to the question how the error finds the right place in the matrix. Every weight has an address made of output and input. It only changes if the error arrives at its output and its input was active. For words that do not occur in the sentence, the input is 0, so the weight stays untouched. The step comes from 0.9 times the previous step minus 0.5 times the gradient: round 1 gives 0.35, round 2 gives 0.9 times 0.35 plus 0.25, which is 0.565. In reality the gradient is averaged over all 230 examples; here it is only one example for illustration.</aside>
+</section>

@@ -1,0 +1,31 @@
+<section id="example" data-transition="fade" style="background:#F6F1E7;color:#1E1B18;font-family:'DM Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:36px">
+<p style="font-size:24px;color:#9A5F0B;letter-spacing:2px;text-transform:uppercase">The example</p>
+<h2 style="font-family:'Domine', Georgia, serif;font-size:64px;font-weight:600;line-height:1.1">The task: understanding sentences</h2>
+<div style="display:flex;gap:32px">
+<div style="flex:1;display:flex;flex-direction:column;gap:10px;background:#FFFDF8;padding:36px;border:1px solid #DDD3C0;border-radius:16px">
+<p style="font-size:24px;color:#5B5348">Input · context [start]</p>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:40px;font-weight:600">kein bier</p>
+<hr style="border-top:1px solid #DDD3C0">
+<p style="font-size:24px;color:#5B5348">Before learning: wrong</p>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:40px;font-weight:600;color:#1F6F8B">bier</p>
+<p style="font-size:24px;color:#5B5348">After “kein bier = wein”: correct</p>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:40px;font-weight:600;color:#9A5F0B">wein</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:10px;background:#FFFDF8;padding:36px;border:1px solid #DDD3C0;border-radius:16px">
+<p style="font-size:24px;color:#5B5348">Input · context [bier]</p>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:40px;font-weight:600">noch eins</p>
+<hr style="border-top:1px solid #DDD3C0">
+<p style="font-size:24px;color:#5B5348">Answer</p>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:40px;font-weight:600;color:#9A5F0B">bier</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:10px;background:#FFFDF8;padding:36px;border:1px solid #DDD3C0;border-radius:16px">
+<p style="font-size:24px;color:#5B5348">Input · context [start]</p>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:40px;font-weight:600">noch eins</p>
+<hr style="border-top:1px solid #DDD3C0">
+<p style="font-size:24px;color:#5B5348">Answer</p>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:40px;font-weight:600;color:#9A5F0B">nichts_bestellt</p>
+</div>
+</div>
+<p style="font-size:32px;line-height:1.4;color:#1E1B18">Not an LLM, but a small neural network: 230 examples, 141 words, 34 possible answers, 4,258 weights. The same principles, just small enough to see every number.<br><span style="font-size:26px;color:#5B5348">German input: kein = no · bier = beer · wein = wine · noch eins = one more</span></p>
+<aside>On the left an example of learning: without any example for “kein” (no), the barkeeper only recognises the word “bier” (beer) and wrongly answers bier. Only after we teach it “kein bier = wein” does it answer wein (wine) correctly. The barkeeper gets a sentence and the context, meaning what has been ordered so far. The same sentence “noch eins” (one more) means different things depending on context: after a beer it means another beer, at the start it means “you have not ordered anything yet” (the answer nichts_bestellt). Important to say: this is not an LLM, but it uses the same building blocks. The numbers come from the current model and change when you teach new examples.</aside>
+</section>

@@ -1,0 +1,28 @@
+<section id="training" data-transition="fade" style="background:#F6F1E7;color:#1E1B18;font-family:'DM Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:36px">
+<p style="font-size:24px;color:#9A5F0B;letter-spacing:2px;text-transform:uppercase">Lernen</p>
+<h2 style="font-family:'Domine', Georgia, serif;font-size:64px;font-weight:600;line-height:1.1">Training: guess, measure, improve</h2>
+<div style="display:flex;gap:32px">
+<div style="flex:1;display:flex;flex-direction:column;gap:14px;background:#FFFDF8;padding:32px;border:1px solid #DDD3C0;border-radius:16px">
+<p style="font-size:44px;font-weight:700;color:#9A5F0B">1</p>
+<p style="font-size:32px;font-weight:700">Guess</p>
+<p style="font-size:28px;line-height:1.35;color:#5B5348">The network computes an answer for all 230 examples.</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:14px;background:#FFFDF8;padding:32px;border:1px solid #DDD3C0;border-radius:16px">
+<p style="font-size:44px;font-weight:700;color:#9A5F0B">2</p>
+<p style="font-size:32px;font-weight:700">Measure the error</p>
+<p style="font-size:28px;line-height:1.35;color:#5B5348">Guess minus correct answer: P − Y.</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:14px;background:#FFFDF8;padding:32px;border:1px solid #DDD3C0;border-radius:16px">
+<p style="font-size:44px;font-weight:700;color:#9A5F0B">3</p>
+<p style="font-size:32px;font-weight:700">Distribute the blame</p>
+<p style="font-size:28px;line-height:1.35;color:#5B5348">The error travels backwards to every weight (backpropagation).</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:14px;background:#FFFDF8;padding:32px;border:1px solid #DDD3C0;border-radius:16px">
+<p style="font-size:44px;font-weight:700;color:#9A5F0B">4</p>
+<p style="font-size:32px;font-weight:700">Correct</p>
+<p style="font-size:28px;line-height:1.35;color:#5B5348">Every weight takes a small step against its blame.</p>
+</div>
+</div>
+<p style="font-size:34px;line-height:1.4">All of this 1500 times. Start: random numbers. End: weights that fit the examples.</p>
+<aside>The weights are not calculated but learned step by step. At the start they are random. In each of the 1500 rounds we guess, measure the error, distribute the blame backwards and nudge every weight a small step in the direction that reduces the error. This is gradient descent, the same mechanism used to train large models.</aside>
+</section>

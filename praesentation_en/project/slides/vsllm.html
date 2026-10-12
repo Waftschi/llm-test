@@ -1,0 +1,14 @@
+<section id="vsllm" data-transition="fade" style="background:#F6F1E7;color:#1E1B18;font-family:'DM Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:32px">
+<p style="font-size:24px;color:#9A5F0B;letter-spacing:2px;text-transform:uppercase">Putting it in context</p>
+<h2 style="font-family:'Domine', Georgia, serif;font-size:64px;font-weight:600;line-height:1.1">From the barkeeper to an LLM</h2>
+<table style="font-size:30px">
+<tr style="background:#EAE2D0"><th style="width:20%">Aspect</th><th style="width:35%">Barkeeper</th><th style="width:45%">LLM</th></tr>
+<tr><td><b>Weights</b></td><td>about 4,000</td><td>billions</td></tr>
+<tr><td><b>Input</b></td><td>1 column per word</td><td>embeddings (meaning vectors)</td></tr>
+<tr><td><b>Task</b></td><td>pick 1 of 34 answers</td><td>predict the next token</td></tr>
+<tr><td><b>Data</b></td><td>230 examples</td><td>trillions of tokens</td></tr>
+<tr><td><b>Layers</b></td><td>2</td><td>dozens to hundreds</td></tr>
+</table>
+<p style="font-size:34px;line-height:1.4;color:#9A5F0B"><b>Unchanged:</b> random start, softmax, measuring the error and improving the weights by gradient.</p>
+<aside>Besides size, the most important difference is the input. In the barkeeper every word is its own column with no relationship to the others. An LLM learns embeddings: words with similar usage, such as “kein” and “no”, get similar vectors, and everything learned about one word also applies to the other. Also, an LLM predicts the next word instead of picking a fixed answer out of 34. The learning mechanics, however, are the same as in this talk.</aside>
+</section>

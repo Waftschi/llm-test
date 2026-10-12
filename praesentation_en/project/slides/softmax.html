@@ -1,0 +1,27 @@
+<section id="softmax" data-transition="fade" style="background:#1E1B18;color:#F6F1E7;font-family:'DM Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:32px">
+<p style="font-size:24px;color:#E0A23B;letter-spacing:2px;text-transform:uppercase">Step 4</p>
+<h2 style="font-family:'Domine', Georgia, serif;font-size:64px;font-weight:600;line-height:1.1">Softmax: scores become percentages</h2>
+<div style="display:flex;gap:64px">
+<div style="flex:1;display:flex;flex-direction:column;gap:24px">
+<p style="font-size:34px;line-height:1.35"><b>1.</b> e to the power of the gap to the best score: everything becomes positive, differences grow.</p>
+<p style="font-size:34px;line-height:1.35"><b>2.</b> Divide by the sum: together 100 %.</p>
+<p style="font-size:34px;line-height:1.35"><b>3.</b> A big gap means a confident decision. Below 40 % the barkeeper asks back.</p>
+</div>
+<div style="width:760px;display:flex;flex-direction:column;gap:20px">
+<table style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:28px">
+<tr style="background:#2A2621"><th style="width:30%">Answer</th><th style="width:20%">Score</th><th style="width:20%">Gap</th><th style="width:15%">e^</th><th style="width:15%">Share</th></tr>
+<tr><td>wein</td><td>11.4</td><td>0.0</td><td>1.000</td><td style="color:#E0A23B"><b>98.9 %</b></td></tr>
+<tr><td>bier</td><td>6.5</td><td>−4.9</td><td>0.008</td><td>0.8 %</td></tr>
+<tr><td>wie_gehts</td><td>4.5</td><td>−6.9</td><td>0.001</td><td>0.1 %</td></tr>
+<tr><td>31 others</td><td>…</td><td>…</td><td>0.003</td><td>0.3 %</td></tr>
+</table>
+<p style="font-size:28px;color:#BDB5A6">Sum of the e^ values: 1.011 (share = e^ divided by sum)</p>
+</div>
+</div>
+<p style="font-size:34px;line-height:1.4;color:#E0A23B">Our case “kein bier”: softmax only sees the scores, the word “kein” is already inside them. It was learned in layer 1 (weights in W1).</p>
+<div style="display:flex;gap:32px">
+<div style="flex:1;background:#2A2621;padding:16px 28px;border-radius:14px"><p style="font-size:26px;color:#BDB5A6">Before learning (“kein” unknown)</p><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:34px;color:#6DB6D1">bier 99.9 % · wrong</p></div>
+<div style="flex:1;background:#2A2621;padding:16px 28px;border-radius:14px"><p style="font-size:26px;color:#BDB5A6">After “kein bier = wein”</p><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:34px;color:#E0A23B">wein 98.9 % · correct</p></div>
+</div>
+<aside>Softmax turns raw scores into probabilities. The table shows our sentence “kein bier” in the context [wein] with the numbers of the current model. Softmax runs over all 34 answers, which is why the last row stands for the 31 others. We calculate with the gap to the best score; that gives the same percentages and avoids huge numbers: wein has e to the 11.4, which is about 85,000. The scores on the layer 2 slide (bier +8.4) come from an earlier run and do not match these numbers. The gap is what matters: with scores of 5 against 1 against 0 it would already be 98 %, 2 % and 1 %.</aside>
+</section>

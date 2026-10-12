@@ -1,0 +1,52 @@
+<section id="learnkein" data-transition="fade" style="background:#1E1B18;color:#F6F1E7;font-family:'DM Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:24px">
+<p style="font-size:24px;color:#E0A23B;letter-spacing:2px;text-transform:uppercase">Learning in miniature</p>
+<h2 style="font-family:'Domine', Georgia, serif;font-size:64px;font-weight:600;line-height:1.1">How “kein” is learned</h2>
+<div style="display:flex;flex-direction:column;gap:14px">
+<div style="display:flex;align-items:center;gap:32px;background:#2A2621;padding:14px 32px;border-radius:14px">
+<p style="width:40px;font-size:44px;font-weight:700;color:#E0A23B">1</p>
+<div style="width:340px;display:flex;flex-direction:column;gap:2px">
+<p style="font-size:34px;font-weight:700">Input</p>
+<p style="font-size:24px;color:#BDB5A6">teach it in the chat</p>
+</div>
+<p style="width:400px;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px;color:#E0A23B">[start] kein bier = wein</p>
+<p style="flex:1;font-size:26px;line-height:1.3">The guest tells the barkeeper what would have been right: sentence, context and the correct answer.</p>
+</div>
+<div style="display:flex;align-items:center;gap:32px;background:#2A2621;padding:14px 32px;border-radius:14px">
+<p style="width:40px;font-size:44px;font-weight:700;color:#E0A23B">2</p>
+<div style="width:340px;display:flex;flex-direction:column;gap:2px">
+<p style="font-size:34px;font-weight:700">Save</p>
+<p style="font-size:24px;color:#BDB5A6">new row in <i>examples</i></p>
+</div>
+<p style="width:400px;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px;color:#E0A23B">start | kein bier | wein</p>
+<p style="flex:1;font-size:26px;line-height:1.3">The example goes into the database next to the existing ones. It is the learning material; nothing in the network changes yet.</p>
+</div>
+<div style="display:flex;align-items:center;gap:32px;background:#2A2621;padding:14px 32px;border-radius:14px">
+<p style="width:40px;font-size:44px;font-weight:700;color:#E0A23B">3</p>
+<div style="width:340px;display:flex;flex-direction:column;gap:2px">
+<p style="font-size:34px;font-weight:700">New column</p>
+<p style="font-size:24px;color:#BDB5A6">word “kein” into the vocabulary</p>
+</div>
+<p style="width:400px;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px;color:#E0A23B">W1: column “kein”</p>
+<p style="flex:1;font-size:26px;line-height:1.3">Before, “kein” was unknown and ignored. Now it gets its own column in W1, with a random start for every concept.</p>
+</div>
+<div style="display:flex;align-items:center;gap:32px;background:#2A2621;padding:14px 32px;border-radius:14px;border-left:8px solid #E0A23B">
+<p style="width:40px;font-size:44px;font-weight:700;color:#E0A23B">4</p>
+<div style="width:340px;display:flex;flex-direction:column;gap:2px">
+<p style="font-size:34px;font-weight:700">Retrain</p>
+<p style="font-size:24px;color:#BDB5A6">all examples, 1500 rounds</p>
+</div>
+<p style="width:400px;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px;color:#E0A23B">error → backprop</p>
+<p style="flex:1;font-size:26px;line-height:1.3">The network guesses for every sentence, measures the error and nudges the weights (slides 10 and 11). For “kein bier” training pulls the weights of “kein” so that they hold back bier votes and push wein votes.</p>
+</div>
+<div style="display:flex;align-items:center;gap:32px;background:#2A2621;padding:14px 32px;border-radius:14px">
+<p style="width:40px;font-size:44px;font-weight:700;color:#E0A23B">5</p>
+<div style="width:340px;display:flex;flex-direction:column;gap:2px">
+<p style="font-size:34px;font-weight:700">Result</p>
+<p style="font-size:24px;color:#BDB5A6">what was learned lives in the weights</p>
+</div>
+<p style="width:400px;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px;color:#E0A23B">bier 99.9 % → wein 98.9 %</p>
+<p style="flex:1;font-size:26px;line-height:1.3">“kein” is not an entry in a list; it lives in the numbers of W1 and W2. The sentence “kein bier” now gives wein.</p>
+</div>
+</div>
+<aside>This is how a sentence becomes a learned relationship. The guest types “kein bier = wein” in the chat. The example is stored in the table examples. Because “kein” is missing from the vocabulary, a new column appears in W1. Then the whole network is retrained: from the random start, with all stored examples, 1500 rounds. So not only the word “kein” is changed, all weights are recalculated. How exactly the weights are nudged is shown on the backpropagation slides. Important: the network does not get a rule “kein flips the answer”. It finds weights that work for the examples. That is why it needs several examples; in our model there are 14 with “kein”, so that similar sentences like “kein wein” or “bitte kein bier” also work. The numbers come from a model with these 14 examples compared to a model without any of them.</aside>
+</section>

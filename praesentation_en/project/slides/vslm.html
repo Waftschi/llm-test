@@ -1,0 +1,17 @@
+<section id="vslm" data-transition="fade" style="background:#F6F1E7;color:#1E1B18;font-family:'DM Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:28px">
+<p style="font-size:24px;color:#9A5F0B;letter-spacing:2px;text-transform:uppercase">Putting it in context</p>
+<h2 style="font-family:'Domine', Georgia, serif;font-size:64px;font-weight:600;line-height:1.1">Classifier or language model?</h2>
+<table style="font-size:28px">
+<tr style="background:#EAE2D0"><th style="width:18%">Aspect</th><th style="width:41%">Barkeeper (classifier)</th><th style="width:41%">Language model</th></tr>
+<tr><td><b>Question</b></td><td>Which of the 34 answers fits?</td><td>Which word comes next?</td></tr>
+<tr><td><b>Input</b></td><td>Words as 0/1, order does not matter</td><td>Word sequence with positions</td></tr>
+<tr><td><b>Output</b></td><td>1 of 34 answers</td><td>1 of tens of thousands of words</td></tr>
+<tr><td><b>Answer text</b></td><td>fixed in advance</td><td>generated word by word</td></tr>
+<tr><td><b>Learns from</b></td><td>230 labelled examples</td><td>unlabelled text (the next word is the solution)</td></tr>
+</table>
+<div style="display:flex;flex-direction:column;gap:8px;background:#FFFDF8;padding:24px 32px;border:1px solid #DDD3C0;border-radius:16px">
+<p style="font-size:32px;font-weight:700;color:#9A5F0B">What carries over</p>
+<p style="font-size:30px;line-height:1.35">The principle stays the same: weighted sums, activation, softmax, measure the error, improve the weights. Only the input (embeddings and position) and the output (vocabulary instead of 34 answers) change.</p>
+</div>
+<aside>Our barkeeper is a classifier: it maps a sentence to one of 34 fixed answers and knows no word order. A language model answers a different question, namely which word comes next, and produces text word by word. The principle carries over: you could rebuild our network by putting the output layer on all known words and training it to predict the next word from the previous words. The advantage: you need no hand-labelled examples, the text itself provides the correct answer. With 230 examples the result would hardly be usable, though; real language models need billions of weights and trillions of words.</aside>
+</section>
