@@ -13,7 +13,7 @@ German version: [README.md](README.md)
 |---|---|
 | `barkeeper2.py` | Two layers (words → concepts → answer), console |
 | `show_matrix.py` | Shows the learned weights (words, concepts, answers, CSV) |
-| `barkeeper_seed.json` | Answers, prices, contexts and starter examples |
+| `barkeeper_seed.json` | Answers, prices, contexts, starter examples and `fallback` (reply and minimum confidence for when nothing is understood) |
 | `barkeeper2.db` | SQLite: training examples and the trained model (as JSON) |
 
 Requirements: Python 3 with `numpy`. Otherwise only the standard library is used.

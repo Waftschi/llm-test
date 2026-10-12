@@ -1,5 +1,6 @@
 {
   "info": "Seed-Daten für den Barkeeper. Kontexte: start + Getränke. Preise in Euro.",
+  "fallback": {"reply": "Hä? Wie bitte?", "min_confidence": 0.4},
   "intents": {
     "gruss": {
       "replies": [

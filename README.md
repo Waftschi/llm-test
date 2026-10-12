@@ -13,7 +13,7 @@ English version: [README.en.md](README.en.md)
 |---|---|
 | `barkeeper2.py` | Zwei Schichten (Wörter → Konzepte → Antwort), Konsole |
 | `show_matrix.py` | Zeigt die gelernten Gewichte (Wörter, Konzepte, Antworten, CSV) |
-| `barkeeper_seed.json` | Antworten, Preise, Kontexte und Start-Beispiele |
+| `barkeeper_seed.json` | Antworten, Preise, Kontexte, Start-Beispiele und `fallback` (Antwort und Mindest-Sicherheit, wenn nichts verstanden wird) |
 | `barkeeper2.db` | SQLite: Trainingsbeispiele und trainiertes Modell (als JSON) |
 
 Voraussetzung: Python 3 mit `numpy`. Sonst wird nur die Standardbibliothek genutzt.

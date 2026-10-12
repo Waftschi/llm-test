@@ -26,6 +26,7 @@ INTENTS = {
     "nichts_bestellt": (["Du hast doch noch gar nichts bestellt!"], 0, None),
     "tschuess":        (["Mach's gut, bis bald!"], 0, "start"),
 }
+FALLBACK = {"reply": "Hä? Wie bitte?", "min_confidence": 0.4}   # when nothing is understood (can be set in the seed)
 seed_examples = [
     ("start", "hallo", "gruss"), ("start", "ein bier bitte", "bier"), ("start", "ein wein", "wein"),
     ("bier", "noch eins", "bier"), ("start", "noch eins", "nichts_bestellt"),
@@ -37,6 +38,7 @@ if os.path.exists(SEED_FILE):
     INTENTS = {k: (v["replies"], v["price"], v["context"]) for k, v in seed["intents"].items()}
     seed_examples = [tuple(e) for e in seed["examples"]]
     HIDDEN = seed.get("hidden", HIDDEN)
+    FALLBACK = {**FALLBACK, **seed.get("fallback", {})}
 
 # Examples that need COMBINATIONS: "kein" flips the meaning of the drink.
 # Our guest drinks only beer or wine, so "kein bier" means wine and vice versa.
@@ -355,8 +357,8 @@ while True:
     if show:
         show_log(feats, m, x, h, p)
     too_few = len(known_words) < len(feats[:-1]) / 2
-    if not known_words or too_few or p.max() < 0.4:
-        print(f"\n  🍺 Barkeeper: Hä? Wie bitte?   (best guess: {intent}, {p.max():.0%})")
+    if not known_words or too_few or p.max() < FALLBACK["min_confidence"]:
+        print(f"\n  🍺 Barkeeper: {FALLBACK['reply']}   (best guess: {intent}, {p.max():.0%})")
         intent = ask_teacher()
         if intent:
             intent = learn(context, said, intent)
