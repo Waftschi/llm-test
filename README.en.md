@@ -12,28 +12,23 @@ German version: [README.md](README.md)
 | File | Purpose |
 |---|---|
 | `barkeeper2.py` | Two layers (words → concepts → answer), console |
-| `barkeeper_server.py` | Web server with chat, teaching and decision log |
-| `barkeeper_chat.html` | Browser UI (served by the server) |
+| `show_matrix.py` | Shows the learned weights (words, concepts, answers, CSV) |
 | `barkeeper_seed.json` | Answers, prices, contexts and starter examples |
 | `barkeeper2.db` | SQLite: training examples and the trained model (as JSON) |
 
-Requirements: Python 3 with `numpy`. The web server otherwise only uses the standard library.
+Requirements: Python 3 with `numpy`. Otherwise only the standard library is used.
 
 ## Getting started
-
-Browser chat:
-
-```
-python3 barkeeper_server.py
-```
-
-Then open http://localhost:8765 (not the HTML file directly, otherwise it cannot reach the server).
 
 Console:
 
 ```
-python3 barkeeper2.py
+python3 barkeeper2.py            # large model
+python3 barkeeper2.py simple     # mini model (see README_SIMPLE.md)
+python3 show_matrix.py           # look at the learned matrix
 ```
+
+There is deliberately no web interface yet, see "Possible next steps".
 
 ## Usage
 
@@ -48,11 +43,11 @@ python3 barkeeper2.py
 
 If the barkeeper does not understand a sentence ("Hä? Wie bitte?"), it automatically asks what it should have done.
 
-Console only: `data` (check training data), `vergleich` (one matrix vs. two layers),
-`log` (decision log on/off), `dashboard` (HTML overview written to `/tmp/barkeeper_dashboard.html`).
+More commands: `data` (check training data), `vergleich` (one matrix vs. two layers),
+`log` (decision log on/off).
 
-In the browser, every answer has a collapsible panel
-"Wie hat der Barkeeper entschieden?" (how did the barkeeper decide?) showing the most active concepts, their drivers and their votes.
+The decision log is printed under every answer and shows the most active concepts, their drivers,
+the votes, the sums, tanh and the softmax calculation.
 
 ## How it works
 
@@ -120,6 +115,8 @@ Nobody designs them. Each of the 24 concepts is a row in `W1` that starts with r
 
 ## Possible next steps
 
+Today the Python core runs in the console only. The web frontend comes later, on top of it:
+
 ```
 Angular (chat UI, log panel, dashboard)
    │  REST/JSON
@@ -130,7 +127,7 @@ Python core (FastAPI): model, training, teaching, explanation, SQLite
 
 Sensible order:
 
-1. Move the model code into an importable `barkeeper_core.py` (currently it is duplicated in the console app and the server).
-2. FastAPI with state per session (currently all browser tabs share one guest).
+1. Move the model code into an importable `barkeeper_core.py` (currently it lives in `barkeeper2.py` together with the console).
+2. FastAPI with state per session.
 3. Angular UI against this API.
 4. NestJS gateway as soon as login or public hosting is needed.

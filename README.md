@@ -12,28 +12,23 @@ English version: [README.en.md](README.en.md)
 | Datei | Zweck |
 |---|---|
 | `barkeeper2.py` | Zwei Schichten (Wörter → Konzepte → Antwort), Konsole |
-| `barkeeper_server.py` | Webserver mit Chat, Teachen und Entscheidungs-Log |
-| `barkeeper_chat.html` | Browser-Oberfläche (wird vom Server ausgeliefert) |
+| `show_matrix.py` | Zeigt die gelernten Gewichte (Wörter, Konzepte, Antworten, CSV) |
 | `barkeeper_seed.json` | Antworten, Preise, Kontexte und Start-Beispiele |
 | `barkeeper2.db` | SQLite: Trainingsbeispiele und trainiertes Modell (als JSON) |
 
-Voraussetzung: Python 3 mit `numpy`. Der Webserver nutzt sonst nur die Standardbibliothek.
+Voraussetzung: Python 3 mit `numpy`. Sonst wird nur die Standardbibliothek genutzt.
 
 ## Starten
-
-Browser-Chat:
-
-```
-python3 barkeeper_server.py
-```
-
-Dann http://localhost:8765 öffnen (nicht die HTML-Datei direkt, sonst erreicht sie den Server nicht).
 
 Konsole:
 
 ```
-python3 barkeeper2.py
+python3 barkeeper2.py            # großes Modell
+python3 barkeeper2.py simple     # Mini-Modell (siehe README_SIMPLE.md)
+python3 show_matrix.py           # gelernte Matrix ansehen
 ```
+
+Eine Weboberfläche gibt es bewusst noch nicht, siehe "Mögliche Weiterentwicklung".
 
 ## Bedienung
 
@@ -48,11 +43,11 @@ python3 barkeeper2.py
 
 Versteht der Barkeeper einen Satz nicht ("Hä? Wie bitte?"), fragt er automatisch, was er hätte tun sollen.
 
-Nur in der Konsole: `data` (Trainingsdaten prüfen), `vergleich` (eine Matrix gegen zwei Schichten),
-`log` (Entscheidungs-Log an/aus), `dashboard` (HTML-Übersicht nach `/tmp/barkeeper_dashboard.html`).
+Weitere Befehle: `data` (Trainingsdaten prüfen), `vergleich` (eine Matrix gegen zwei Schichten),
+`log` (Entscheidungs-Log an/aus).
 
-Im Browser steht unter jeder Antwort ein aufklappbares Panel
-"Wie hat der Barkeeper entschieden?" mit den aktivsten Konzepten, ihren Treibern und den Stimmen.
+Das Entscheidungs-Log steht unter jeder Antwort und zeigt die aktivsten Konzepte, ihre Treiber,
+die Stimmen, die Summen, tanh und die Softmax-Rechnung.
 
 ## Wie es funktioniert
 
@@ -120,6 +115,8 @@ Niemand entwirft sie. Jedes der 24 Konzepte ist eine Zeile in `W1`, die mit Zufa
 
 ## Mögliche Weiterentwicklung
 
+Der Python-Kern läuft heute nur in der Konsole. Das Web-Frontend kommt später darauf:
+
 ```
 Angular (Chat-UI, Log-Panel, Dashboard)
    │  REST/JSON
@@ -130,7 +127,7 @@ Python-Kern (FastAPI): Modell, Training, Teachen, Erklärung, SQLite
 
 Sinnvolle Reihenfolge:
 
-1. Modellcode in ein importierbares `barkeeper_core.py` auslagern (aktuell ist er in Konsole und Server doppelt).
-2. FastAPI mit Zustand pro Sitzung (aktuell teilen sich alle Browser-Tabs einen Gast).
+1. Modellcode in ein importierbares `barkeeper_core.py` auslagern (aktuell steckt er noch in `barkeeper2.py` zusammen mit der Konsole).
+2. FastAPI mit Zustand pro Sitzung.
 3. Angular-Oberfläche gegen diese API.
 4. NestJS-Gateway, sobald Login oder öffentliches Hosting nötig sind.

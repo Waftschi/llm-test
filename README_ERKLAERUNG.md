@@ -140,12 +140,12 @@ Wenn du `noch eins = bier` eingibst oder `falsch` korrigierst:
 3. Alles wird mit demselben Seed neu trainiert.
 4. Die Spalten des neuen Satzes werden verschoben, bis er stimmt. Die übrigen Beispiele halten den Rest an seinem Platz.
 
-## 9. Selbst ausprobieren (Browser-Chat)
+## 9. Selbst ausprobieren (Konsole)
 
-1. `ein bier` senden und das Panel "Wie hat der Barkeeper entschieden?" aufklappen:
+1. `python3 barkeeper2.py` starten, `ein bier` eingeben und das Entscheidungs-Log lesen (`log` schaltet es an oder aus):
    Mehrere Konzepte schlagen wegen `bier` und `ein` aus.
-2. `kein bier` senden und vergleichen: Das stärkste Konzept hat jetzt `kein` als größten Treiber, Wein gewinnt.
-3. Etwas Unbekanntes wie `ein weißbier` senden, beibringen und erneut fragen.
+2. `kein bier` eingeben und vergleichen: Das stärkste Konzept hat jetzt `kein` als größten Treiber, Wein gewinnt.
+3. Etwas Unbekanntes wie `ein weißbier` eingeben, beibringen und erneut fragen.
 
 ## Gleiche Ideen in echten LLMs
 

@@ -16,16 +16,15 @@ Das Mini-Modell hat eine eigene Datenbank (`barkeeper_simple.db`). Deine bisheri
 ## Starten
 
 ```
-python3 barkeeper2.py simple                           # Konsole
-BARKEEPER_PROFILE=simple python3 barkeeper_server.py   # Browser-Chat (vorher einmal barkeeper2.py simple ausführen)
-BARKEEPER_PROFILE=simple python3 show_matrix.py        # Matrix ansehen (nur 4 x 6)
+python3 barkeeper2.py simple                       # Konsole
+BARKEEPER_PROFILE=simple python3 show_matrix.py    # Matrix ansehen (nur 4 x 6)
 ```
 
 Ohne `simple` läuft alles wie bisher mit dem großen Modell.
 
 ## Experiment
 
-1. `python3 barkeeper2.py simple` starten und `ein bier` senden.
+1. `python3 barkeeper2.py simple` starten und `ein bier` eingeben.
    Im Log siehst du nur vier Konzepte, die klar von `bier` getrieben werden.
 2. `BARKEEPER_PROFILE=simple python3 show_matrix.py` ausführen und die Matrix notieren.
 3. `kein bier = wein` beibringen und `show_matrix.py` erneut ausführen.
