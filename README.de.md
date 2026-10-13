@@ -7,6 +7,8 @@ um jeden Schritt nachzuvollziehen.
 
 English version (default): [README.md](README.md)
 
+**Präsentation:** [Deutsch](https://waftschi.github.io/llm-test/praesentation/presentation.html) · [Englisch](https://waftschi.github.io/llm-test/praesentation_en/presentation.html) (Folien, die das Netz Schritt für Schritt erklären)
+
 ## Dateien
 
 | Datei | Zweck |
@@ -14,9 +16,14 @@ English version (default): [README.md](README.md)
 | `barkeeper2.py` | Zwei Schichten (Wörter → Konzepte → Antwort), Konsole |
 | `show_matrix.py` | Zeigt die gelernten Gewichte (Wörter, Konzepte, Antworten, CSV) |
 | `barkeeper_seed.json` | Antworten, Preise, Kontexte, Start-Beispiele und `fallback` (Antwort und Mindest-Sicherheit, wenn nichts verstanden wird) |
-| `barkeeper2.db` | SQLite: Trainingsbeispiele und trainiertes Modell (als JSON) |
+| `barkeeper2.db` | SQLite: Trainingsbeispiele und trainiertes Modell (als JSON). Wird beim ersten Start erzeugt, liegt nicht im Repo |
+| `praesentation/`, `praesentation_en/` | Folien auf Deutsch und Englisch (`build_presentation.py` erzeugt sie) |
 
 Voraussetzung: Python 3 mit `numpy`. Sonst wird nur die Standardbibliothek genutzt.
+
+```
+pip3 install -r requirements.txt
+```
 
 ## Starten
 
@@ -131,3 +138,7 @@ Sinnvolle Reihenfolge:
 2. FastAPI mit Zustand pro Sitzung.
 3. Angular-Oberfläche gegen diese API.
 4. NestJS-Gateway, sobald Login oder öffentliches Hosting nötig sind.
+
+## Lizenz
+
+[MIT](LICENSE): frei nutzbar, veränderbar und weitergebbar, solange der Copyright-Hinweis erhalten bleibt.

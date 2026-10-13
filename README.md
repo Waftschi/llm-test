@@ -7,6 +7,8 @@ to follow every single step.
 
 German version: [README.de.md](README.de.md)
 
+**Presentation:** [English](https://waftschi.github.io/llm-test/praesentation_en/presentation.html) · [German](https://waftschi.github.io/llm-test/praesentation/presentation.html) (slides that explain the network step by step)
+
 ## Files
 
 | File | Purpose |
@@ -14,9 +16,14 @@ German version: [README.de.md](README.de.md)
 | `barkeeper2.py` | Two layers (words → concepts → answer), console |
 | `show_matrix.py` | Shows the learned weights (words, concepts, answers, CSV) |
 | `barkeeper_seed.json` | Answers, prices, contexts, starter examples and `fallback` (reply and minimum confidence for when nothing is understood) |
-| `barkeeper2.db` | SQLite: training examples and the trained model (as JSON) |
+| `barkeeper2.db` | SQLite: training examples and the trained model (as JSON). Created on the first start, not part of the repo |
+| `praesentation/`, `praesentation_en/` | Slides in German and English (`build_presentation.py` builds them) |
 
 Requirements: Python 3 with `numpy`. Otherwise only the standard library is used.
+
+```
+pip3 install -r requirements.txt
+```
 
 ## Getting started
 
@@ -131,3 +138,7 @@ Sensible order:
 2. FastAPI with state per session.
 3. Angular UI against this API.
 4. NestJS gateway as soon as login or public hosting is needed.
+
+## License
+
+[MIT](LICENSE): free to use, change and share, as long as the copyright notice is kept.
