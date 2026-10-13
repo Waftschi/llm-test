@@ -1,133 +1,133 @@
-# Barkeeper – ein kleines neuronales Netz zum Verstehen
+# Barkeeper – a small neural network for learning how it works
 
-Ein Barkeeper, der Sätze wie "ein bier", "kein wein" oder "zahlen bitte" versteht und dazulernt.
-Kein echtes LLM, sondern ein neuronales Netz mit knapp 4000 Gewichten. Es nutzt dieselben
-Grundideen wie ein LLM (Zahlen, Gewichte, Softmax, Gradientenabstieg), ist aber klein genug,
-um jeden Schritt nachzuvollziehen.
+A bartender who understands sentences like "ein bier", "kein wein" or "zahlen bitte" (German) and keeps learning.
+Not a real LLM, but a neural network with just under 4000 weights. It uses the same basic
+ideas as an LLM (numbers, weights, softmax, gradient descent), but it is small enough
+to follow every single step.
 
-English version: [README.en.md](README.en.md)
+German version: [README.de.md](README.de.md)
 
-## Dateien
+## Files
 
-| Datei | Zweck |
+| File | Purpose |
 |---|---|
-| `barkeeper2.py` | Zwei Schichten (Wörter → Konzepte → Antwort), Konsole |
-| `show_matrix.py` | Zeigt die gelernten Gewichte (Wörter, Konzepte, Antworten, CSV) |
-| `barkeeper_seed.json` | Antworten, Preise, Kontexte, Start-Beispiele und `fallback` (Antwort und Mindest-Sicherheit, wenn nichts verstanden wird) |
-| `barkeeper2.db` | SQLite: Trainingsbeispiele und trainiertes Modell (als JSON) |
+| `barkeeper2.py` | Two layers (words → concepts → answer), console |
+| `show_matrix.py` | Shows the learned weights (words, concepts, answers, CSV) |
+| `barkeeper_seed.json` | Answers, prices, contexts, starter examples and `fallback` (reply and minimum confidence for when nothing is understood) |
+| `barkeeper2.db` | SQLite: training examples and the trained model (as JSON) |
 
-Voraussetzung: Python 3 mit `numpy`. Sonst wird nur die Standardbibliothek genutzt.
+Requirements: Python 3 with `numpy`. Otherwise only the standard library is used.
 
-## Starten
+## Getting started
 
-Konsole:
+Console:
 
 ```
-python3 barkeeper2.py            # großes Modell
-python3 barkeeper2.py simple     # Mini-Modell (siehe README_SIMPLE.md)
-python3 show_matrix.py           # gelernte Matrix ansehen
+python3 barkeeper2.py            # large model
+python3 barkeeper2.py simple     # mini model (see README_SIMPLE.md)
+python3 show_matrix.py           # look at the learned matrix
 ```
 
-Eine Weboberfläche gibt es bewusst noch nicht, siehe "Mögliche Weiterentwicklung".
+There is deliberately no web interface yet, see "Possible next steps".
 
-## Bedienung
+## Usage
 
-| Eingabe | Wirkung |
+| Input | Effect |
 |---|---|
-| `ein bier`, `kein wein`, `zahlen bitte` | normal bestellen |
-| `noch eins = bier` | direkt beibringen (Kontext = aktueller Kontext) |
-| `[wein] noch eins = wein` | beibringen mit explizitem Kontext |
-| `falsch` | letzte Antwort korrigieren (Liste, Nummer oder neue Antwort wählen) |
-| `skip` | Teach-Frage überspringen |
-| `reset` | neuer Gast (Kontext und Rechnung zurücksetzen) |
+| `ein bier`, `kein wein`, `zahlen bitte` | order normally |
+| `noch eins = bier` | teach directly (context = current context) |
+| `[wein] noch eins = wein` | teach with an explicit context |
+| `falsch` | correct the last answer (pick from a list, a number, or type a new answer) |
+| `skip` | skip the teaching question |
+| `reset` | new guest (reset context and bill) |
 
-Versteht der Barkeeper einen Satz nicht ("Hä? Wie bitte?"), fragt er automatisch, was er hätte tun sollen.
+If the barkeeper does not understand a sentence ("Hä? Wie bitte?"), it automatically asks what it should have done.
 
-Weitere Befehle: `data` (Trainingsdaten prüfen), `vergleich` (eine Matrix gegen zwei Schichten),
-`log` (Entscheidungs-Log an/aus).
+More commands: `data` (check training data), `vergleich` (one matrix vs. two layers),
+`log` (decision log on/off).
 
-Das Entscheidungs-Log steht unter jeder Antwort und zeigt die aktivsten Konzepte, ihre Treiber,
-die Stimmen, die Summen, tanh und die Softmax-Rechnung.
+The decision log is printed under every answer and shows the most active concepts, their drivers,
+the votes, the sums, tanh and the softmax calculation.
 
-## Wie es funktioniert
+## How it works
 
-### 1. Text wird zu Zahlen
-Aus "ein bier" im Kontext `start` werden die Merkmale `ein`, `bier`, `[start]`.
-Jedes der bekannten Merkmale (aktuell 133) bekommt eine 1, wenn es vorkommt, sonst 0.
-Dieser Zahlenvektor ist die Eingabe `x`.
+### 1. Text becomes numbers
+"ein bier" in the context `start` becomes the features `ein`, `bier`, `[start]`.
+Each known feature (currently 133) gets a 1 if it occurs, otherwise a 0.
+This vector of numbers is the input `x`.
 
-### 2. Zwei Schichten
+### 2. Two layers
 
 ```
-h = tanh(W1 · x + b1)       Schicht 1: Wörter + Kontext → 24 Konzepte
-p = softmax(W2 · h + b2)    Schicht 2: Konzepte → Wahrscheinlichkeit je Antwort
+h = tanh(W1 · x + b1)       layer 1: words + context → 24 concepts
+p = softmax(W2 · h + b2)    layer 2: concepts → probability per answer
 ```
 
-- `W1` ist eine 24 × 133 Tabelle. Jedes Konzept summiert gewichtete Stimmen der aktiven Wörter.
-- `tanh` drückt die Summe auf einen Wert zwischen -1 und +1 (die "Aktivierung" im Log).
-- `W2` sammelt für jede Antwort die Stimmen der Konzepte. `softmax` macht daraus Prozente (Summe 100 %).
-- Die höchste Antwort gewinnt. Unter 40 % (oder bei zu vielen unbekannten Wörtern) fragt der Barkeeper nach.
+- `W1` is a 24 × 133 table. Each concept adds up the weighted votes of the active words.
+- `tanh` squeezes the sum to a value between -1 and +1 (the "activation" in the log).
+- `W2` collects the votes of the concepts for each answer. `softmax` turns them into percentages (sum 100 %).
+- The highest answer wins. Below 40 % (or with too many unknown words) the barkeeper asks.
 
-### 3. Warum zwei Schichten?
-Eine einzelne Matrix addiert nur unabhängige Wortstimmen: `kein` und `bier` können nicht zusammenwirken,
-"kein bier" würde weiter für Bier stimmen. Ein verstecktes Konzept kann nur dann ausschlagen, wenn
-`kein` und `bier` zusammen vorkommen, und dann für Wein stimmen. Der Konsolenbefehl `vergleich` zeigt den Unterschied.
+### 3. Why two layers?
+A single matrix only adds up independent word votes: `kein` and `bier` cannot work together,
+so "kein bier" would still vote for beer. A hidden concept can be built to fire only when
+`kein` and `bier` occur together, and then vote for wine. The console command `vergleich` shows the difference.
 
 ### 4. Training
-Wiederholt (1500 Runden, über alle Beispiele gleichzeitig):
+Repeated (1500 rounds, over all examples at once):
 
-1. Antwort raten.
-2. Fehler messen: `P - Y` (Vermutung minus richtige Antwort).
-3. Schuld rückwärts an jedes Gewicht verteilen (Backpropagation).
-4. Jedes Gewicht ein Stück gegen seine Schuld verschieben (Gradientenabstieg, mit Momentum).
+1. Guess the answer.
+2. Measure the error: `P - Y` (guess minus correct answer).
+3. Distribute the blame backwards to every weight (backpropagation).
+4. Move every weight a little against its blame (gradient descent, with momentum).
 
-### 5. Wie der Fehler die richtige Stelle in der Matrix findet
-Jedes Gewicht hat eine Adresse (Ausgang `i`, Eingang `j`):
-
-```
-Änderung von W[i,j]  =  Fehler an Ausgang i  ×  Wert von Eingang j
-```
-
-Im Code: `D2.T @ Hd` für `W2` und `D1.T @ X` für `W1`.
-
-- **Schicht 2:** Gradient = Fehler der Antwort × Aktivierung des Konzepts. Aktive Konzepte, die zur richtigen Antwort passen, stimmen künftig stärker dafür.
-- **Weitergabe an Schicht 1:** `D1 = (D2 @ W2) * (1 - Hd**2)`.
-  `D2 @ W2` fragt jedes Konzept, wie viel es zur falschen Antwort beigetragen hat.
-  `(1 - Hd**2)` ist die Steigung von `tanh`; ein Konzept, das schon bei ±1 klebt, ändert sich kaum.
-- **Schicht 1:** Gradient = Schuld des Konzepts × `x[j]`. Nur Wörter, die im Satz vorkamen (`x[j] = 1`), werden verändert; alle anderen Spalten bekommen genau 0.
-
-Ein Beispiel verschiebt also nur die Spalten seiner eigenen Wörter, und zwar wenig (gemittelt über alle Beispiele).
-"bier" und "kein bier" schieben die Spalte `bier` in entgegengesetzte Richtungen. Dadurch müssen sich Konzepte
-auf die Kombination spezialisieren.
-
-### 6. Woher kommen die Konzepte?
-Niemand entwirft sie. Jedes der 24 Konzepte ist eine Zeile in `W1`, die mit Zufallszahlen startet
-(`np.random.randn`, fester Seed = wiederholbar). Das Training formt aus dem Zufall Spezialisten.
-
-- Zufälliger Start ist nötig, weil sonst alle Zeilen denselben Gradienten bekämen und für immer identische Kopien blieben.
-- Die Bedeutung ("Bier bestellen") ist unsere Interpretation anhand der treibenden Wörter im Log. Das Modell kennt nur Nummern.
-- Die Nummern sind willkürlich und können sich nach dem Neutrainieren verschieben. Ein Konzept mischt oft mehrere Muster.
-- Festgelegt sind nur die Anzahl (`HIDDEN = 24`) und die Rechenform (`tanh`).
-
-### 7. Teachen
-`learn()` löscht ein altes Beispiel mit gleichem Kontext und Satz, fügt das neue ein und trainiert alles neu
-(gleicher Seed). Die Spalten des neuen Satzes werden verschoben, bis er stimmt; die übrigen Beispiele halten den Rest in Position.
-
-## Mögliche Weiterentwicklung
-
-Der Python-Kern läuft heute nur in der Konsole. Das Web-Frontend kommt später darauf:
+### 5. How the error finds the right place in the matrix
+Every weight has an address (output `i`, input `j`):
 
 ```
-Angular (Chat-UI, Log-Panel, Dashboard)
+change of W[i,j]  =  error at output i  ×  value of input j
+```
+
+In the code: `D2.T @ Hd` for `W2` and `D1.T @ X` for `W1`.
+
+- **Layer 2:** gradient = error of the answer × activation of the concept. Active concepts that fit the correct answer vote for it more strongly from now on.
+- **Passing it on to layer 1:** `D1 = (D2 @ W2) * (1 - Hd**2)`.
+  `D2 @ W2` asks each concept how much it contributed to the wrong answer.
+  `(1 - Hd**2)` is the slope of `tanh`; a concept that is already stuck at ±1 hardly changes.
+- **Layer 1:** gradient = blame of the concept × `x[j]`. Only words that occurred in the sentence (`x[j] = 1`) are changed; all other columns get exactly 0.
+
+So one example only moves the columns of its own words, and only a little (averaged over all examples).
+"bier" and "kein bier" push the column `bier` in opposite directions. That forces concepts
+to specialise in the combination.
+
+### 6. Where do the concepts come from?
+Nobody designs them. Each of the 24 concepts is a row in `W1` that starts with random numbers
+(`np.random.randn`, fixed seed = repeatable). Training turns the randomness into specialists.
+
+- A random start is necessary because otherwise all rows would get the same gradient and stay identical copies forever.
+- The meaning ("ordering beer") is our interpretation based on the driving words in the log. The model only knows numbers.
+- The numbers are arbitrary and can shift after retraining. A concept often mixes several patterns.
+- Only the count (`HIDDEN = 24`) and the activation function (`tanh`) are fixed by us.
+
+### 7. Teaching
+`learn()` deletes an old example with the same context and sentence, inserts the new one and retrains everything
+(same seed). The columns of the new sentence are moved until it is right; the other examples hold everything else in place.
+
+## Possible next steps
+
+Today the Python core runs in the console only. The web frontend comes later, on top of it:
+
+```
+Angular (chat UI, log panel, dashboard)
    │  REST/JSON
-NestJS (Gateway: Auth, Sessions, Validierung, Rate-Limiting)
-   │  REST/JSON (nur intern)
-Python-Kern (FastAPI): Modell, Training, Teachen, Erklärung, SQLite
+NestJS (gateway: auth, sessions, validation, rate limiting)
+   │  REST/JSON (internal only)
+Python core (FastAPI): model, training, teaching, explanation, SQLite
 ```
 
-Sinnvolle Reihenfolge:
+Sensible order:
 
-1. Modellcode in ein importierbares `barkeeper_core.py` auslagern (aktuell steckt er noch in `barkeeper2.py` zusammen mit der Konsole).
-2. FastAPI mit Zustand pro Sitzung.
-3. Angular-Oberfläche gegen diese API.
-4. NestJS-Gateway, sobald Login oder öffentliches Hosting nötig sind.
+1. Move the model code into an importable `barkeeper_core.py` (currently it lives in `barkeeper2.py` together with the console).
+2. FastAPI with state per session.
+3. Angular UI against this API.
+4. NestJS gateway as soon as login or public hosting is needed.

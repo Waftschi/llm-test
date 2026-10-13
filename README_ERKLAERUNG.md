@@ -1,6 +1,6 @@
 # Wie der Barkeeper lernt – die Erklärung
 
-Diese Datei erklärt Schritt für Schritt, was in `barkeeper2.py` passiert. Die Bedienung steht in `README.md`.
+Diese Datei erklärt Schritt für Schritt, was in `barkeeper2.py` passiert. Die Bedienung steht in `README.de.md` (englisch: `README.md`).
 
 ## Vorab: Das ist kein LLM
 
