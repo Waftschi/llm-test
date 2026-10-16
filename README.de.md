@@ -7,6 +7,8 @@ um jeden Schritt nachzuvollziehen.
 
 English version (default): [README.md](README.md)
 
+**Kurzanleitung für Kolleginnen und Kollegen** (in 20–30 Minuten erklärbar): [docs/README.de.md](docs/README.de.md)
+
 **Präsentation:** [Deutsch](https://waftschi.github.io/llm-test/praesentation/presentation.html) · [Englisch](https://waftschi.github.io/llm-test/praesentation_en/presentation.html) (Folien, die das Netz Schritt für Schritt erklären)
 
 ## Dateien

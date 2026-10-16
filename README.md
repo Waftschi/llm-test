@@ -7,6 +7,8 @@ to follow every single step.
 
 German version: [README.de.md](README.de.md)
 
+**Short guide for colleagues** (explainable in 20–30 minutes): [docs/README.md](docs/README.md)
+
 **Presentation:** [English](https://waftschi.github.io/llm-test/praesentation_en/presentation.html) · [German](https://waftschi.github.io/llm-test/praesentation/presentation.html) (slides that explain the network step by step)
 
 ## Files
