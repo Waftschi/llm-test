@@ -1,0 +1,25 @@
+<section id="w2" data-transition="fade" style="background:#F6F1E7;color:#1E1B18;font-family:'DM Sans', Arial, sans-serif;padding:96px 128px 120px;display:flex;flex-direction:column;gap:24px">
+<p style="font-size:24px;color:#9A5F0B;letter-spacing:2px;text-transform:uppercase">Schritt 3 – Schicht 2</p>
+<h2 style="font-family:'Domine', Georgia, serif;font-size:64px;font-weight:600;line-height:1.1">W2 und b2: die gelernten Zahlen von Schicht 2</h2>
+<div style="background:#FFFDF8;padding:18px 32px;border:1px solid #DDD3C0;border-radius:16px;border-left:8px solid #9A5F0B">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:38px;color:#9A5F0B">s = W2·h + b2</p>
+</div>
+<div style="display:flex;gap:40px">
+<div style="width:900px;display:flex;flex-direction:column;gap:14px">
+<p style="font-size:26px;color:#5B5348">Ausschnitt aus W2 (jede Zahl ist ein Gewicht) und b2:</p>
+<table style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:28px">
+<tr style="background:#EAE2D0"><th style="width:18%">Antwort</th><th style="width:14%">c11</th><th style="width:14%">c5</th><th style="width:14%">c2</th><th style="width:14%">c15</th><th style="width:12%">…</th><th style="width:14%">b2</th></tr>
+<tr><td><b>wein</b></td><td>+1.03</td><td>+1.49</td><td>−3.31</td><td>−1.36</td><td>…</td><td style="color:#1F6F8B">+0.11</td></tr>
+<tr><td><b>bier</b></td><td>+3.36</td><td>+0.90</td><td>+0.81</td><td>+1.71</td><td>…</td><td style="color:#1F6F8B">+0.60</td></tr>
+<tr><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td></tr>
+</table>
+<p style="font-size:26px;line-height:1.3;color:#5B5348">Ganz W2: 34 Zeilen (Antworten) × 24 Spalten (Konzepte) = 816 Zahlen. b2: 34 Zahlen, eine pro Antwort.</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:16px">
+<div style="display:flex;flex-direction:column;gap:6px;background:#FFFDF8;padding:20px 26px;border:1px solid #DDD3C0;border-radius:14px"><p style="font-size:30px;font-weight:700;color:#9A5F0B">W2</p><p style="font-size:26px;line-height:1.3">Eine Zeile pro Antwort, eine Spalte pro Konzept. Die Zahl sagt, wie stark dieses Konzept für diese Antwort stimmt (+) oder dagegen (−).</p></div>
+<div style="display:flex;flex-direction:column;gap:6px;background:#FFFDF8;padding:20px 26px;border:1px solid #DDD3C0;border-radius:14px"><p style="font-size:30px;font-weight:700;color:#1F6F8B">b2</p><p style="font-size:26px;line-height:1.3">Die Grundneigung einer Antwort, die gilt, egal welche Konzepte anspringen. Sie wird zur Summe der Stimmen addiert.</p></div>
+<div style="display:flex;flex-direction:column;gap:6px;background:#FFFDF8;padding:20px 26px;border:1px solid #DDD3C0;border-radius:14px;border-left:8px solid #9A5F0B"><p style="font-size:30px;font-weight:700;color:#9A5F0B">Beispiel wein</p><p style="font-size:26px;line-height:1.3">c2 hat h = −1.00 und für wein das Gewicht −3.31. Stimme: −3.31 × −1.00 = +3.31. Alle Stimmen plus b2 (+0.11) ergeben die Punktzahl +11.4.</p></div>
+</div>
+</div>
+<aside>Auf der Folie davor hast du die Stimmen der Konzepte gesehen. Hier sind die Zahlen dahinter: W2 und b2, die gelernten Zahlen von Schicht 2. W2 ist eine Tabelle mit einer Zeile pro Antwort und einer Spalte pro Konzept, bei uns 34 mal 24, also 816 Zahlen. Eine Zahl sagt, wie stark das Konzept für die Antwort stimmt oder dagegen. Die Stimme ist Gewicht mal Aktivierung h. b2 ist der Bias, eine Zahl pro Antwort, die Grundneigung unabhängig vom Satz. Gerechnet wird s gleich W2 mal h plus b2, das Ergebnis sind die 34 Punktzahlen. Wie W1 und b1 werden auch W2 und b2 im Training gelernt, zusammen sind es 4258 Zahlen im ganzen Netz. Der Ausschnitt zeigt echte Werte des aktuellen Modells.</aside>
+</section>

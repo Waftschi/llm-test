@@ -1,35 +1,22 @@
-<section id="backex" data-transition="fade" style="background:#F6F1E7;color:#1E1B18;font-family:'DM Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:28px">
+<section id="backex" data-transition="fade" style="background:#F6F1E7;color:#1E1B18;font-family:'DM Sans', Arial, sans-serif;padding:72px 128px 100px;display:flex;flex-direction:column;gap:14px">
 <p style="font-size:24px;color:#9A5F0B;letter-spacing:2px;text-transform:uppercase">Learning</p>
-<h2 style="font-family:'Domine', Georgia, serif;font-size:64px;font-weight:600;line-height:1.1">Worked example: D2 and D1</h2>
-<div style="display:flex;gap:48px">
-<div style="width:640px;display:flex;flex-direction:column;gap:12px;background:#FFFDF8;padding:24px 28px;border:1px solid #DDD3C0;border-radius:16px">
-<p style="font-size:32px;font-weight:700;color:#9A5F0B">Starting point</p>
-<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px;line-height:1.4">Correct: bier, Y = [0, 1, 0]<br>Activation h = [+0.9, −0.5]</p>
-<table style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px">
-<tr style="background:#EAE2D0"><th style="width:40%">Concept</th><th style="width:30%">c0</th><th style="width:30%">c1</th></tr>
-<tr><td><b>Activation h</b></td><td><b>+0.9</b></td><td><b>−0.5</b></td></tr>
-<tr><td>W2 gruss</td><td>0.1</td><td>0.2</td></tr>
-<tr><td>W2 bier</td><td>0.5</td><td>−0.5</td></tr>
-<tr><td>W2 wein</td><td>1.5</td><td>−0.4</td></tr>
-</table>
-<p style="font-size:28px;line-height:1.35">Guess P = [0.13, 0.26, 0.61]. The network guesses <b>wein (61 %)</b>, the right answer would be bier.</p>
+<h2 style="font-family:'Domine', Georgia, serif;font-size:64px;font-weight:600;line-height:1.1">Worked example: who carries how much blame?</h2>
+<p style="font-size:26px;line-height:1.3;color:#5B5348">Mini network with 3 answers (gruss, bier, wein) and 2 concepts (c0, c1). The right answer is bier, the network guesses wein.</p>
+<div style="display:flex;gap:24px;align-items:center;background:#FFFDF8;padding:12px 24px;border:1px solid #DDD3C0;border-radius:16px">
+<p style="width:52px;font-size:48px;font-weight:700;color:#9A5F0B">1</p>
+<div style="width:440px;display:flex;flex-direction:column;gap:6px"><p style="font-size:28px;font-weight:700;line-height:1.15">How wrong was each answer?</p><p style="font-size:24px;line-height:1.3;color:#5B5348">D2 = P − Y. P is the guess, Y the right answer (bier = 1).</p></div>
+<div style="flex:1"><table style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px"><tr style="background:#EAE2D0"><th style="width:22%">Answer</th><th style="width:28%">P (guess)</th><th style="width:22%">Y (right)</th><th style="width:28%">D2 = P − Y</th></tr><tr><td>gruss</td><td>0.13</td><td>0</td><td style="color:#9A5F0B;">+0.13</td></tr><tr><td>bier</td><td>0.26</td><td>1</td><td style="color:#1F6F8B;">−0.74</td></tr><tr><td>wein</td><td>0.61</td><td>0</td><td style="color:#9A5F0B;">+0.61</td></tr></table></div>
 </div>
-<div style="flex:1;display:flex;flex-direction:column;gap:20px">
-<div style="display:flex;flex-direction:column;gap:8px;background:#FFFDF8;padding:20px 28px;border:1px solid #DDD3C0;border-radius:16px">
-<p style="font-size:30px;font-weight:700;color:#9A5F0B">1 · D2 = P − Y</p>
-<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px">gruss +0.13   bier <span style="color:#1F6F8B">−0.74</span>   wein +0.61</p>
-<p style="font-size:26px;color:#5B5348">Positive = answer too strong, negative = too weak.</p>
+<div style="display:flex;gap:24px;align-items:center;background:#FFFDF8;padding:12px 24px;border:1px solid #DDD3C0;border-radius:16px">
+<p style="width:52px;font-size:48px;font-weight:700;color:#9A5F0B">2</p>
+<div style="width:440px;display:flex;flex-direction:column;gap:6px"><p style="font-size:28px;font-weight:700;line-height:1.15">How much blame does each concept carry?</p><p style="font-size:24px;line-height:1.3;color:#5B5348">Every answer sends its error back through the weights W2. Then everything is added up.</p></div>
+<div style="flex:1"><table style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px"><tr style="background:#EAE2D0"><th style="width:10%">Concept</th><th style="width:22%">gruss +0.13</th><th style="width:25%">bier −0.74</th><th style="width:26%">wein +0.61</th><th style="width:17%">Σ</th></tr><tr><td>c0</td><td>× 0.1 = +0.01</td><td>× 0.5 = <span style="color:#1F6F8B">−0.37</span></td><td>× 1.5 = +0.92</td><td style="color:#9A5F0B"><b>+0.56</b></td></tr><tr><td>c1</td><td>× 0.2 = +0.03</td><td>× −0.5 = +0.37</td><td>× −0.4 = <span style="color:#1F6F8B">−0.24</span></td><td style="color:#9A5F0B"><b>+0.15</b></td></tr></table></div>
 </div>
-<div style="display:flex;flex-direction:column;gap:8px;background:#FFFDF8;padding:20px 28px;border:1px solid #DDD3C0;border-radius:16px">
-<p style="font-size:30px;font-weight:700;color:#9A5F0B">2 · D2 · W2: each concept’s contribution to the blame</p>
-<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px;line-height:1.4">c0: 0.13·0.1 + (−0.74)·0.5 + 0.61·1.5 = <b>+0.56</b><br>c1: 0.13·0.2 + (−0.74)·(−0.5) + 0.61·(−0.4) = <b>+0.15</b></p>
+<div style="display:flex;gap:24px;align-items:center;background:#FFFDF8;padding:12px 24px;border:1px solid #DDD3C0;border-radius:16px;border-left:8px solid #9A5F0B">
+<p style="width:52px;font-size:48px;font-weight:700;color:#9A5F0B">3</p>
+<div style="width:440px;display:flex;flex-direction:column;gap:6px"><p style="font-size:28px;font-weight:700;line-height:1.15">How movable is the concept?</p><p style="font-size:24px;line-height:1.3;color:#5B5348">Times (1 − h²): a concept near +1 or −1 hardly changes, one near 0 changes a lot. Result: D1.</p></div>
+<div style="flex:1"><table style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px"><tr style="background:#EAE2D0"><th style="width:14%">Concept</th><th style="width:20%">Blame Σ</th><th style="width:26%">Activation h</th><th style="width:18%">1 − h²</th><th style="width:22%">D1</th></tr><tr><td>c0</td><td>+0.56</td><td>+0.9</td><td>0.19</td><td style="color:#9A5F0B"><b>0.11</b></td></tr><tr><td>c1</td><td>+0.15</td><td style="color:#1F6F8B">−0.5</td><td>0.75</td><td style="color:#9A5F0B"><b>0.11</b></td></tr></table></div>
 </div>
-<div style="display:flex;flex-direction:column;gap:8px;background:#FFFDF8;padding:20px 28px;border:1px solid #DDD3C0;border-radius:16px">
-<p style="font-size:30px;font-weight:700;color:#9A5F0B">3 · × (1 − h²): how movable is the concept?</p>
-<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px;line-height:1.4">c0: h = +0.9 → 1 − 0.9² = 0.19 → 0.56 × 0.19 = <b>0.11</b><br>c1: h = −0.5 → 1 − 0.5² = 0.75 → 0.15 × 0.75 = <b>0.11</b></p>
-<p style="font-size:26px;color:#5B5348">c0: activation +0.9 is close to the maximum +1: flat curve, small factor.</p>
-</div>
-</div>
-</div>
-<aside>A tiny example with three answers and two concepts. The network guesses wein with 61 percent, but the right answer is bier. Step 1: D2 is guess minus correct answer. Bier is far too weak with minus 0.74, wein far too strong with plus 0.61. Step 2: we pass these errors back through the weights W2 to the concepts. For every concept, all answer errors are multiplied by that concept’s weight into the respective answer and added up. Concept 0 votes strongly for wein with weight 1.5 and therefore receives a lot of blame, plus 0.56. Step 3: the factor 1 minus h squared is the slope of tanh. Concept 0 has activation 0.9, so it sits close to the limit and its factor is only 0.19, which means it is hard to move. Concept 1 is in the middle at minus 0.5, so its factor is 0.75. In the end both concepts have the same blame, 0.11. From this the weight changes are calculated, which the next slide shows.</aside>
+<p style="font-size:28px;line-height:1.3"><b>Both concepts get the blame 0.11. From that the learning rule works out how the weights in W1 change.</b></p>
+<aside>A tiny example with three answers and two concepts. The network guesses wein with 61 percent, the right answer would be bier. Step 1: D2 is guess minus right answer. Bier is far too weak at minus 0.74, wein far too strong at plus 0.61. Step 2: the error of each answer is multiplied by the weight W2 of the concept and added up. Concept 0 votes strongly for wein with weight 1.5 and therefore gets a lot of blame, plus 0.56. Step 3: the factor 1 minus h squared is the slope of tanh. Concept 0 has activation 0.9 and sits almost at the limit, so the factor is only 0.19. Concept 1 is in the middle at minus 0.5, the factor is 0.75. In the end both concepts carry the same blame, 0.11. From that the changes of the weights are calculated.</aside>
 </section>

@@ -1,5 +1,5 @@
-<section id="twolayers" data-transition="fade" style="background:#1E1B18;color:#F6F1E7;font-family:'DM Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:36px">
-<p style="font-size:24px;color:#E0A23B;letter-spacing:2px;text-transform:uppercase">Putting it in context</p>
+<section id="twolayers" data-transition="fade" style="background:#F6F1E7;color:#1E1B18;font-family:'DM Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:36px">
+<p style="font-size:24px;color:#9A5F0B;letter-spacing:2px;text-transform:uppercase">Putting it in context</p>
 <h2 style="font-family:'Domine', Georgia, serif;font-size:64px;font-weight:600;line-height:1.1">Why two layers?</h2>
 <div style="display:flex;gap:64px">
 <div style="flex:1;display:flex;flex-direction:column;gap:28px">
@@ -7,18 +7,18 @@
 <p style="font-size:32px;line-height:1.4">A concept can be learned so that it only fires when “kein” and “bier” occur together, and then votes for wine.</p>
 </div>
 <div style="width:640px;display:flex;flex-direction:column;gap:24px">
-<div style="background:#2A2621;padding:24px 32px;border-radius:16px;display:flex;flex-direction:column;gap:6px">
-<p style="font-size:28px;color:#BDB5A6">One matrix · 12 new sentences</p>
-<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:64px;font-weight:600;color:#6DB6D1">8 / 12</p>
-<p style="font-size:26px;color:#BDB5A6">Training: 223 / 230</p>
+<div style="background:#FFFDF8;border:1px solid #DDD3C0;padding:24px 32px;border-radius:16px;display:flex;flex-direction:column;gap:6px">
+<p style="font-size:28px;color:#5B5348">One matrix – 12 new sentences</p>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:64px;font-weight:600;color:#1F6F8B">8 / 12</p>
+<p style="font-size:26px;color:#5B5348">Training: 223 / 230</p>
 </div>
-<div style="background:#2A2621;padding:24px 32px;border-radius:16px;display:flex;flex-direction:column;gap:6px">
-<p style="font-size:28px;color:#BDB5A6">Two layers · 12 new sentences</p>
-<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:64px;font-weight:600;color:#E0A23B">12 / 12</p>
-<p style="font-size:26px;color:#BDB5A6">Training: 230 / 230</p>
+<div style="background:#FFFDF8;border:1px solid #DDD3C0;padding:24px 32px;border-radius:16px;display:flex;flex-direction:column;gap:6px">
+<p style="font-size:28px;color:#5B5348">Two layers – 12 new sentences</p>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:64px;font-weight:600;color:#9A5F0B">12 / 12</p>
+<p style="font-size:26px;color:#5B5348">Training: 230 / 230</p>
 </div>
 </div>
 </div>
-<p style="font-size:28px;line-height:1.4;color:#BDB5A6">Test with 12 sentences the network has never seen (command “vergleich”, German for comparison). The single matrix fails on “bier bitte”, “wein bitte”, “ich will wein” and “heute ein wein”.</p>
+<p style="font-size:28px;line-height:1.4;color:#5B5348">Test with 12 sentences the network has never seen (command “vergleich”, German for comparison). The single matrix fails on “bier bitte”, “wein bitte”, “ich will wein” and “heute ein wein”.</p>
 <aside>This is the reason for the hidden layer. Without it the network cannot represent combinations such as “kein” plus “bier” cleanly. The big numbers are the meaningful test: twelve sentences that appeared in no training example, for instance “kein bier bitte” or “ich will wein”. The single matrix gets eight of them right, two layers get all twelve. The small numbers below are only the training examples: there the matrix reaches 223 of 230, two layers 230 of 230. That only shows how well the network can represent the examples. Whether it also works on new sentences only the test shows. All numbers come from the command vergleich in the current model and change with the data. The test sentences are fixed in the code and there are only twelve, so the number is a hint and not a proof.</aside>
 </section>

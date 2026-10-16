@@ -38,12 +38,23 @@
 <p style="font-size:28px;color:#E0A23B;letter-spacing:2px;text-transform:uppercase">Teamvortrag</p>
 
 </section>
+<section id="part1" data-transition="fade" style="background:#1E1B18;color:#F6F1E7;font-family:'DM Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;justify-content:center;gap:40px">
+<p style="font-size:32px;color:#E0A23B;letter-spacing:4px;text-transform:uppercase">Teil 1</p>
+<h1 style="font-family:'Domine', Georgia, serif;font-size:128px;font-weight:600;line-height:1.05">Antworten</h1>
+<p style="font-size:48px;line-height:1.3;color:#BDB5A6">Wie aus einem Satz eine Antwort wird</p>
+<div style="display:flex;gap:24px;margin-top:40px">
+<p style="background:#E0A23B;color:#1E1B18;font-weight:700;font-size:28px;padding:14px 32px;border-radius:999px">1  Antworten</p>
+<p style="background:#2A2621;color:#BDB5A6;border:1px solid #4A443B;font-size:28px;padding:14px 32px;border-radius:999px">2  Lernen</p>
+<p style="background:#2A2621;color:#BDB5A6;border:1px solid #4A443B;font-size:28px;padding:14px 32px;border-radius:999px">3  Einordnung</p>
+</div>
+
+</section>
 <section id="example" data-transition="fade" style="background:#F6F1E7;color:#1E1B18;font-family:'DM Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:36px">
 <p style="font-size:24px;color:#9A5F0B;letter-spacing:2px;text-transform:uppercase">Das Beispiel</p>
 <h2 style="font-family:'Domine', Georgia, serif;font-size:64px;font-weight:600;line-height:1.1">Die Aufgabe: Sätze verstehen</h2>
 <div style="display:flex;gap:32px">
 <div style="flex:1;display:flex;flex-direction:column;gap:10px;background:#FFFDF8;padding:36px;border:1px solid #DDD3C0;border-radius:16px">
-<p style="font-size:24px;color:#5B5348">Eingabe · Kontext [start]</p>
+<p style="font-size:24px;color:#5B5348">Eingabe – Kontext [start]</p>
 <p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:40px;font-weight:600">kein bier</p>
 <hr style="border-top:1px solid #DDD3C0">
 <p style="font-size:24px;color:#5B5348">Vor dem Lernen: falsch</p>
@@ -52,14 +63,14 @@
 <p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:40px;font-weight:600;color:#9A5F0B">wein</p>
 </div>
 <div style="flex:1;display:flex;flex-direction:column;gap:10px;background:#FFFDF8;padding:36px;border:1px solid #DDD3C0;border-radius:16px">
-<p style="font-size:24px;color:#5B5348">Eingabe · Kontext [bier]</p>
+<p style="font-size:24px;color:#5B5348">Eingabe – Kontext [bier]</p>
 <p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:40px;font-weight:600">noch eins</p>
 <hr style="border-top:1px solid #DDD3C0">
 <p style="font-size:24px;color:#5B5348">Antwort</p>
 <p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:40px;font-weight:600;color:#9A5F0B">bier</p>
 </div>
 <div style="flex:1;display:flex;flex-direction:column;gap:10px;background:#FFFDF8;padding:36px;border:1px solid #DDD3C0;border-radius:16px">
-<p style="font-size:24px;color:#5B5348">Eingabe · Kontext [start]</p>
+<p style="font-size:24px;color:#5B5348">Eingabe – Kontext [start]</p>
 <p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:40px;font-weight:600">noch eins</p>
 <hr style="border-top:1px solid #DDD3C0">
 <p style="font-size:24px;color:#5B5348">Antwort</p>
@@ -67,59 +78,6 @@
 </div>
 </div>
 <p style="font-size:32px;line-height:1.4;color:#1E1B18">Kein LLM, sondern ein kleines neuronales Netz: 230 Beispiele, 141 Wörter, 34 mögliche Antworten, 4.258 Gewichte. Dieselben Prinzipien, nur klein genug, um jede Zahl zu sehen.</p>
-
-</section>
-<section id="pipeline" data-transition="fade" style="background:#1E1B18;color:#F6F1E7;font-family:'DM Sans', Arial, sans-serif;padding:96px 128px 120px;display:flex;flex-direction:column;gap:20px">
-<p style="font-size:24px;color:#E0A23B;letter-spacing:2px;text-transform:uppercase">Vorwärts · vor dem Lernen</p>
-<h2 style="font-family:'Domine', Georgia, serif;font-size:64px;font-weight:600;line-height:1.1">So entsteht eine Antwort</h2>
-<p style="font-size:24px;color:#BDB5A6">Beispiel „kein bier“ im Kontext [start], <b>vor dem Lernen</b>. Blau: die Werte, die von Schritt zu Schritt weitergegeben werden.</p>
-<div style="display:flex;flex-direction:column;gap:10px">
-<div style="display:flex;align-items:center;gap:32px;background:#2A2621;padding:10px 32px;border-radius:14px">
-<p style="width:40px;font-size:44px;font-weight:700;color:#E0A23B">1</p>
-<div style="width:340px;display:flex;flex-direction:column;gap:2px">
-<p style="font-size:34px;font-weight:700">Text → Zahlen</p>
-<p style="font-size:24px;color:#BDB5A6">Wörter + Kontext als 0/1</p>
-</div>
-<div style="width:400px;display:flex;flex-direction:column;gap:4px"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:28px;color:#E0A23B">x = 0 0 1 1 0 … 1</p><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:21px;color:#6DB6D1">bier 1 · [start] 1 · „kein“ unbekannt, ignoriert</p></div>
-<p style="flex:1;font-size:26px;line-height:1.3">Computer rechnen nur mit Zahlen: Jedes Wort bekommt eine 1 (kommt vor) oder eine 0 (kommt nicht vor).</p>
-</div>
-<div style="display:flex;align-items:center;gap:32px;background:#2A2621;padding:10px 32px;border-radius:14px;border-left:8px solid #E0A23B">
-<p style="width:40px;font-size:44px;font-weight:700;color:#E0A23B">2</p>
-<div style="width:340px;display:flex;flex-direction:column;gap:2px">
-<p style="font-size:34px;font-weight:700">Schicht 1</p>
-<p style="font-size:24px;color:#BDB5A6">Wörter → Konzepte</p>
-</div>
-<div style="width:400px;display:flex;flex-direction:column;gap:4px"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:28px;color:#E0A23B">h = tanh(W1·x + b1)</p><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:21px;color:#6DB6D1">c18 −0.96 · c20 −0.90 · c1 +0.89 · c17 +0.78 …</p></div>
-<p style="flex:1;font-size:26px;line-height:1.3">Konzepte sind Ja/Nein-Fragen an den Satz, z. B. „Kommt <b>kein</b> zusammen mit <b>bier</b> vor?“ <b>tanh</b> macht aus der Summe z ein klares Signal von −1 (nein) bis +1 (ja). Das Ergebnis <b>h</b> geht in Schritt 3.</p>
-</div>
-<div style="display:flex;align-items:center;gap:32px;background:#2A2621;padding:10px 32px;border-radius:14px">
-<p style="width:40px;font-size:44px;font-weight:700;color:#E0A23B">3</p>
-<div style="width:340px;display:flex;flex-direction:column;gap:2px">
-<p style="font-size:34px;font-weight:700">Schicht 2</p>
-<p style="font-size:24px;color:#BDB5A6">Konzepte → Punktzahlen</p>
-</div>
-<div style="width:400px;display:flex;flex-direction:column;gap:4px"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:28px;color:#E0A23B">s = W2·h + b2</p><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:21px;color:#6DB6D1">bier +13.7 · danke +6.2 · tschuess +5.0 · …</p></div>
-<p style="flex:1;font-size:26px;line-height:1.3">Jede mögliche Antwort sammelt das Dafür und Dagegen der Fragen und bekommt daraus eine Punktzahl.</p>
-</div>
-<div style="display:flex;align-items:center;gap:32px;background:#2A2621;padding:10px 32px;border-radius:14px">
-<p style="width:40px;font-size:44px;font-weight:700;color:#E0A23B">4</p>
-<div style="width:340px;display:flex;flex-direction:column;gap:2px">
-<p style="font-size:34px;font-weight:700">Softmax</p>
-<p style="font-size:24px;color:#BDB5A6">Punktzahlen → Prozente</p>
-</div>
-<div style="width:400px;display:flex;flex-direction:column;gap:4px"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:28px;color:#E0A23B">p = softmax(s)</p><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:21px;color:#6DB6D1">bier 99.9 % · danke 0.1 % · …</p></div>
-<p style="flex:1;font-size:26px;line-height:1.3">Aus den Punktzahlen werden Prozente, die zusammen 100 % ergeben, wie ein Wahlergebnis.</p>
-</div>
-<div style="display:flex;align-items:center;gap:32px;background:#2A2621;padding:10px 32px;border-radius:14px">
-<p style="width:40px;font-size:44px;font-weight:700;color:#E0A23B">5</p>
-<div style="width:340px;display:flex;flex-direction:column;gap:2px">
-<p style="font-size:34px;font-weight:700">Antwort</p>
-<p style="font-size:24px;color:#BDB5A6">Höchster Wert gewinnt</p>
-</div>
-<div style="width:400px;display:flex;flex-direction:column;gap:4px"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:28px;color:#E0A23B">bier = 99.9 %</p><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:21px;color:#6DB6D1">bier gewinnt: falsch, richtig wäre wein</p></div>
-<p style="flex:1;font-size:26px;line-height:1.3">Die Antwort mit den meisten Prozenten gewinnt. Unter 40 % fragt der Barkeeper nach.</p>
-</div>
-</div>
 
 </section>
 <section id="numbers" data-transition="fade" style="background:#F6F1E7;color:#1E1B18;font-family:'DM Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:24px">
@@ -146,58 +104,103 @@
 <p style="font-size:30px;line-height:1.4">Für das Netz sind das zwei getrennte Spalten mit eigenen Gewichten. Dass sie zusammengehören, weiß es nicht.</p>
 
 </section>
-<section id="layer1" data-transition="fade" style="background:#1E1B18;color:#F6F1E7;font-family:'DM Sans', Arial, sans-serif;padding:96px 128px 120px;display:flex;flex-direction:column;gap:24px">
-<p style="font-size:24px;color:#E0A23B;letter-spacing:2px;text-transform:uppercase">Schritt 2 · Schicht 1</p>
+<section id="layer1" data-transition="fade" style="background:#F6F1E7;color:#1E1B18;font-family:'DM Sans', Arial, sans-serif;padding:96px 128px 120px;display:flex;flex-direction:column;gap:18px">
+<p style="font-size:24px;color:#9A5F0B;letter-spacing:2px;text-transform:uppercase">Schritt 2 – Schicht 1</p>
 <h2 style="font-family:'Domine', Georgia, serif;font-size:64px;font-weight:600;line-height:1.1">Wörter werden zu Konzepten</h2>
 <div style="display:flex;gap:64px">
-<div style="width:780px;display:flex;flex-direction:column;gap:6px;background:#2A2621;padding:28px;border-radius:16px">
-<p style="font-size:24px;color:#BDB5A6">Konzept 0 · Eingabe „kein bier“ im Kontext [wein]</p>
-<div style="display:flex;justify-content:space-between"><p style="font-size:24px;color:#BDB5A6">Wort</p><p style="font-size:24px;color:#BDB5A6">Gewicht</p></div>
-<div style="display:flex;justify-content:space-between"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:30px">bier</p><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:30px;color:#E0A23B">+3.9</p></div>
-<div style="display:flex;justify-content:space-between"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:30px">[wein]</p><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:30px;color:#E0A23B">+1.9</p></div>
-<div style="display:flex;justify-content:space-between"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:30px">kein</p><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:30px;color:#6DB6D1">−0.2</p></div>
-<hr style="border-top:1px solid #4A443B">
-<div style="display:flex;justify-content:space-between"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:30px">Σ Gewichte</p><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:30px">+5.61</p></div>
-<div style="display:flex;justify-content:space-between"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:30px">+ Bias</p><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:30px;color:#6DB6D1">−0.09</p></div>
-<div style="display:flex;justify-content:space-between"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:30px">= Summe z</p><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:30px">+5.52</p></div>
-<div style="display:flex;justify-content:space-between"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:36px;font-weight:600;color:#E0A23B">tanh(+5.52)</p><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:36px;font-weight:600;color:#E0A23B">= +1.00</p></div>
+<div style="width:780px;display:flex;flex-direction:column;gap:6px;background:#FFFDF8;border:1px solid #DDD3C0;padding:28px;border-radius:16px">
+<p style="font-size:24px;color:#5B5348">Konzept 15 – Eingabe „kein bier“ im Kontext [wein]</p>
+<div style="display:flex;justify-content:space-between"><p style="font-size:24px;color:#5B5348">Wort</p><p style="font-size:24px;color:#5B5348">Gewicht</p></div>
+<div style="display:flex;justify-content:space-between"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:30px">bier</p><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:30px;color:#9A5F0B">+1.23</p></div>
+<div style="display:flex;justify-content:space-between"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:30px">[wein]</p><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:30px;color:#1F6F8B">−0.85</p></div>
+<div style="display:flex;justify-content:space-between"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:30px">kein</p><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:30px;color:#9A5F0B">+1.82</p></div>
+<hr style="border-top:1px solid #DDD3C0">
+<div style="display:flex;justify-content:space-between"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:30px">Σ Gewichte</p><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:30px">+2.20</p></div>
+<div style="display:flex;justify-content:space-between"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:30px">+ Bias</p><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:30px;color:#1F6F8B">−0.24</p></div>
+<div style="display:flex;justify-content:space-between"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:30px">= Summe z</p><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:30px">+1.96</p></div>
+<div style="display:flex;justify-content:space-between"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:36px;font-weight:600;color:#9A5F0B">tanh(+1.96)</p><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:36px;font-weight:600;color:#9A5F0B">= +0.96</p></div>
 </div>
 <div style="flex:1;display:flex;flex-direction:column;gap:24px">
-<div style="display:flex;flex-direction:column;gap:8px;background:#2A2621;padding:24px;border-radius:16px">
-<p style="font-size:32px;font-weight:700;color:#E0A23B">Gewicht</p>
+<div style="display:flex;flex-direction:column;gap:8px;background:#FFFDF8;border:1px solid #DDD3C0;padding:24px;border-radius:16px">
+<p style="font-size:32px;font-weight:700;color:#9A5F0B">Gewicht</p>
 <p style="font-size:26px;line-height:1.3">Wie stark ein Wort dieses Konzept anschiebt (+) oder bremst (−). Jedes Konzept hat für jedes Wort ein eigenes Gewicht. Es startet als Zufallszahl und wird im Training Schritt für Schritt gelernt.</p>
 </div>
-<div style="display:flex;flex-direction:column;gap:8px;background:#2A2621;padding:24px;border-radius:16px">
-<p style="font-size:32px;font-weight:700;color:#E0A23B">Bias</p>
+<div style="display:flex;flex-direction:column;gap:8px;background:#FFFDF8;border:1px solid #DDD3C0;padding:24px;border-radius:16px">
+<p style="font-size:32px;font-weight:700;color:#9A5F0B">Bias</p>
 <p style="font-size:26px;line-height:1.3">Die Grundneigung des Konzepts, auch wenn kein Wort passt. Es ist ein Gewicht, dessen Eingang immer 1 ist. Es startet bei 0 und wird im Training mitgelernt.</p>
 </div>
-<div style="display:flex;flex-direction:column;gap:8px;background:#2A2621;padding:24px;border-radius:16px;border-left:8px solid #E0A23B">
-<p style="font-size:32px;font-weight:700;color:#E0A23B">Warum tanh?</p>
-<p style="font-size:26px;line-height:1.3">tanh drückt z auf −1 … +1. Ab etwa ±2 ist das Konzept voll an oder aus. Ohne diese Biegung wären zwei Schichten nur eine Matrix. Das Ergebnis <b>h = tanh(z) = +1.00</b> (unten links) geht in Schicht 2.</p>
+<div style="display:flex;flex-direction:column;gap:8px;background:#FFFDF8;border:1px solid #DDD3C0;padding:24px;border-radius:16px;border-left:8px solid #9A5F0B">
+<p style="font-size:32px;font-weight:700;color:#9A5F0B">Warum tanh?</p>
+<p style="font-size:26px;line-height:1.3">tanh drückt z auf −1 … +1. Ab etwa ±2 ist das Konzept fast voll an oder aus. Ohne diese Biegung wären zwei Schichten nur eine Matrix. Das Ergebnis <b>h = tanh(z) = +0.96</b> (unten links) geht in Schicht 2.</p>
 </div>
 </div>
 </div>
 
 </section>
-<section id="layer2" data-transition="fade" style="background:#F6F1E7;color:#1E1B18;font-family:'DM Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:28px">
-<p style="font-size:24px;color:#9A5F0B;letter-spacing:2px;text-transform:uppercase">Schritt 3 · Schicht 2</p>
+<section id="layer2" data-transition="fade" style="background:#F6F1E7;color:#1E1B18;font-family:'DM Sans', Arial, sans-serif;padding:96px 128px 120px;display:flex;flex-direction:column;gap:22px">
+<p style="font-size:24px;color:#9A5F0B;letter-spacing:2px;text-transform:uppercase">Schritt 3 – Schicht 2</p>
 <h2 style="font-family:'Domine', Georgia, serif;font-size:64px;font-weight:600;line-height:1.1">Konzepte stimmen für Antworten</h2>
 <table style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:30px">
-<tr><th style="width:20%">Antwort</th><th style="width:10%">c0</th><th style="width:10%">c2</th><th style="width:10%">c1</th><th style="width:10%">c3</th><th style="width:13%">Σ</th><th style="width:13%">+ Bias</th><th style="width:14%">Punktzahl</th></tr>
-<tr style="background:#EAE2D0"><td>Aktivierung</td><td>+1.00</td><td>+0.91</td><td>−0.61</td><td>+0.42</td><td></td><td></td><td></td></tr>
-<tr><td><b>bier</b></td><td>+4.3</td><td>+3.5</td><td>+1.8</td><td>+0.1</td><td>+9.6</td><td>−1.2</td><td style="color:#9A5F0B"><b>+8.4</b></td></tr>
-<tr><td><b>wein</b></td><td>−2.3</td><td>−2.7</td><td>0.0</td><td>−1.7</td><td>−6.7</td><td>+2.1</td><td style="color:#1F6F8B"><b>−4.6</b></td></tr>
+<tr><th style="width:14%">Antwort</th><th style="width:10%">c11</th><th style="width:10%">c5</th><th style="width:10%">c2</th><th style="width:10%">c15</th><th style="width:12%">20 weitere</th><th style="width:10%">Σ</th><th style="width:10%">+ Bias</th><th style="width:14%">Punktzahl</th></tr>
+<tr style="background:#EAE2D0"><td>Aktivierung h</td><td>+1.00</td><td>+1.00</td><td>−1.00</td><td>+0.96</td><td></td><td></td><td></td><td></td></tr>
+<tr><td><b>wein</b></td><td>+1.03</td><td>+1.49</td><td>+3.31</td><td>−1.31</td><td>+6.72</td><td>+11.24</td><td>+0.11</td><td style="color:#9A5F0B"><b>+11.4</b></td></tr>
+<tr><td><b>bier</b></td><td>+3.36</td><td>+0.90</td><td>−0.81</td><td>+1.65</td><td>+0.78</td><td>+5.87</td><td>+0.60</td><td style="color:#1F6F8B"><b>+6.5</b></td></tr>
 </table>
 <div style="display:flex;flex-direction:column;gap:8px;background:#FFFDF8;padding:24px 32px;border:1px solid #DDD3C0;border-radius:16px">
-<p style="font-size:32px;font-weight:700;color:#9A5F0B">Was sind c0, c1, c2, c3?</p>
-<p style="font-size:28px;line-height:1.35">Konzepte aus Schicht 1: je eine Ja/Nein-Frage an den Satz, +1 heißt ja, −1 heißt nein. Das Netz hat sie selbst gelernt. Gezeigt sind die 4 aktivsten von 24, nach Aktivierung sortiert. Sie haben keine Namen, nur Nummern.</p>
+<p style="font-size:32px;font-weight:700;color:#9A5F0B">Was bedeuten die Zahlen?</p>
+<p style="font-size:26px;line-height:1.3"><b>c11, c5, c2, c15</b> sind vier der 24 Konzepte aus Schicht 1 (c15 kennst du von Folie 5). <b>Aktivierung h</b> ist ihr tanh-Ergebnis für „kein bier“: +1 heißt ja, −1 heißt nein. Die Zahlen darunter sind die <b>Stimmen</b> des Konzepts für die Antwort. „20 weitere“ fasst die übrigen Konzepte zusammen, damit Σ stimmt.</p>
 </div>
-<p style="font-size:34px;line-height:1.4">Stimme = Gewicht W2[Antwort, Konzept] × Aktivierung des Konzepts</p>
-<p style="font-size:30px;line-height:1.4;color:#5B5348">Beispiel c0 → bier: gelerntes Gewicht ≈ +4.3 × Aktivierung +1.00 = Stimme +4.3</p>
+<p style="font-size:32px;line-height:1.3">Stimme = Gewicht W2[Antwort, Konzept] × Aktivierung h des Konzepts</p>
+<p style="font-size:28px;line-height:1.3;color:#5B5348">Beispiel c2 → wein: Gewicht −3.31 × Aktivierung −1.00 = Stimme +3.31 (Minus mal Minus: c2 sagt „nein“, und „nein“ spricht für wein)</p>
 
 </section>
-<section id="softmax" data-transition="fade" style="background:#1E1B18;color:#F6F1E7;font-family:'DM Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:32px">
-<p style="font-size:24px;color:#E0A23B;letter-spacing:2px;text-transform:uppercase">Schritt 4</p>
+<section id="concepts" data-transition="fade" style="background:#F6F1E7;color:#1E1B18;font-family:'DM Sans', Arial, sans-serif;padding:96px 128px 120px;display:flex;flex-direction:column;gap:28px">
+<p style="font-size:24px;color:#9A5F0B;letter-spacing:2px;text-transform:uppercase">Lernen</p>
+<h2 style="font-family:'Domine', Georgia, serif;font-size:64px;font-weight:600;line-height:1.1">Woher kommen die Konzepte?</h2>
+<div style="display:flex;gap:32px">
+<div style="flex:1;display:flex;flex-direction:column;gap:14px;background:#FFFDF8;padding:28px;border:1px solid #DDD3C0;border-radius:16px">
+<p style="font-size:32px;font-weight:700;color:#9A5F0B">Start: Zufall</p>
+<p style="font-size:26px;line-height:1.3;color:#5B5348">W1 ist die Gewichtstabelle von Schicht 1: 24 Zeilen (Konzepte) × 141 Spalten (Wörter). Jedes Konzept ist eine Zeile darin, eine Zahl pro Wort, und beginnt mit anderen Zufallszahlen. Würden alle mit demselben Wert starten (zum Beispiel 0), bekäme jedes Konzept im Training exakt dieselbe Schuld und dieselben Änderungen. Alle blieben für immer gleich, 24 Konzepte wären nur eines. Erst der zufällige Start macht sie verschieden.</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:14px;background:#FFFDF8;padding:28px;border:1px solid #DDD3C0;border-radius:16px">
+<p style="font-size:32px;font-weight:700;color:#9A5F0B">Training formt sie</p>
+<p style="font-size:26px;line-height:1.3;color:#5B5348">Die Beispiele schieben die Zeilen. Es entstehen Spezialisten, zum Beispiel für „kein“ + „bier“.</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:14px;background:#FFFDF8;padding:28px;border:1px solid #DDD3C0;border-radius:16px">
+<p style="font-size:32px;font-weight:700;color:#9A5F0B">Namen sind Deutung</p>
+<p style="font-size:26px;line-height:1.3;color:#5B5348">Das Netz kennt nur „Konzept 15“. Die Bedeutung lesen wir aus den treibenden Wörtern ab.</p>
+</div>
+</div>
+<p style="font-size:30px;line-height:1.35">Die Anzahl der Konzepte bestimmt die Feinabstufung der Entscheidungen: zu wenige sind zu grob, zu viele lernen die Beispiele auswendig.</p>
+
+</section>
+<section id="w2" data-transition="fade" style="background:#F6F1E7;color:#1E1B18;font-family:'DM Sans', Arial, sans-serif;padding:96px 128px 120px;display:flex;flex-direction:column;gap:24px">
+<p style="font-size:24px;color:#9A5F0B;letter-spacing:2px;text-transform:uppercase">Schritt 3 – Schicht 2</p>
+<h2 style="font-family:'Domine', Georgia, serif;font-size:64px;font-weight:600;line-height:1.1">W2 und b2: die gelernten Zahlen von Schicht 2</h2>
+<div style="background:#FFFDF8;padding:18px 32px;border:1px solid #DDD3C0;border-radius:16px;border-left:8px solid #9A5F0B">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:38px;color:#9A5F0B">s = W2·h + b2</p>
+</div>
+<div style="display:flex;gap:40px">
+<div style="width:900px;display:flex;flex-direction:column;gap:14px">
+<p style="font-size:26px;color:#5B5348">Ausschnitt aus W2 (jede Zahl ist ein Gewicht) und b2:</p>
+<table style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:28px">
+<tr style="background:#EAE2D0"><th style="width:18%">Antwort</th><th style="width:14%">c11</th><th style="width:14%">c5</th><th style="width:14%">c2</th><th style="width:14%">c15</th><th style="width:12%">…</th><th style="width:14%">b2</th></tr>
+<tr><td><b>wein</b></td><td>+1.03</td><td>+1.49</td><td>−3.31</td><td>−1.36</td><td>…</td><td style="color:#1F6F8B">+0.11</td></tr>
+<tr><td><b>bier</b></td><td>+3.36</td><td>+0.90</td><td>+0.81</td><td>+1.71</td><td>…</td><td style="color:#1F6F8B">+0.60</td></tr>
+<tr><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td></tr>
+</table>
+<p style="font-size:26px;line-height:1.3;color:#5B5348">Ganz W2: 34 Zeilen (Antworten) × 24 Spalten (Konzepte) = 816 Zahlen. b2: 34 Zahlen, eine pro Antwort.</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:16px">
+<div style="display:flex;flex-direction:column;gap:6px;background:#FFFDF8;padding:20px 26px;border:1px solid #DDD3C0;border-radius:14px"><p style="font-size:30px;font-weight:700;color:#9A5F0B">W2</p><p style="font-size:26px;line-height:1.3">Eine Zeile pro Antwort, eine Spalte pro Konzept. Die Zahl sagt, wie stark dieses Konzept für diese Antwort stimmt (+) oder dagegen (−).</p></div>
+<div style="display:flex;flex-direction:column;gap:6px;background:#FFFDF8;padding:20px 26px;border:1px solid #DDD3C0;border-radius:14px"><p style="font-size:30px;font-weight:700;color:#1F6F8B">b2</p><p style="font-size:26px;line-height:1.3">Die Grundneigung einer Antwort, die gilt, egal welche Konzepte anspringen. Sie wird zur Summe der Stimmen addiert.</p></div>
+<div style="display:flex;flex-direction:column;gap:6px;background:#FFFDF8;padding:20px 26px;border:1px solid #DDD3C0;border-radius:14px;border-left:8px solid #9A5F0B"><p style="font-size:30px;font-weight:700;color:#9A5F0B">Beispiel wein</p><p style="font-size:26px;line-height:1.3">c2 hat h = −1.00 und für wein das Gewicht −3.31. Stimme: −3.31 × −1.00 = +3.31. Alle Stimmen plus b2 (+0.11) ergeben die Punktzahl +11.4.</p></div>
+</div>
+</div>
+
+</section>
+<section id="softmax" data-transition="fade" style="background:#F6F1E7;color:#1E1B18;font-family:'DM Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:32px">
+<p style="font-size:24px;color:#9A5F0B;letter-spacing:2px;text-transform:uppercase">Schritt 4</p>
 <h2 style="font-family:'Domine', Georgia, serif;font-size:64px;font-weight:600;line-height:1.1">Softmax: Punktzahlen werden Prozente</h2>
 <div style="display:flex;gap:64px">
 <div style="flex:1;display:flex;flex-direction:column;gap:24px">
@@ -207,75 +210,186 @@
 </div>
 <div style="width:760px;display:flex;flex-direction:column;gap:20px">
 <table style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:28px">
-<tr style="background:#2A2621"><th style="width:30%">Antwort</th><th style="width:20%">Punkte</th><th style="width:20%">Abstand</th><th style="width:15%">e^</th><th style="width:15%">Anteil</th></tr>
-<tr><td>wein</td><td>11.4</td><td>0.0</td><td>1.000</td><td style="color:#E0A23B"><b>98.9 %</b></td></tr>
+<tr style="background:#EAE2D0"><th style="width:30%">Antwort</th><th style="width:20%">Punkte</th><th style="width:20%">Abstand</th><th style="width:15%">e^</th><th style="width:15%">Anteil</th></tr>
+<tr><td>wein</td><td>11.4</td><td>0.0</td><td>1.000</td><td style="color:#9A5F0B"><b>98.9 %</b></td></tr>
 <tr><td>bier</td><td>6.5</td><td>−4.9</td><td>0.008</td><td>0.8 %</td></tr>
 <tr><td>wie_gehts</td><td>4.5</td><td>−6.9</td><td>0.001</td><td>0.1 %</td></tr>
 <tr><td>31 weitere</td><td>…</td><td>…</td><td>0.003</td><td>0.3 %</td></tr>
 </table>
-<p style="font-size:28px;color:#BDB5A6">Summe der e^-Werte: 1.011 (Anteil = e^ geteilt durch Summe)</p>
+<p style="font-size:28px;color:#5B5348">Summe der e^-Werte: 1.011 (Anteil = e^ geteilt durch Summe)</p>
 </div>
 </div>
-<p style="font-size:34px;line-height:1.4;color:#E0A23B">Unser Fall „kein bier“: Softmax sieht nur die Punktzahlen, das Wort „kein“ steckt schon darin. Es wurde in Schicht 1 gelernt (Gewichte in W1).</p>
+<p style="font-size:34px;line-height:1.4;color:#9A5F0B">Unser Fall „kein bier“: Softmax sieht nur die Punktzahlen, das Wort „kein“ steckt schon darin. Es wurde in Schicht 1 gelernt (Gewichte in W1).</p>
 <div style="display:flex;gap:32px">
-<div style="flex:1;background:#2A2621;padding:16px 28px;border-radius:14px"><p style="font-size:26px;color:#BDB5A6">Vor dem Lernen („kein“ unbekannt)</p><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:34px;color:#6DB6D1">bier 99.9 % · falsch</p></div>
-<div style="flex:1;background:#2A2621;padding:16px 28px;border-radius:14px"><p style="font-size:26px;color:#BDB5A6">Nach „kein bier = wein“</p><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:34px;color:#E0A23B">wein 98.9 % · richtig</p></div>
+<div style="flex:1;background:#FFFDF8;border:1px solid #DDD3C0;padding:16px 28px;border-radius:14px"><p style="font-size:26px;color:#5B5348">Vor dem Lernen („kein“ unbekannt)</p><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:34px;color:#1F6F8B">bier 99.9 %, falsch</p></div>
+<div style="flex:1;background:#FFFDF8;border:1px solid #DDD3C0;padding:16px 28px;border-radius:14px"><p style="font-size:26px;color:#5B5348">Nach „kein bier = wein“</p><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:34px;color:#9A5F0B">wein 98.9 %, richtig</p></div>
 </div>
 
 </section>
-<section id="learnkein" data-transition="fade" style="background:#1E1B18;color:#F6F1E7;font-family:'DM Sans', Arial, sans-serif;padding:96px 128px 120px;display:flex;flex-direction:column;gap:16px">
-<p style="font-size:24px;color:#E0A23B;letter-spacing:2px;text-transform:uppercase">Lernen im Kleinen</p>
+<section id="answer" data-transition="fade" style="background:#F6F1E7;color:#1E1B18;font-family:'DM Sans', Arial, sans-serif;padding:96px 128px 120px;display:flex;flex-direction:column;gap:28px">
+<p style="font-size:24px;color:#9A5F0B;letter-spacing:2px;text-transform:uppercase">Schritt 5</p>
+<h2 style="font-family:'Domine', Georgia, serif;font-size:64px;font-weight:600;line-height:1.1">Antwort: der höchste Wert gewinnt</h2>
+<div style="display:flex;gap:56px">
+<div style="flex:1;display:flex;flex-direction:column;gap:18px">
+<div style="display:flex;gap:20px;align-items:center;background:#FFFDF8;border:1px solid #DDD3C0;padding:20px 26px;border-radius:14px;border-left:8px solid #9A5F0B"><p style="width:36px;font-size:38px;font-weight:700;color:#9A5F0B">1</p><p style="font-size:28px;line-height:1.3">Die Antwort mit dem höchsten Prozentwert gewinnt. Bei „kein bier“ ist das wein mit 98.9 %.</p></div>
+<div style="display:flex;gap:20px;align-items:center;background:#FFFDF8;border:1px solid #DDD3C0;padding:20px 26px;border-radius:14px"><p style="width:36px;font-size:38px;font-weight:700;color:#9A5F0B">2</p><p style="font-size:28px;line-height:1.3">Der Barkeeper nimmt zufällig einen der Antwortsätze, die zu dieser Antwort gehören, und nennt den Preis.</p></div>
+<div style="display:flex;gap:20px;align-items:center;background:#FFFDF8;border:1px solid #DDD3C0;padding:20px 26px;border-radius:14px"><p style="width:36px;font-size:38px;font-weight:700;color:#9A5F0B">3</p><p style="font-size:28px;line-height:1.3">Nur wenn die Sicherheit unter 40 % liegt oder kaum Wörter bekannt sind, fragt er nach.</p></div>
+</div>
+<div style="width:760px;display:flex;flex-direction:column;gap:18px">
+<div style="background:#FFFDF8;border:1px solid #DDD3C0;padding:24px 30px;border-radius:14px;display:flex;flex-direction:column;gap:10px">
+<p style="font-size:24px;color:#5B5348">Die Ausgabe im Terminal</p>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:28px">Du: kein bier</p>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:28px;color:#9A5F0B">🍺 Barkeeper: Ein Glas Rotwein, bitte schön.</p>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:22px;color:#1F6F8B">(wein, 99 %)</p>
+</div>
+<div style="background:#FFFDF8;border:1px solid #DDD3C0;padding:24px 30px;border-radius:14px;display:flex;flex-direction:column;gap:10px">
+<p style="font-size:24px;color:#5B5348">Wenn das Netz unsicher ist</p>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:28px;color:#9A5F0B">🍺 Barkeeper: Hä? Wie bitte?</p>
+</div>
+</div>
+</div>
+<div style="display:flex;gap:32px">
+<div style="flex:1;background:#FFFDF8;border:1px solid #DDD3C0;padding:16px 28px;border-radius:14px"><p style="font-size:26px;color:#5B5348">Vor dem Lernen („kein“ unbekannt)</p><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:34px;color:#1F6F8B">bier 99.9 %, falsch</p></div>
+<div style="flex:1;background:#FFFDF8;border:1px solid #DDD3C0;padding:16px 28px;border-radius:14px"><p style="font-size:26px;color:#5B5348">Nach „kein bier = wein“</p><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:34px;color:#9A5F0B">wein 98.9 %, richtig</p></div>
+</div>
+
+</section>
+<section id="pipeline" data-transition="fade" style="background:#F6F1E7;color:#1E1B18;font-family:'DM Sans', Arial, sans-serif;padding:96px 128px 120px;display:flex;flex-direction:column;gap:20px">
+<p style="font-size:24px;color:#9A5F0B;letter-spacing:2px;text-transform:uppercase">Zusammenfassung – vor dem Lernen</p>
+<h2 style="font-family:'Domine', Georgia, serif;font-size:64px;font-weight:600;line-height:1.1">So entsteht eine Antwort</h2>
+<p style="font-size:24px;color:#5B5348">Beispiel „kein bier“ im Kontext [start], <b>vor dem Lernen</b>. Blau: die Werte, die von Schritt zu Schritt weitergegeben werden.</p>
+<div style="display:flex;flex-direction:column;gap:10px">
+<div style="display:flex;align-items:center;gap:32px;background:#FFFDF8;border:1px solid #DDD3C0;padding:10px 32px;border-radius:14px">
+<p style="width:40px;font-size:44px;font-weight:700;color:#9A5F0B">1</p>
+<div style="width:340px;display:flex;flex-direction:column;gap:2px">
+<p style="font-size:34px;font-weight:700">Text → Zahlen</p>
+<p style="font-size:24px;color:#5B5348">Wörter + Kontext als 0/1</p>
+</div>
+<div style="width:400px;display:flex;flex-direction:column;gap:4px"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:28px;color:#9A5F0B">x = 0 0 1 1 0 … 1</p><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:21px;color:#1F6F8B">bier 1, [start] 1, „kein“ unbekannt, ignoriert</p></div>
+<p style="flex:1;font-size:26px;line-height:1.3">Computer rechnen nur mit Zahlen: Jedes Wort bekommt eine 1 (kommt vor) oder eine 0 (kommt nicht vor).</p>
+</div>
+<div style="display:flex;align-items:center;gap:32px;background:#FFFDF8;border:1px solid #DDD3C0;padding:10px 32px;border-radius:14px;border-left:8px solid #9A5F0B">
+<p style="width:40px;font-size:44px;font-weight:700;color:#9A5F0B">2</p>
+<div style="width:340px;display:flex;flex-direction:column;gap:2px">
+<p style="font-size:34px;font-weight:700">Schicht 1</p>
+<p style="font-size:24px;color:#5B5348">Wörter → Konzepte</p>
+</div>
+<div style="width:400px;display:flex;flex-direction:column;gap:4px"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:28px;color:#9A5F0B">h = tanh(W1·x + b1)</p><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:21px;color:#1F6F8B">h = [ c18 −0.96, c20 −0.90, c1 +0.89, c17 +0.78, … ]</p></div>
+<p style="flex:1;font-size:26px;line-height:1.3">Konzepte sind Ja/Nein-Fragen an den Satz, z. B. „Kommt <b>kein</b> zusammen mit <b>bier</b> vor?“ <b>tanh</b> macht aus der Summe z ein klares Signal von −1 (nein) bis +1 (ja). Das Ergebnis <b>h</b> geht in Schritt 3.</p>
+</div>
+<div style="display:flex;align-items:center;gap:32px;background:#FFFDF8;border:1px solid #DDD3C0;padding:10px 32px;border-radius:14px">
+<p style="width:40px;font-size:44px;font-weight:700;color:#9A5F0B">3</p>
+<div style="width:340px;display:flex;flex-direction:column;gap:2px">
+<p style="font-size:34px;font-weight:700">Schicht 2</p>
+<p style="font-size:24px;color:#5B5348">Konzepte → Punktzahlen</p>
+</div>
+<div style="width:400px;display:flex;flex-direction:column;gap:4px"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:28px;color:#9A5F0B">s = W2·h + b2</p><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:21px;color:#1F6F8B">s = [ bier +13.7, danke +6.2, tschuess +5.0, … ]</p></div>
+<p style="flex:1;font-size:26px;line-height:1.3">Jede mögliche Antwort sammelt das Dafür und Dagegen der Fragen und bekommt daraus eine Punktzahl <b>s</b>. W2 und b2 sind die gelernten Gewichte, s ist das Ergebnis.</p>
+</div>
+<div style="display:flex;align-items:center;gap:32px;background:#FFFDF8;border:1px solid #DDD3C0;padding:10px 32px;border-radius:14px">
+<p style="width:40px;font-size:44px;font-weight:700;color:#9A5F0B">4</p>
+<div style="width:340px;display:flex;flex-direction:column;gap:2px">
+<p style="font-size:34px;font-weight:700">Softmax</p>
+<p style="font-size:24px;color:#5B5348">Punktzahlen → Prozente</p>
+</div>
+<div style="width:400px;display:flex;flex-direction:column;gap:4px"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:28px;color:#9A5F0B">p = softmax(s)</p><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:21px;color:#1F6F8B">p = [ bier 99.9 %, danke 0.1 %, … ]</p></div>
+<p style="flex:1;font-size:26px;line-height:1.3">Aus den Punktzahlen s werden Prozente p, die zusammen 100 % ergeben, wie ein Wahlergebnis.</p>
+</div>
+<div style="display:flex;align-items:center;gap:32px;background:#FFFDF8;border:1px solid #DDD3C0;padding:10px 32px;border-radius:14px">
+<p style="width:40px;font-size:44px;font-weight:700;color:#9A5F0B">5</p>
+<div style="width:340px;display:flex;flex-direction:column;gap:2px">
+<p style="font-size:34px;font-weight:700">Antwort</p>
+<p style="font-size:24px;color:#5B5348">Höchster Wert gewinnt</p>
+</div>
+<div style="width:400px;display:flex;flex-direction:column;gap:4px"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:28px;color:#9A5F0B">bier = 99.9 %</p><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:21px;color:#1F6F8B">bier gewinnt: falsch, richtig wäre wein</p></div>
+<p style="flex:1;font-size:26px;line-height:1.3">Die Antwort mit den meisten Prozenten gewinnt. Unter 40 % fragt der Barkeeper nach.</p>
+</div>
+</div>
+
+</section>
+<section id="part2" data-transition="fade" style="background:#1E1B18;color:#F6F1E7;font-family:'DM Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;justify-content:center;gap:40px">
+<p style="font-size:32px;color:#E0A23B;letter-spacing:4px;text-transform:uppercase">Teil 2</p>
+<h1 style="font-family:'Domine', Georgia, serif;font-size:128px;font-weight:600;line-height:1.05">Lernen</h1>
+<p style="font-size:48px;line-height:1.3;color:#BDB5A6">Wie die Gewichte entstehen</p>
+<div style="display:flex;gap:24px;margin-top:40px">
+<p style="background:#2A2621;color:#BDB5A6;border:1px solid #4A443B;font-size:28px;padding:14px 32px;border-radius:999px">1  Antworten</p>
+<p style="background:#E0A23B;color:#1E1B18;font-weight:700;font-size:28px;padding:14px 32px;border-radius:999px">2  Lernen</p>
+<p style="background:#2A2621;color:#BDB5A6;border:1px solid #4A443B;font-size:28px;padding:14px 32px;border-radius:999px">3  Einordnung</p>
+</div>
+
+</section>
+<section id="learnkein" data-transition="fade" style="background:#F6F1E7;color:#1E1B18;font-family:'DM Sans', Arial, sans-serif;padding:96px 128px 120px;display:flex;flex-direction:column;gap:16px">
+<p style="font-size:24px;color:#9A5F0B;letter-spacing:2px;text-transform:uppercase">Lernen im Kleinen</p>
 <h2 style="font-family:'Domine', Georgia, serif;font-size:64px;font-weight:600;line-height:1.1">Wie „kein“ gelernt wird</h2>
 <div style="display:flex;flex-direction:column;gap:14px">
-<div style="display:flex;align-items:center;gap:32px;background:#2A2621;padding:10px 32px;border-radius:14px">
-<p style="width:40px;font-size:44px;font-weight:700;color:#E0A23B">1</p>
+<div style="display:flex;align-items:center;gap:32px;background:#FFFDF8;border:1px solid #DDD3C0;padding:10px 32px;border-radius:14px">
+<p style="width:40px;font-size:44px;font-weight:700;color:#9A5F0B">1</p>
 <div style="width:340px;display:flex;flex-direction:column;gap:2px">
 <p style="font-size:34px;font-weight:700">Eingabe</p>
-<p style="font-size:24px;color:#BDB5A6">in der Konsole beibringen</p>
+<p style="font-size:24px;color:#5B5348">in der Konsole beibringen</p>
 </div>
-<p style="width:400px;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px;color:#E0A23B">[start] kein bier = wein</p>
+<p style="width:400px;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px;color:#9A5F0B">[start] kein bier = wein</p>
 <p style="flex:1;font-size:26px;line-height:1.3">Der Gast sagt dem Barkeeper, was richtig gewesen wäre: Satz, Kontext und die richtige Antwort.</p>
 </div>
-<div style="display:flex;align-items:center;gap:32px;background:#2A2621;padding:10px 32px;border-radius:14px">
-<p style="width:40px;font-size:44px;font-weight:700;color:#E0A23B">2</p>
+<div style="display:flex;align-items:center;gap:32px;background:#FFFDF8;border:1px solid #DDD3C0;padding:10px 32px;border-radius:14px">
+<p style="width:40px;font-size:44px;font-weight:700;color:#9A5F0B">2</p>
 <div style="width:340px;display:flex;flex-direction:column;gap:2px">
 <p style="font-size:34px;font-weight:700">Speichern</p>
-<p style="font-size:24px;color:#BDB5A6">neue Zeile in <i>examples</i></p>
+<p style="font-size:24px;color:#5B5348">neue Zeile in <i>examples</i></p>
 </div>
-<p style="width:400px;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px;color:#E0A23B">start | kein bier | wein</p>
+<p style="width:400px;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px;color:#9A5F0B">start | kein bier | wein</p>
 <p style="flex:1;font-size:26px;line-height:1.3">Das Beispiel kommt in die Datenbank zu den bisherigen Beispielen. Es ist die Lernvorlage, noch nichts am Netz ändert sich.</p>
 </div>
-<div style="display:flex;align-items:center;gap:32px;background:#2A2621;padding:10px 32px;border-radius:14px">
-<p style="width:40px;font-size:44px;font-weight:700;color:#E0A23B">3</p>
+<div style="display:flex;align-items:center;gap:32px;background:#FFFDF8;border:1px solid #DDD3C0;padding:10px 32px;border-radius:14px">
+<p style="width:40px;font-size:44px;font-weight:700;color:#9A5F0B">3</p>
 <div style="width:340px;display:flex;flex-direction:column;gap:2px">
 <p style="font-size:34px;font-weight:700">Neue Spalte</p>
-<p style="font-size:24px;color:#BDB5A6">Wort „kein“ ins Vokabular</p>
+<p style="font-size:24px;color:#5B5348">Wort „kein“ ins Vokabular</p>
 </div>
-<p style="width:400px;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px;color:#E0A23B">W1: Spalte „kein“</p>
+<p style="width:400px;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px;color:#9A5F0B">W1: Spalte „kein“</p>
 <p style="flex:1;font-size:26px;line-height:1.3">Vorher war „kein“ unbekannt und wurde ignoriert. Jetzt bekommt es eine eigene Spalte in W1, mit einem Zufallsstart pro Konzept.</p>
 </div>
-<div style="display:flex;align-items:center;gap:32px;background:#2A2621;padding:10px 32px;border-radius:14px;border-left:8px solid #E0A23B">
-<p style="width:40px;font-size:44px;font-weight:700;color:#E0A23B">4</p>
+<div style="display:flex;align-items:center;gap:32px;background:#FFFDF8;border:1px solid #DDD3C0;padding:10px 32px;border-radius:14px;border-left:8px solid #9A5F0B">
+<p style="width:40px;font-size:44px;font-weight:700;color:#9A5F0B">4</p>
 <div style="width:340px;display:flex;flex-direction:column;gap:2px">
 <p style="font-size:34px;font-weight:700">Neu trainieren</p>
-<p style="font-size:24px;color:#BDB5A6">alle Beispiele, 1500 Runden</p>
+<p style="font-size:24px;color:#5B5348">alle Beispiele, 1500 Runden</p>
 </div>
-<p style="width:400px;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px;color:#E0A23B">Fehler → Backprop</p>
-<p style="flex:1;font-size:26px;line-height:1.3">Das Netz rät für jeden Satz, misst den Fehler und schiebt die Gewichte (Folien 10 und 11). Bei „kein bier“ zieht das Training die Gewichte von „kein“ so, dass sie bier-Stimmen bremsen und wein-Stimmen anschieben.</p>
+<p style="width:400px;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px;color:#9A5F0B">Fehler → Backprop</p>
+<p style="flex:1;font-size:26px;line-height:1.3">Das Netz rät für jeden Satz, misst den Fehler und schiebt die Gewichte (Folien 15 bis 19). Bei „kein bier“ zieht das Training die Gewichte von „kein“ so, dass sie bier-Stimmen bremsen und wein-Stimmen anschieben.</p>
 </div>
-<div style="display:flex;align-items:center;gap:32px;background:#2A2621;padding:10px 32px;border-radius:14px">
-<p style="width:40px;font-size:44px;font-weight:700;color:#E0A23B">5</p>
+<div style="display:flex;align-items:center;gap:32px;background:#FFFDF8;border:1px solid #DDD3C0;padding:10px 32px;border-radius:14px">
+<p style="width:40px;font-size:44px;font-weight:700;color:#9A5F0B">5</p>
 <div style="width:340px;display:flex;flex-direction:column;gap:2px">
 <p style="font-size:34px;font-weight:700">Ergebnis</p>
-<p style="font-size:24px;color:#BDB5A6">das Gelernte steckt in den Gewichten</p>
+<p style="font-size:24px;color:#5B5348">das Gelernte steckt in den Gewichten</p>
 </div>
-<p style="width:400px;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px;color:#E0A23B">bier 99.9 % → wein 98.9 %</p>
+<p style="width:400px;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px;color:#9A5F0B">bier 99.9 % → wein 98.9 %</p>
 <p style="flex:1;font-size:26px;line-height:1.3">„kein“ ist kein Eintrag in einer Liste, sondern steckt in den Zahlen von W1 und W2. Der Satz „kein bier“ ergibt jetzt wein.</p>
 </div>
 </div>
 
 </section>
-<section id="training" data-transition="fade" style="background:#F6F1E7;color:#1E1B18;font-family:'DM Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:36px">
+<section id="relearn" data-transition="fade" style="background:#F6F1E7;color:#1E1B18;font-family:'DM Sans', Arial, sans-serif;padding:96px 128px 120px;display:flex;flex-direction:column;gap:28px">
+<p style="font-size:24px;color:#9A5F0B;letter-spacing:2px;text-transform:uppercase">Lernen</p>
+<h2 style="font-family:'Domine', Georgia, serif;font-size:64px;font-weight:600;line-height:1.1">Was passiert, wenn man etwas beibringt?</h2>
+<div style="display:flex;gap:48px">
+<div style="flex:1;display:flex;flex-direction:column;gap:16px">
+<p style="font-size:28px;color:#5B5348">Beispiel: Du lehrst „kein wein“ = bier.</p>
+<div style="display:flex;gap:20px;align-items:center;background:#FFFDF8;border:1px solid #DDD3C0;padding:18px 24px;border-radius:14px"><p style="width:36px;font-size:38px;font-weight:700;color:#9A5F0B">1</p><p style="font-size:28px;line-height:1.3">Das Beispiel wird gespeichert. Ein altes mit gleichem Kontext und Satz wird ersetzt.</p></div>
+<div style="display:flex;gap:20px;align-items:center;background:#FFFDF8;border:1px solid #DDD3C0;padding:18px 24px;border-radius:14px"><p style="width:36px;font-size:38px;font-weight:700;color:#9A5F0B">2</p><p style="font-size:28px;line-height:1.3">Alle Gewichte werden neu zufällig gesetzt (Seed 0).</p></div>
+<div style="display:flex;gap:20px;align-items:center;background:#FFFDF8;border:1px solid #DDD3C0;padding:18px 24px;border-radius:14px"><p style="width:36px;font-size:38px;font-weight:700;color:#9A5F0B">3</p><p style="font-size:28px;line-height:1.3">1500 Runden Training auf allen Beispielen, alte und neues.</p></div>
+<div style="display:flex;gap:20px;align-items:center;background:#FFFDF8;border:1px solid #DDD3C0;padding:18px 24px;border-radius:14px"><p style="width:36px;font-size:38px;font-weight:700;color:#9A5F0B">4</p><p style="font-size:28px;line-height:1.3">Neue Gewichte W1, b1, W2, b2 landen in der Datenbank.</p></div>
+</div>
+<div style="width:640px;display:flex;flex-direction:column;gap:16px">
+<div style="background:#FFFDF8;border:1px solid #DDD3C0;padding:22px 28px;border-radius:14px;border-left:8px solid #9A5F0B;display:flex;flex-direction:column;gap:8px"><p style="font-size:30px;font-weight:700;color:#9A5F0B">Lehren: selten, dauert länger</p><p style="font-size:26px;line-height:1.3">Alles wird neu gelernt. Auch die 24 Konzepte entstehen neu: Konzept 5 von gestern muss nicht dieselbe Frage sein wie Konzept 5 heute.</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD3C0;padding:22px 28px;border-radius:14px;border-left:8px solid #1F6F8B;display:flex;flex-direction:column;gap:8px"><p style="font-size:30px;font-weight:700;color:#1F6F8B">Fragen: oft, Millisekunden</p><p style="font-size:26px;line-height:1.3">Nichts wird gelernt oder gespeichert. Die Gewichte werden geladen und einmal vorwärts durchgerechnet. Die Konzepte werden aus dem Satz berechnet.</p></div>
+<p style="font-size:26px;line-height:1.35;color:#5B5348">Nebenwirkung: Ein neues Beispiel kann auch andere Antworten leicht verändern. Ein einzelnes „kein wein“ gegen 14 gegenläufige „kein bier“ setzt sich nicht immer durch.</p>
+</div>
+</div>
+
+</section>
+<section id="training" data-transition="fade" style="background:#F6F1E7;color:#1E1B18;font-family:'DM Sans', Arial, sans-serif;padding:96px 128px 120px;display:flex;flex-direction:column;gap:32px">
 <p style="font-size:24px;color:#9A5F0B;letter-spacing:2px;text-transform:uppercase">Lernen</p>
 <h2 style="font-family:'Domine', Georgia, serif;font-size:64px;font-weight:600;line-height:1.1">Training: raten, messen, nachbessern</h2>
 <div style="display:flex;gap:32px">
@@ -303,81 +417,123 @@
 <p style="font-size:34px;line-height:1.4">Das Ganze 1500-mal. Start: Zufallszahlen. Ende: Gewichte, die zu den Beispielen passen.</p>
 
 </section>
-<section id="backprop" data-transition="fade" style="background:#1E1B18;color:#F6F1E7;font-family:'DM Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:28px">
-<p style="font-size:24px;color:#E0A23B;letter-spacing:2px;text-transform:uppercase">Lernen</p>
+<section id="learnrule" data-transition="fade" style="background:#F6F1E7;color:#1E1B18;font-family:'DM Sans', Arial, sans-serif;padding:96px 128px 120px;display:flex;flex-direction:column;gap:28px">
+<p style="font-size:24px;color:#9A5F0B;letter-spacing:2px;text-transform:uppercase">Lernen</p>
+<h2 style="font-family:'Domine', Georgia, serif;font-size:64px;font-weight:600;line-height:1.1">Die Lernformel: wie ein Gewicht verschoben wird</h2>
+<div style="background:#FFFDF8;border:1px solid #DDD3C0;padding:24px 36px;border-radius:16px;border-left:8px solid #9A5F0B">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:38px;color:#9A5F0B">neues Gewicht = altes Gewicht − Lernrate × Fehler × Eingang</p>
+</div>
+<div style="display:flex;gap:48px">
+<div style="width:600px;display:flex;flex-direction:column;gap:16px">
+<div style="display:flex;flex-direction:column;gap:4px;background:#FFFDF8;border:1px solid #DDD3C0;padding:18px 24px;border-radius:14px">
+<p style="font-size:30px;font-weight:700;color:#9A5F0B">Fehler</p>
+<p style="font-size:26px;line-height:1.3">P − Y: Wie falsch lag die Antwort? <b>P</b> = Vermutung des Netzes (0 bis 1), <b>Y</b> = richtige Antwort (1 = richtig, 0 = falsch). Positiv = zu stark, negativ = zu schwach.</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:4px;background:#FFFDF8;border:1px solid #DDD3C0;padding:18px 24px;border-radius:14px">
+<p style="font-size:30px;font-weight:700;color:#9A5F0B">Eingang</p>
+<p style="font-size:26px;line-height:1.3">War das Wort im Satz? 1 = korrigieren, 0 = Gewicht bleibt. Beim Bias ist der Eingang immer 1.</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:4px;background:#FFFDF8;border:1px solid #DDD3C0;padding:18px 24px;border-radius:14px">
+<p style="font-size:30px;font-weight:700;color:#9A5F0B">Lernrate</p>
+<p style="font-size:26px;line-height:1.3">Schrittgröße, hier 0.5. Lieber viele kleine Schritte als ein großer Sprung.</p>
+</div>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:16px">
+<p style="font-size:26px;color:#5B5348">Mini-Beispiel: „kein bier“ soll wein ergeben. Eine Matrix, Start bei 0, ohne Momentum.</p>
+<table style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:28px">
+<tr style="background:#EAE2D0"><th style="width:14%">Runde</th><th style="width:30%">Gewicht kein→wein</th><th style="width:18%">P(wein)</th><th style="width:18%">Fehler</th><th style="width:20%">Schritt</th></tr>
+<tr><td>1</td><td>0.00</td><td>50 %</td><td style="color:#1F6F8B">−0.50</td><td style="color:#9A5F0B">+0.25</td></tr>
+<tr><td>2</td><td>+0.25</td><td>73 %</td><td style="color:#1F6F8B">−0.27</td><td style="color:#9A5F0B">+0.13</td></tr>
+<tr><td>3</td><td>+0.38</td><td>82 %</td><td style="color:#1F6F8B">−0.18</td><td style="color:#9A5F0B">+0.09</td></tr>
+<tr><td>4</td><td>+0.47</td><td>87 %</td><td style="color:#1F6F8B">−0.13</td><td style="color:#9A5F0B">+0.07</td></tr>
+</table>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px;color:#5B5348">Runde 1: 0 − 0.5 × (−0.50) × 1 = +0.25</p>
+<p style="font-size:28px;line-height:1.35"><b>Minus mal minus:</b> wein war zu schwach, also steigt sein Gewicht. Je näher am Ziel, desto kleiner der Fehler und desto kleiner der Schritt.</p>
+</div>
+</div>
+
+</section>
+<section id="learncurve" data-transition="fade" style="background:#F6F1E7;color:#1E1B18;font-family:'DM Sans', Arial, sans-serif;padding:96px 128px 120px;display:flex;flex-direction:column;gap:24px">
+<p style="font-size:24px;color:#9A5F0B;letter-spacing:2px;text-transform:uppercase">Lernen</p>
+<h2 style="font-family:'Domine', Georgia, serif;font-size:64px;font-weight:600;line-height:1.1">Was passiert in den 1500 Runden?<br><span style="color:#9A5F0B">„kein bier“ im Kontext [wein]</span></h2>
+<div style="background:#FFFDF8;padding:24px 32px;border:1px solid #DDD3C0;border-radius:16px;display:flex;flex-direction:column;gap:12px">
+<div style="display:flex;gap:20px"><p style="font-size:24px;color:#5B5348;width:90px">Runde</p><p style="font-size:24px;color:#5B5348;width:400px">Verlust (kleiner ist besser)</p><p style="font-size:24px;color:#5B5348;width:110px">Verlust</p><p style="font-size:24px;color:#5B5348;width:110px">Treffer</p><p style="font-size:24px;color:#5B5348">Antwort darauf</p></div>
+<div style="display:flex;align-items:center;gap:20px"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px;width:90px">Start</p><div style="width:400px"><div style="width:380px;height:22px;background:#9A5F0B;border-radius:4px"></div></div><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px;width:110px">4.43</p><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px;width:110px">2.6 %</p><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px;color:#1F6F8B">wie_gehts 21.5 %</p></div>
+<div style="display:flex;align-items:center;gap:20px"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px;width:90px">1</p><div style="width:400px"><div style="width:356px;height:22px;background:#9A5F0B;border-radius:4px"></div></div><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px;width:110px">4.15</p><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px;width:110px">4.8 %</p><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px;color:#1F6F8B">wie_gehts 20.6 %</p></div>
+<div style="display:flex;align-items:center;gap:20px"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px;width:90px">10</p><div style="width:400px"><div style="width:146px;height:22px;background:#9A5F0B;border-radius:4px"></div></div><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px;width:110px">1.70</p><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px;width:110px">53 %</p><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px;color:#9A5F0B">wein 52.9 %</p></div>
+<div style="display:flex;align-items:center;gap:20px"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px;width:90px">100</p><div style="width:400px"><div style="width:4px;height:22px;background:#9A5F0B;border-radius:4px"></div></div><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px;width:110px">0.021</p><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px;width:110px">100 %</p><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px;color:#9A5F0B">wein 87.9 %</p></div>
+<div style="display:flex;align-items:center;gap:20px"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px;width:90px">500</p><div style="width:400px"><div style="width:4px;height:22px;background:#9A5F0B;border-radius:4px"></div></div><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px;width:110px">0.003</p><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px;width:110px">100 %</p><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px;color:#9A5F0B">wein 97.4 %</p></div>
+<div style="display:flex;align-items:center;gap:20px"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px;width:90px">1500</p><div style="width:400px"><div style="width:4px;height:22px;background:#9A5F0B;border-radius:4px"></div></div><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px;width:110px">0.001</p><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px;width:110px">100 %</p><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px;color:#9A5F0B">wein 98.9 %</p></div>
+</div>
+<div style="display:flex;gap:24px">
+<div style="flex:1;display:flex;flex-direction:column;gap:6px;background:#FFFDF8;padding:18px 24px;border:1px solid #DDD3C0;border-radius:14px"><p style="font-size:28px;font-weight:700;color:#9A5F0B">Verlust</p><p style="font-size:24px;line-height:1.3;color:#5B5348">Wie unsicher das Netz bei der richtigen Antwort ist: −ln(P der richtigen Antwort), Durchschnitt über alle 230 Beispiele. 0 hieße völlig sicher.</p></div>
+<div style="flex:1;display:flex;flex-direction:column;gap:6px;background:#FFFDF8;padding:18px 24px;border:1px solid #DDD3C0;border-radius:14px"><p style="font-size:28px;font-weight:700;color:#9A5F0B">Treffer</p><p style="font-size:24px;line-height:1.3;color:#5B5348">Anteil der Trainingsbeispiele, bei denen die richtige Antwort vorn liegt. Das sind bekannte Beispiele, keine neuen Sätze.</p></div>
+<div style="flex:1;display:flex;flex-direction:column;gap:6px;background:#FFFDF8;padding:18px 24px;border:1px solid #DDD3C0;border-radius:14px;border-left:8px solid #9A5F0B"><p style="font-size:28px;font-weight:700;color:#9A5F0B">Warum 1500 Runden?</p><p style="font-size:24px;line-height:1.3;color:#5B5348">Nach 100 Runden stimmen schon alle Beispiele. Danach wird das Netz nur noch sicherer: „kein bier“ geht von 88 % auf 99 % wein.</p></div>
+</div>
+
+</section>
+<section id="backprop" data-transition="fade" style="background:#F6F1E7;color:#1E1B18;font-family:'DM Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:28px">
+<p style="font-size:24px;color:#9A5F0B;letter-spacing:2px;text-transform:uppercase">Lernen</p>
 <h2 style="font-family:'Domine', Georgia, serif;font-size:64px;font-weight:600;line-height:1.1">Backpropagation: Fehler rückwärts</h2>
 <div style="display:flex;flex-direction:column;gap:16px">
 <div style="display:flex;align-items:center;gap:16px">
-<p style="width:220px;font-size:26px;color:#BDB5A6">Vorwärts: raten</p>
-<p style="flex:1;font-size:30px;background:#2A2621;padding:18px 24px;border-radius:12px;text-align:center">Wörter x</p>
-<x-shape kind="arrow-right" style="width:48px;height:32px;background:#BDB5A6"></x-shape>
-<p style="flex:1;font-size:30px;background:#2A2621;padding:18px 24px;border-radius:12px;text-align:center">Konzepte h</p>
-<x-shape kind="arrow-right" style="width:48px;height:32px;background:#BDB5A6"></x-shape>
-<p style="flex:1;font-size:30px;background:#2A2621;padding:18px 24px;border-radius:12px;text-align:center">Antwort p</p>
+<p style="width:220px;font-size:26px;color:#5B5348">Vorwärts: raten</p>
+<p style="flex:1;font-size:30px;background:#FFFDF8;border:1px solid #DDD3C0;padding:18px 24px;border-radius:12px;text-align:center">Wörter x</p>
+<x-shape kind="arrow-right" style="width:48px;height:32px;background:#5B5348"></x-shape>
+<p style="flex:1;font-size:30px;background:#FFFDF8;border:1px solid #DDD3C0;padding:18px 24px;border-radius:12px;text-align:center">Konzepte h</p>
+<x-shape kind="arrow-right" style="width:48px;height:32px;background:#5B5348"></x-shape>
+<p style="flex:1;font-size:30px;background:#FFFDF8;border:1px solid #DDD3C0;padding:18px 24px;border-radius:12px;text-align:center">Antwort p</p>
 </div>
 <div style="display:flex;align-items:center;gap:16px">
-<p style="width:220px;font-size:26px;color:#E0A23B">Rückwärts: Schuld</p>
-<p style="flex:1;font-size:30px;color:#E0A23B;border:2px solid #E0A23B;padding:16px 24px;border-radius:12px;text-align:center">Schuld der W1-Gewichte</p>
-<x-shape kind="arrow-left" style="width:48px;height:32px;background:#E0A23B"></x-shape>
-<p style="flex:1;font-size:30px;color:#E0A23B;border:2px solid #E0A23B;padding:16px 24px;border-radius:12px;text-align:center">Schuld der Konzepte</p>
-<x-shape kind="arrow-left" style="width:48px;height:32px;background:#E0A23B"></x-shape>
-<p style="flex:1;font-size:30px;color:#E0A23B;border:2px solid #E0A23B;padding:16px 24px;border-radius:12px;text-align:center">Fehler P − Y</p>
+<p style="width:220px;font-size:26px;color:#9A5F0B">Rückwärts: Schuld</p>
+<p style="flex:1;font-size:30px;color:#9A5F0B;border:2px solid #9A5F0B;padding:16px 24px;border-radius:12px;text-align:center">Schuld der W1-Gewichte</p>
+<x-shape kind="arrow-left" style="width:48px;height:32px;background:#9A5F0B"></x-shape>
+<p style="flex:1;font-size:30px;color:#9A5F0B;border:2px solid #9A5F0B;padding:16px 24px;border-radius:12px;text-align:center">Schuld der Konzepte</p>
+<x-shape kind="arrow-left" style="width:48px;height:32px;background:#9A5F0B"></x-shape>
+<p style="flex:1;font-size:30px;color:#9A5F0B;border:2px solid #9A5F0B;padding:16px 24px;border-radius:12px;text-align:center">Fehler P − Y</p>
 </div>
 </div>
 <p style="font-size:28px;line-height:1.35"><b>Was ist das?</b> Der Fehler am Ausgang wird Schicht für Schicht rückwärts verteilt, bis jedes Gewicht seinen Anteil an der Schuld kennt.</p>
 <p style="font-size:28px;line-height:1.35"><b>Wie?</b> Jedes Konzept wird gefragt: Wie viel hast du zur falschen Antwort beigetragen? Danach weiß jedes Gewicht, in welche Richtung und wie stark es sich ändern muss.</p>
-<div style="display:flex;flex-direction:column;gap:8px;background:#2A2621;padding:16px 32px;border-radius:16px">
-<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:28px;color:#E0A23B;line-height:1.5">D2 = P − Y      D1 = (D2 · W2) × (1 − h²)</p>
-<p style="font-size:26px;line-height:1.35;color:#BDB5A6">Y = richtige Antwort · P = Vermutung · D2 = Fehler am Ausgang · h = Aktivierung der Konzepte · W2 = Gewichte Schicht 2 · D1 = Schuld der Konzepte</p>
+<div style="display:flex;flex-direction:column;gap:8px;background:#FFFDF8;border:1px solid #DDD3C0;padding:16px 32px;border-radius:16px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:28px;color:#9A5F0B;line-height:1.5">D2 = P − Y&emsp;&emsp;&emsp;D1 = (D2 · W2) × (1 − h²)</p>
+<p style="font-size:26px;line-height:1.35;color:#5B5348">Y = richtige Antwort; P = Vermutung; D2 = Fehler am Ausgang; h = Aktivierung der Konzepte; W2 = Gewichte Schicht 2; D1 = Schuld der Konzepte</p>
 </div>
 
 </section>
-<section id="backex" data-transition="fade" style="background:#F6F1E7;color:#1E1B18;font-family:'DM Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:28px">
+<section id="backex" data-transition="fade" style="background:#F6F1E7;color:#1E1B18;font-family:'DM Sans', Arial, sans-serif;padding:72px 128px 100px;display:flex;flex-direction:column;gap:14px">
 <p style="font-size:24px;color:#9A5F0B;letter-spacing:2px;text-transform:uppercase">Lernen</p>
-<h2 style="font-family:'Domine', Georgia, serif;font-size:64px;font-weight:600;line-height:1.1">Rechenbeispiel: D2 und D1</h2>
-<div style="display:flex;gap:48px">
-<div style="width:640px;display:flex;flex-direction:column;gap:12px;background:#FFFDF8;padding:24px 28px;border:1px solid #DDD3C0;border-radius:16px">
-<p style="font-size:32px;font-weight:700;color:#9A5F0B">Ausgangslage</p>
-<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px;line-height:1.4">Richtig: bier, Y = [0, 1, 0]<br>Aktivierung h = [+0.9, −0.5]</p>
-<table style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px">
-<tr style="background:#EAE2D0"><th style="width:40%">Konzept</th><th style="width:30%">c0</th><th style="width:30%">c1</th></tr>
-<tr><td><b>Aktivierung h</b></td><td><b>+0.9</b></td><td><b>−0.5</b></td></tr>
-<tr><td>W2 gruss</td><td>0.1</td><td>0.2</td></tr>
-<tr><td>W2 bier</td><td>0.5</td><td>−0.5</td></tr>
-<tr><td>W2 wein</td><td>1.5</td><td>−0.4</td></tr>
-</table>
-<p style="font-size:28px;line-height:1.35">Vermutung P = [0.13, 0.26, 0.61]. Das Netz rät <b>wein (61 %)</b>, richtig wäre bier.</p>
+<h2 style="font-family:'Domine', Georgia, serif;font-size:64px;font-weight:600;line-height:1.1">Rechenbeispiel: Wer trägt wie viel Schuld?</h2>
+<p style="font-size:26px;line-height:1.3;color:#5B5348">Mini-Netz mit 3 Antworten (gruss, bier, wein) und 2 Konzepten (c0, c1). Richtig ist bier, das Netz rät wein.</p>
+<div style="display:flex;gap:24px;align-items:center;background:#FFFDF8;padding:12px 24px;border:1px solid #DDD3C0;border-radius:16px">
+<p style="width:52px;font-size:48px;font-weight:700;color:#9A5F0B">1</p>
+<div style="width:440px;display:flex;flex-direction:column;gap:6px"><p style="font-size:28px;font-weight:700;line-height:1.15">Wie falsch lag jede Antwort?</p><p style="font-size:24px;line-height:1.3;color:#5B5348">D2 = P − Y. P ist die Vermutung, Y die richtige Antwort (bier = 1).</p></div>
+<div style="flex:1"><table style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px"><tr style="background:#EAE2D0"><th style="width:22%">Antwort</th><th style="width:28%">P (Vermutung)</th><th style="width:22%">Y (richtig)</th><th style="width:28%">D2 = P − Y</th></tr><tr><td>gruss</td><td>0.13</td><td>0</td><td style="color:#9A5F0B;">+0.13</td></tr><tr><td>bier</td><td>0.26</td><td>1</td><td style="color:#1F6F8B;">−0.74</td></tr><tr><td>wein</td><td>0.61</td><td>0</td><td style="color:#9A5F0B;">+0.61</td></tr></table></div>
 </div>
-<div style="flex:1;display:flex;flex-direction:column;gap:20px">
-<div style="display:flex;flex-direction:column;gap:8px;background:#FFFDF8;padding:20px 28px;border:1px solid #DDD3C0;border-radius:16px">
-<p style="font-size:30px;font-weight:700;color:#9A5F0B">1 · D2 = P − Y</p>
-<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px">gruss +0.13   bier <span style="color:#1F6F8B">−0.74</span>   wein +0.61</p>
-<p style="font-size:26px;color:#5B5348">Positiv = Antwort zu stark, negativ = zu schwach.</p>
+<div style="display:flex;gap:24px;align-items:center;background:#FFFDF8;padding:12px 24px;border:1px solid #DDD3C0;border-radius:16px">
+<p style="width:52px;font-size:48px;font-weight:700;color:#9A5F0B">2</p>
+<div style="width:440px;display:flex;flex-direction:column;gap:6px"><p style="font-size:28px;font-weight:700;line-height:1.15">Wie viel Schuld trägt jedes Konzept?</p><p style="font-size:24px;line-height:1.3;color:#5B5348">Jede Antwort schickt ihren Fehler über die Gewichte W2 zurück. Dann wird alles addiert.</p></div>
+<div style="flex:1"><table style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px"><tr style="background:#EAE2D0"><th style="width:10%">Konzept</th><th style="width:22%">gruss +0.13</th><th style="width:25%">bier −0.74</th><th style="width:26%">wein +0.61</th><th style="width:17%">Σ</th></tr><tr><td>c0</td><td>× 0.1 = +0.01</td><td>× 0.5 = <span style="color:#1F6F8B">−0.37</span></td><td>× 1.5 = +0.92</td><td style="color:#9A5F0B"><b>+0.56</b></td></tr><tr><td>c1</td><td>× 0.2 = +0.03</td><td>× −0.5 = +0.37</td><td>× −0.4 = <span style="color:#1F6F8B">−0.24</span></td><td style="color:#9A5F0B"><b>+0.15</b></td></tr></table></div>
 </div>
-<div style="display:flex;flex-direction:column;gap:8px;background:#FFFDF8;padding:20px 28px;border:1px solid #DDD3C0;border-radius:16px">
-<p style="font-size:30px;font-weight:700;color:#9A5F0B">2 · D2 · W2: Beitrag jedes Konzepts zur Schuld</p>
-<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px;line-height:1.4">c0: 0.13·0.1 + (−0.74)·0.5 + 0.61·1.5 = <b>+0.56</b><br>c1: 0.13·0.2 + (−0.74)·(−0.5) + 0.61·(−0.4) = <b>+0.15</b></p>
+<div style="display:flex;gap:24px;align-items:center;background:#FFFDF8;padding:12px 24px;border:1px solid #DDD3C0;border-radius:16px;border-left:8px solid #9A5F0B">
+<p style="width:52px;font-size:48px;font-weight:700;color:#9A5F0B">3</p>
+<div style="width:440px;display:flex;flex-direction:column;gap:6px"><p style="font-size:28px;font-weight:700;line-height:1.15">Wie beweglich ist das Konzept?</p><p style="font-size:24px;line-height:1.3;color:#5B5348">Mal (1 − h²): Ein Konzept nahe +1 oder −1 ändert sich kaum, eines nahe 0 viel. Ergebnis: D1.</p></div>
+<div style="flex:1"><table style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px"><tr style="background:#EAE2D0"><th style="width:14%">Konzept</th><th style="width:20%">Schuld Σ</th><th style="width:26%">Aktivierung h</th><th style="width:18%">1 − h²</th><th style="width:22%">D1</th></tr><tr><td>c0</td><td>+0.56</td><td>+0.9</td><td>0.19</td><td style="color:#9A5F0B"><b>0.11</b></td></tr><tr><td>c1</td><td>+0.15</td><td style="color:#1F6F8B">−0.5</td><td>0.75</td><td style="color:#9A5F0B"><b>0.11</b></td></tr></table></div>
 </div>
-<div style="display:flex;flex-direction:column;gap:8px;background:#FFFDF8;padding:20px 28px;border:1px solid #DDD3C0;border-radius:16px">
-<p style="font-size:30px;font-weight:700;color:#9A5F0B">3 · × (1 − h²): Wie beweglich ist das Konzept?</p>
-<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px;line-height:1.4">c0: h = +0.9 → 1 − 0.9² = 0.19 → 0.56 × 0.19 = <b>0.11</b><br>c1: h = −0.5 → 1 − 0.5² = 0.75 → 0.15 × 0.75 = <b>0.11</b></p>
-<p style="font-size:26px;color:#5B5348">c0: Aktivierung +0.9 liegt nahe am Maximum +1: flache Kurve, kleiner Faktor.</p>
-</div>
-</div>
-</div>
+<p style="font-size:28px;line-height:1.3"><b>Beide Konzepte bekommen die Schuld 0.11. Daraus berechnet die Lernformel, wie sich die Gewichte in W1 ändern.</b></p>
 
 </section>
-<section id="address" data-transition="fade" style="background:#1E1B18;color:#F6F1E7;font-family:'DM Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:32px">
-<p style="font-size:24px;color:#E0A23B;letter-spacing:2px;text-transform:uppercase">Lernen</p>
+<section id="address" data-transition="fade" style="background:#F6F1E7;color:#1E1B18;font-family:'DM Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:32px">
+<p style="font-size:24px;color:#9A5F0B;letter-spacing:2px;text-transform:uppercase">Lernen</p>
 <h2 style="font-family:'Domine', Georgia, serif;font-size:64px;font-weight:600;line-height:1.1">Welches Gewicht ändert sich?</h2>
-<div style="background:#2A2621;padding:28px 36px;border-radius:16px">
-<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:34px;color:#E0A23B;line-height:1.4">Änderung von W[i, j] = Fehler an Ausgang i × Wert von Eingang j</p>
+<div style="background:#FFFDF8;border:1px solid #DDD3C0;padding:28px 36px;border-radius:16px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:34px;color:#9A5F0B;line-height:1.4">Änderung von W[i, j] = Fehler an Ausgang i × Wert von Eingang j</p>
 </div>
-<p style="font-size:30px;color:#BDB5A6">Beispiel: Gewicht W2[bier, c0], Aktivierung von c0 = +1.00, Lernrate 0.5, Momentum 0.9</p>
+<p style="font-size:30px;color:#5B5348">Beispiel: Gewicht W2[bier, c0], Aktivierung von c0 = +1.00, Lernrate 0.5, Momentum 0.9</p>
 <table style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:30px">
-<tr style="background:#2A2621"><th style="width:14%">Runde</th><th style="width:20%">P(bier)</th><th style="width:26%">Fehler P−Y</th><th style="width:40%">Schritt (Momentum)</th></tr>
-<tr><td>1</td><td>0.30</td><td style="color:#6DB6D1">−0.70</td><td style="color:#E0A23B">+0.350</td></tr>
-<tr><td>2</td><td>0.50</td><td style="color:#6DB6D1">−0.50</td><td style="color:#E0A23B">+0.565</td></tr>
+<tr style="background:#EAE2D0"><th style="width:14%">Runde</th><th style="width:20%">P(bier)</th><th style="width:26%">Fehler P−Y</th><th style="width:40%">Schritt (Momentum)</th></tr>
+<tr><td>1</td><td>0.30</td><td style="color:#1F6F8B">−0.70</td><td style="color:#9A5F0B">+0.350</td></tr>
+<tr><td>2</td><td>0.50</td><td style="color:#1F6F8B">−0.50</td><td style="color:#9A5F0B">+0.565</td></tr>
 </table>
 <ul style="font-size:32px;line-height:1.4">
 <li>Fehler negativ und Konzept aktiv: das Gewicht steigt.</li>
@@ -385,28 +541,19 @@
 </ul>
 
 </section>
-<section id="concepts" data-transition="fade" style="background:#F6F1E7;color:#1E1B18;font-family:'DM Sans', Arial, sans-serif;padding:96px 128px 120px;display:flex;flex-direction:column;gap:28px">
-<p style="font-size:24px;color:#9A5F0B;letter-spacing:2px;text-transform:uppercase">Lernen</p>
-<h2 style="font-family:'Domine', Georgia, serif;font-size:64px;font-weight:600;line-height:1.1">Woher kommen die Konzepte?</h2>
-<div style="display:flex;gap:32px">
-<div style="flex:1;display:flex;flex-direction:column;gap:14px;background:#FFFDF8;padding:28px;border:1px solid #DDD3C0;border-radius:16px">
-<p style="font-size:36px;font-weight:700;color:#9A5F0B">Start: Zufall</p>
-<p style="font-size:30px;line-height:1.35;color:#5B5348">Jedes Konzept ist eine Zeile in W1 und beginnt mit anderen Zufallszahlen. Würden alle mit demselben Wert starten (zum Beispiel 0), bekäme jedes Konzept im Training exakt dieselbe Schuld und dieselben Änderungen. Alle blieben für immer gleich, 24 Konzepte wären nur eines. Erst der zufällige Start macht sie verschieden.</p>
+<section id="part3" data-transition="fade" style="background:#1E1B18;color:#F6F1E7;font-family:'DM Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;justify-content:center;gap:40px">
+<p style="font-size:32px;color:#E0A23B;letter-spacing:4px;text-transform:uppercase">Teil 3</p>
+<h1 style="font-family:'Domine', Georgia, serif;font-size:128px;font-weight:600;line-height:1.05">Einordnung</h1>
+<p style="font-size:48px;line-height:1.3;color:#BDB5A6">Warum zwei Schichten, und was ein LLM anders macht</p>
+<div style="display:flex;gap:24px;margin-top:40px">
+<p style="background:#2A2621;color:#BDB5A6;border:1px solid #4A443B;font-size:28px;padding:14px 32px;border-radius:999px">1  Antworten</p>
+<p style="background:#2A2621;color:#BDB5A6;border:1px solid #4A443B;font-size:28px;padding:14px 32px;border-radius:999px">2  Lernen</p>
+<p style="background:#E0A23B;color:#1E1B18;font-weight:700;font-size:28px;padding:14px 32px;border-radius:999px">3  Einordnung</p>
 </div>
-<div style="flex:1;display:flex;flex-direction:column;gap:14px;background:#FFFDF8;padding:28px;border:1px solid #DDD3C0;border-radius:16px">
-<p style="font-size:36px;font-weight:700;color:#9A5F0B">Training formt sie</p>
-<p style="font-size:30px;line-height:1.35;color:#5B5348">Die Beispiele schieben die Zeilen. Es entstehen Spezialisten, zum Beispiel für „kein“ + „bier“.</p>
-</div>
-<div style="flex:1;display:flex;flex-direction:column;gap:14px;background:#FFFDF8;padding:28px;border:1px solid #DDD3C0;border-radius:16px">
-<p style="font-size:36px;font-weight:700;color:#9A5F0B">Namen sind Deutung</p>
-<p style="font-size:30px;line-height:1.35;color:#5B5348">Das Netz kennt nur „Konzept 15“. Die Bedeutung lesen wir aus den treibenden Wörtern ab.</p>
-</div>
-</div>
-<p style="font-size:34px;line-height:1.4">Die Anzahl der Konzepte bestimmt die Feinabstufung der Entscheidungen: zu wenige sind zu grob, zu viele lernen die Beispiele auswendig.</p>
 
 </section>
-<section id="twolayers" data-transition="fade" style="background:#1E1B18;color:#F6F1E7;font-family:'DM Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:36px">
-<p style="font-size:24px;color:#E0A23B;letter-spacing:2px;text-transform:uppercase">Einordnung</p>
+<section id="twolayers" data-transition="fade" style="background:#F6F1E7;color:#1E1B18;font-family:'DM Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:36px">
+<p style="font-size:24px;color:#9A5F0B;letter-spacing:2px;text-transform:uppercase">Einordnung</p>
 <h2 style="font-family:'Domine', Georgia, serif;font-size:64px;font-weight:600;line-height:1.1">Warum zwei Schichten?</h2>
 <div style="display:flex;gap:64px">
 <div style="flex:1;display:flex;flex-direction:column;gap:28px">
@@ -414,19 +561,93 @@
 <p style="font-size:32px;line-height:1.4">Ein Konzept kann so gelernt werden, dass es nur ausschlägt, wenn „kein“ und „bier“ zusammen vorkommen, und dann für Wein stimmt.</p>
 </div>
 <div style="width:640px;display:flex;flex-direction:column;gap:24px">
-<div style="background:#2A2621;padding:24px 32px;border-radius:16px;display:flex;flex-direction:column;gap:6px">
-<p style="font-size:28px;color:#BDB5A6">Eine Matrix · 12 neue Sätze</p>
-<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:64px;font-weight:600;color:#6DB6D1">8 / 12</p>
-<p style="font-size:26px;color:#BDB5A6">Training: 223 / 230</p>
+<div style="background:#FFFDF8;border:1px solid #DDD3C0;padding:24px 32px;border-radius:16px;display:flex;flex-direction:column;gap:6px">
+<p style="font-size:28px;color:#5B5348">Eine Matrix – 12 neue Sätze</p>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:64px;font-weight:600;color:#1F6F8B">8 / 12</p>
+<p style="font-size:26px;color:#5B5348">Training: 223 / 230</p>
 </div>
-<div style="background:#2A2621;padding:24px 32px;border-radius:16px;display:flex;flex-direction:column;gap:6px">
-<p style="font-size:28px;color:#BDB5A6">Zwei Schichten · 12 neue Sätze</p>
-<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:64px;font-weight:600;color:#E0A23B">12 / 12</p>
-<p style="font-size:26px;color:#BDB5A6">Training: 230 / 230</p>
+<div style="background:#FFFDF8;border:1px solid #DDD3C0;padding:24px 32px;border-radius:16px;display:flex;flex-direction:column;gap:6px">
+<p style="font-size:28px;color:#5B5348">Zwei Schichten – 12 neue Sätze</p>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:64px;font-weight:600;color:#9A5F0B">12 / 12</p>
+<p style="font-size:26px;color:#5B5348">Training: 230 / 230</p>
 </div>
 </div>
 </div>
-<p style="font-size:28px;line-height:1.4;color:#BDB5A6">Test mit 12 Sätzen, die das Netz nie gesehen hat (Befehl „vergleich“). Die Matrix scheitert bei „bier bitte“, „wein bitte“, „ich will wein“ und „heute ein wein“.</p>
+<p style="font-size:28px;line-height:1.4;color:#5B5348">Test mit 12 Sätzen, die das Netz nie gesehen hat (Befehl „vergleich“). Die Matrix scheitert bei „bier bitte“, „wein bitte“, „ich will wein“ und „heute ein wein“.</p>
+
+</section>
+<section id="hurdle" data-transition="fade" style="background:#F6F1E7;color:#1E1B18;font-family:'DM Sans', Arial, sans-serif;padding:96px 128px 120px;display:flex;flex-direction:column;gap:24px">
+<p style="font-size:24px;color:#9A5F0B;letter-spacing:2px;text-transform:uppercase">Einordnung – Mini-Beispiel</p>
+<h2 style="font-family:'Domine', Georgia, serif;font-size:64px;font-weight:600;line-height:1.1">Gewicht = Punkte, Bias = Hürde</h2>
+<div style="display:flex;gap:48px">
+<div style="width:560px;display:flex;flex-direction:column;gap:16px;background:#FFFDF8;padding:28px;border:1px solid #DDD3C0;border-radius:16px">
+<p style="font-size:30px;font-weight:700;color:#9A5F0B">Barkeeper: „Bier oder Wein?“</p>
+<table style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:28px">
+<tr style="background:#EAE2D0"><th style="width:55%">Gast</th><th style="width:45%">bekommt</th></tr>
+<tr><td>bier</td><td>bier</td></tr>
+<tr><td>wein</td><td>wein</td></tr>
+<tr><td>kein bier</td><td><b>wein</b></td></tr>
+<tr><td>kein wein</td><td><b>bier</b></td></tr>
+</table>
+<p style="font-size:24px;line-height:1.35;color:#5B5348">Nur zwei Möglichkeiten: „kein“ dreht das genannte Getränk um. Das Netz kennt die Frage nicht, es sieht nur diese vier Beispiele.</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:18px">
+<p style="font-size:28px;line-height:1.35">Jedes der Wörter <b>wein</b> und <b>kein</b> bringt <b>3 Punkte</b>. Der Bias ist die <b>Hürde</b>: Liegt die Summe darüber, ist das Konzept an.</p>
+<div style="display:flex;flex-direction:column;gap:6px;background:#FFFDF8;padding:18px 28px;border:1px solid #DDD3C0;border-radius:16px">
+<div style="display:flex;justify-content:space-between;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:28px"><span>0 Wörter: 0</span><span style="color:#9A5F0B">│1.5│</span><span>1 Wort: 3</span><span style="color:#9A5F0B">│4.5│</span><span>2 Wörter: 6</span></div>
+<p style="font-size:22px;color:#5B5348">Punkte vor der Hürde – die Hürden liegen genau in der Mitte</p>
+</div>
+<div style="display:flex;gap:20px">
+<div style="flex:1;display:flex;flex-direction:column;gap:6px;background:#FFFDF8;padding:18px 24px;border:1px solid #DDD3C0;border-radius:16px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#9A5F0B">c0 = tanh(3·wein + 3·kein − 1.5)</p>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px">−1.5 / +1.5 / +4.5</p>
+<p style="font-size:26px;line-height:1.3">An ab <b>einem</b> Wort: <b>ODER</b></p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:6px;background:#FFFDF8;padding:18px 24px;border:1px solid #DDD3C0;border-radius:16px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#9A5F0B">c1 = tanh(3·wein + 3·kein − 4.5)</p>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px">−4.5 / −1.5 / +1.5</p>
+<p style="font-size:26px;line-height:1.3">An nur mit <b>beiden</b>: <b>UND</b></p>
+</div>
+</div>
+<div style="background:#FFFDF8;border:1px solid #DDD3C0;border-left:8px solid #9A5F0B;padding:16px 28px;border-radius:16px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:28px;color:#9A5F0B">wein-Punkte = 2·c0 − 2·c1;  bier-Punkte = 1</p>
+<p style="font-size:24px;line-height:1.3;color:#5B5348">ODER, aber nicht UND (= XOR): genau so ergibt „kein bier“ wein</p>
+</div>
+</div>
+</div>
+
+</section>
+<section id="tanhproof" data-transition="fade" style="background:#F6F1E7;color:#1E1B18;font-family:'DM Sans', Arial, sans-serif;padding:80px 128px 100px;display:flex;flex-direction:column;gap:20px">
+<p style="font-size:24px;color:#9A5F0B;letter-spacing:2px;text-transform:uppercase">Einordnung – Mini-Beispiel</p>
+<h2 style="font-family:'Domine', Georgia, serif;font-size:64px;font-weight:600;line-height:1.1">Ohne tanh geht es nicht</h2>
+<div style="display:flex;gap:40px">
+<div style="flex:1;display:flex;flex-direction:column;gap:12px;background:#FFFDF8;border:1px solid #DDD3C0;padding:24px 28px;border-radius:16px">
+<p style="font-size:30px;font-weight:700;color:#9A5F0B">Mit tanh – 4 von 4 richtig</p>
+<table style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px">
+<tr><th style="width:30%">Satz</th><th style="width:16%">c0</th><th style="width:16%">c1</th><th style="width:20%">wein</th><th style="width:18%">→</th></tr>
+<tr><td>bier</td><td>−0.91</td><td>−1.00</td><td>+0.19</td><td>bier ✓</td></tr>
+<tr><td>wein</td><td>+0.91</td><td>−0.91</td><td>+3.62</td><td>wein ✓</td></tr>
+<tr><td>kein bier</td><td>+0.91</td><td>−0.91</td><td>+3.62</td><td>wein ✓</td></tr>
+<tr><td>kein wein</td><td>+1.00</td><td>+0.91</td><td>+0.19</td><td>bier ✓</td></tr>
+</table>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:12px;background:#FFFDF8;border:1px solid #DDD3C0;padding:24px 28px;border-radius:16px">
+<p style="font-size:30px;font-weight:700;color:#1F6F8B">Ohne tanh – 2 von 4 richtig</p>
+<table style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px">
+<tr><th style="width:30%">Satz</th><th style="width:16%">c0</th><th style="width:16%">c1</th><th style="width:20%">wein</th><th style="width:18%">→</th></tr>
+<tr><td>bier</td><td>−1.5</td><td>−4.5</td><td>+6.00</td><td>wein ✗</td></tr>
+<tr><td>wein</td><td>+1.5</td><td>−1.5</td><td>+6.00</td><td>wein ✓</td></tr>
+<tr><td>kein bier</td><td>+1.5</td><td>−1.5</td><td>+6.00</td><td>wein ✓</td></tr>
+<tr><td>kein wein</td><td>+4.5</td><td>+1.5</td><td>+6.00</td><td>wein ✗</td></tr>
+</table>
+</div>
+</div>
+<div style="background:#FFFDF8;border:1px solid #DDD3C0;padding:18px 36px;border-radius:16px;border-left:8px solid #1F6F8B;display:flex;flex-direction:column;gap:8px">
+<p style="font-size:26px;line-height:1.3;color:#5B5348"><b>wein</b> = 1, wenn das Wort im Satz steht, sonst 0. Genauso <b>kein</b>. „3·wein“ heißt: 3 Punkte, wenn wein vorkommt. <b>c0</b> und <b>c1</b> sind die zwei Schalter von Folie 23: c0 = ODER (an ab einem Wort), c1 = UND (an nur mit beiden).</p>
+<p style="font-size:30px;line-height:1.4">2·(3·wein + 3·kein − 1.5) − 2·(3·wein + 3·kein − 4.5) = <b style="color:#1F6F8B">6</b> &nbsp;für jeden Satz</p>
+<p style="font-size:26px;line-height:1.3;color:#5B5348">Die Wortpunkte (3·wein + 3·kein) stehen in beiden Klammern und fallen weg. Übrig: 2·(−1.5) − 2·(−4.5) = −3 + 9 = 6. Dazu: wein-Punkte = 2·c0 − 2·c1, bier-Punkte immer 1. Deshalb gewinnt wein immer.</p>
+</div>
+<p style="font-size:28px;line-height:1.35">Ohne tanh heben sich die Wörter auf: Zwei Schichten sind dann nur eine Matrix. Erst tanh macht aus den Summen <b style="color:#9A5F0B">Schalter</b> (an/aus), und erst Schalter erlauben UND und ODER.</p>
 
 </section>
 <section id="vslm" data-transition="fade" style="background:#F6F1E7;color:#1E1B18;font-family:'DM Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:28px">
@@ -460,16 +681,16 @@
 <p style="font-size:34px;line-height:1.4;color:#9A5F0B"><b>Gleich geblieben:</b> Zufallsstart, Softmax, Fehler messen und die Gewichte per Gradient nachbessern.</p>
 
 </section>
-<section id="tryit" data-transition="fade" style="background:#1E1B18;color:#F6F1E7;font-family:'DM Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:36px">
-<p style="font-size:24px;color:#E0A23B;letter-spacing:2px;text-transform:uppercase">Zum Mitnehmen</p>
+<section id="tryit" data-transition="fade" style="background:#F6F1E7;color:#1E1B18;font-family:'DM Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:36px">
+<p style="font-size:24px;color:#9A5F0B;letter-spacing:2px;text-transform:uppercase">Zum Mitnehmen</p>
 <h2 style="font-family:'Domine', Georgia, serif;font-size:64px;font-weight:600;line-height:1.1">Selbst ausprobieren</h2>
 <div style="display:flex;gap:48px">
-<div style="width:820px;display:flex;flex-direction:column;gap:16px;background:#2A2621;padding:36px;border-radius:16px">
-<p style="font-size:24px;color:#BDB5A6">Starten</p>
-<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:28px;color:#E0A23B">python3 barkeeper2.py</p>
-<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:28px;color:#E0A23B">python3 barkeeper2.py simple</p>
-<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:28px;color:#E0A23B">python3 show_matrix.py</p>
-<p style="font-size:28px;color:#BDB5A6">Alles läuft in der Konsole</p>
+<div style="width:820px;display:flex;flex-direction:column;gap:16px;background:#FFFDF8;border:1px solid #DDD3C0;padding:36px;border-radius:16px">
+<p style="font-size:24px;color:#5B5348">Starten</p>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:28px;color:#9A5F0B">python3 barkeeper2.py</p>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:28px;color:#9A5F0B">python3 barkeeper2.py simple</p>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:28px;color:#9A5F0B">python3 show_matrix.py</p>
+<p style="font-size:28px;color:#5B5348">Alles läuft in der Konsole</p>
 </div>
 <div style="flex:1;display:flex;flex-direction:column;gap:20px">
 <p style="font-size:32px;line-height:1.35"><b>Eingabe:</b> „ein bier“, „kein bier“, „noch eins“</p>
@@ -478,7 +699,7 @@
 <p style="font-size:32px;line-height:1.35"><b>Mini-Modell:</b> nur 4 Konzepte und 43 Gewichte</p>
 </div>
 </div>
-<p style="font-size:44px;font-family:'Domine', Georgia, serif;color:#E0A23B">Fragen?</p>
+<p style="font-size:44px;font-family:'Domine', Georgia, serif;color:#9A5F0B">Fragen?</p>
 
 </section>
 </div></div>
@@ -493,7 +714,7 @@
   </span>
 </div>
 <script>
-const NOTES = ["Einstieg: Der Titel sagt bewusst nicht \"LLM\", denn unser Barkeeper ist kein Sprachmodell, sondern ein kleines neuronales Netz, das Sätze einer von 34 Antworten zuordnet. Wir schauen uns nicht ein echtes LLM an, sondern ein winziges neuronales Netz mit rund 4.000 Gewichten. Es nutzt dieselben Grundideen, ist aber so klein, dass wir jede einzelne Zahl sehen können. Am Ende wissen alle, wie aus einem Satz eine Antwort wird und wie das Netz lernt.", "Links ein Beispiel für das Lernen: Ohne Beispiel für \"kein\" erkennt der Barkeeper nur das Wort \"bier\" und antwortet falsch mit bier. Erst nachdem wir ihm \"kein bier = wein\" beigebracht haben, antwortet er richtig mit wein. Der Barkeeper bekommt einen Satz und den Kontext, also was bisher bestellt wurde. Derselbe Satz \"noch eins\" bedeutet je nach Kontext etwas anderes: nach einem Bier noch ein Bier, am Anfang dagegen \"du hast noch nichts bestellt\". Wichtig zu sagen: Das ist kein LLM, aber es verwendet dieselben Bausteine. Zahlen stammen vom aktuellen Modell und ändern sich, wenn man neue Beispiele beibringt.", "Das ist der ganze Vorwärtsweg in fünf Schritten. Die blauen Zeilen zeigen, welche Werte von Schritt zu Schritt weitergegeben werden, hier am Beispiel \"kein bier\" im Zustand vor dem Lernen. Das Netz kennt \"kein\" noch nicht, ignoriert es und sieht nur \"bier\" mit [start]. Es antwortet mit 99.9 Prozent bier und liegt damit falsch. Die Rechenschritte sind nach dem Lernen genau dieselben, es ändern sich nur die Gewichte. Die Zahlen stammen aus einem Modell, das ohne die kein-Beispiele trainiert wurde. Die rechte Spalte erklärt jeden Schritt in einfachen Worten. Der wichtigste Schritt ist Schritt 2: Ein Konzept ist keine fest programmierte Regel, sondern eine Art Ja/Nein-Frage an den Satz, zum Beispiel \"kommt kein zusammen mit bier vor?\". Das Netz kennt die Frage nicht in Worten, es hat nur Zahlen, die bei genau dieser Wortkombination stark ausschlagen. Welche Fragen sich lohnen, entscheidet das Training. Mit tanh werden die Werte der Konzepte auf −1 bis +1 gedrückt: nahe +1 heißt \"ja\", nahe −1 \"nein\", um 0 \"unentschieden\". Das ist auch der Grund, warum es tanh braucht: Ohne diese Biegung wäre Schicht 2 mal Schicht 1 mathematisch nur eine einzige Matrix, und das Netz könnte keine Kombinationen wie \"kein\" plus \"bier\" lernen (siehe Folie 14). Das Ergebnis von tanh heißt h, das ist der Wert, der in Schritt 3 weiterverwendet wird. Ein konkretes Beispiel mit tanh(+5.52) = +1.00 sieht man auf der übernächsten Folie. W1, W2, b1 und b2 sind die Gewichte, also die Zahlen, die beim Training gelernt werden.", "Der Unterschied: \"bier\" ohne Klammern ist ein Wort, das der Gast gerade gesagt hat. \"[bier]\" in eckigen Klammern ist der Kontext, also der Gesprächsstand: Der Gast hat vorher schon ein Bier bestellt. Deshalb kann derselbe Satz \"noch eins\" einmal ein weiteres Bier bedeuten, nämlich im Kontext [bier], und einmal \"du hast noch nichts bestellt\", nämlich im Kontext [start]. Für das Netz sind \"bier\" und \"[bier]\" zwei völlig getrennte Spalten, es weiß nicht, dass sie zusammengehören. Hier steht „kein bier“ im Kontext [wein]: Die Spalten kein, bier und [wein] haben eine 1. Das Netz kann nur mit Zahlen rechnen, deshalb bekommt jedes Wort seine eigene Spalte. Bei echten LLMs ersetzen Embeddings diese einfache 0/1-Darstellung.", "Hier ein echtes Konzept aus dem Log. Links stehen die Gewichte der Wörter im Satz: \"bier\" schiebt das Konzept mit +3.9 stark nach oben, der Kontext \"[wein]\" mit +1.9, das Wort \"kein\" zieht leicht ab. Rechts die Herkunft: Gewichte und Bias werden nicht berechnet, sondern gelernt. Beide starten mit Zufallszahlen bzw. 0 und werden in 1500 Trainingsrunden schrittweise korrigiert, jeweils ein kleines Stück gegen den Fehler. Der Bias ist technisch ein Gewicht, dessen Eingang immer 1 ist, deshalb lernt er nach derselben Regel. Er bedeutet die Tendenz ohne Eingabe. Alles zusammen ergibt 5.52, tanh macht daraus 1.00. Das ist der Wert h dieses Konzepts, er steht in der letzten Zeile links. Wichtig ist tanh aus zwei Gründen: Es begrenzt die Werte auf minus 1 bis plus 1, kein Konzept kann also alles andere übertönen. Und es ist gekrümmt: Ohne diese Biegung wären Schicht 1 und Schicht 2 zusammen mathematisch nur eine einzige Matrix, und das Netz könnte keine Kombinationen wie kein plus bier lernen.", "Die Spalten c0 bis c3 sind Konzepte aus Schicht 1. Ein Konzept ist eine Art Ja-Nein-Frage an den Satz: Nahe +1 wurde sie mit ja beantwortet, nahe -1 mit nein. Welche Fragen es gibt, hat das Netz im Training selbst herausgefunden, deshalb haben sie keine Namen, nur Nummern. Gezeigt sind nur die vier aktivsten von 24 Konzepten. Jedes Konzept stimmt für jede Antwort mit einem eigenen Gewicht. Konzept 0 sagt zum Beispiel \"ja, bier\" mit +4.3 und \"nein, wein\" mit -2.3. Wir addieren alle Stimmen, rechnen den Bias dazu und erhalten für jede Antwort eine Punktzahl. Hier gewinnt bier mit +8.4 gegen wein mit -4.6. Die Gewichte sind aus den gerundeten Log-Zahlen zurückgerechnet, die genauen Werte stehen in show_matrix.py.", "Softmax macht aus den Rohwerten Wahrscheinlichkeiten. Die Tabelle zeigt unseren Satz \"kein bier\" im Kontext [wein] mit den Zahlen des aktuellen Modells. Softmax läuft über alle 34 Antworten, deshalb steht unten die Zeile für die 31 übrigen. Gerechnet wird mit dem Abstand zur besten Punktzahl, das ergibt dieselben Prozente und vermeidet riesige Zahlen: wein hat e hoch 11.4, das sind rund 85.000. Die Punktzahlen aus der Schicht-2-Folie (bier +8.4) stammen aus einem früheren Lauf mit dem Wort no und passen nicht zu diesen Zahlen. Der Abstand ist entscheidend: Bei Punktzahlen von 5 gegen 1 gegen 0 wären es schon 98 %, 2 % und 1 %.", "So wird aus einem Satz ein gelernter Zusammenhang. Der Gast tippt in der Konsole \"kein bier = wein\". Das Beispiel wird in der Tabelle examples gespeichert. Weil \"kein\" im Vokabular noch fehlt, entsteht eine neue Spalte in W1. Dann wird das gesamte Netz neu trainiert: aus dem Zufallsstart, mit allen gespeicherten Beispielen, 1500 Runden. Es wird also nicht nur das Wort \"kein\" geändert, sondern alle Gewichte werden neu berechnet. Wie genau die Gewichte dabei geschoben werden, zeigen die Folien zu Backpropagation. Wichtig: Das Netz bekommt keine Regel \"kein dreht die Antwort um\". Es findet Gewichte, die für die Beispiele funktionieren. Deshalb braucht es mehrere Beispiele, in unserem Modell sind es 14 mit \"kein\", damit auch ähnliche Sätze wie \"kein wein\" oder \"bitte kein bier\" richtig laufen. Die Zahlen unten stammen aus einem Modell mit diesen 14 Beispielen im Vergleich zu einem Modell ganz ohne sie.", "Die Gewichte werden nicht berechnet, sondern schrittweise gelernt. Am Anfang sind sie zufällig. In jeder der 1500 Runden raten wir, messen den Fehler, verteilen die Schuld rückwärts und schieben jedes Gewicht ein kleines Stück in die Richtung, die den Fehler verkleinert. Das ist Gradientenabstieg, derselbe Mechanismus wie beim Training großer Modelle.", "Backpropagation heißt Rückwärts-Weitergabe des Fehlers. Beim Raten läuft die Rechnung vorwärts von den Wörtern über die Konzepte zur Antwort. Beim Lernen läuft die Schuld den umgekehrten Weg. Zuerst wird der Fehler am Ausgang gemessen: Vermutung minus richtige Antwort, das ist D2. Dann wird er durch W2 zurück zu den Konzepten gereicht: Jedes Konzept bekommt den Teil der Schuld, den es über seine Gewichte zur falschen Antwort beigetragen hat. Der Faktor 1 minus h hoch 2 ist die Steigung von tanh, ein Konzept, das schon fast bei plus oder minus 1 klebt, ändert sich kaum. Daraus ergibt sich die Schuld jedes Gewichts in W1 und W2, die nächste Folie zeigt, welche Gewichte sich dabei konkret ändern. Dieser Mechanismus ist in großen Sprachmodellen derselbe.", "Ein winziges Beispiel mit drei Antworten und zwei Konzepten. Das Netz rät wein mit 61 Prozent, richtig wäre bier. Schritt 1: D2 ist Vermutung minus richtige Antwort. Bier ist mit minus 0.74 viel zu schwach, wein mit plus 0.61 viel zu stark. Schritt 2: Wir geben diese Fehler über die Gewichte W2 an die Konzepte weiter. Für jedes Konzept werden alle Antwort-Fehler mit dem Gewicht dieses Konzepts in die jeweilige Antwort multipliziert und addiert. Konzept 0 stimmt mit Gewicht 1.5 stark für wein und bekommt deshalb viel Schuld, plus 0.56. Schritt 3: Der Faktor 1 minus h hoch 2 ist die Steigung von tanh. Konzept 0 hat die Aktivierung 0.9 und sitzt fast am Anschlag, der Faktor ist nur 0.19. Konzept 1 liegt mit minus 0.5 in der Mitte, der Faktor ist 0.75. Am Ende haben beide Konzepte die gleiche Schuld, 0.11. Daraus werden dann die Änderungen der Gewichte berechnet, das zeigt die nächste Folie.", "Das ist die Antwort auf die Frage, wie der Fehler die richtige Stelle in der Matrix findet. Jedes Gewicht hat eine Adresse aus Ausgang und Eingang. Es ändert sich nur, wenn der Fehler an seinem Ausgang ankommt und sein Eingang aktiv war. Bei Wörtern, die im Satz nicht vorkommen, ist der Eingang 0, also bleibt das Gewicht unberührt. Der Schritt ergibt sich aus 0.9 mal dem alten Schritt minus 0.5 mal dem Gradienten: Runde 1 gibt 0.35, Runde 2 gibt 0.9 mal 0.35 plus 0.25, also 0.565. In Wirklichkeit wird der Gradient über alle 230 Beispiele gemittelt, hier zur Veranschaulichung nur ein Beispiel.", "Niemand programmiert die Konzepte. Wir legen nur fest, wie viele es gibt, bei uns 24, und die Rechenform tanh. Alles andere entsteht im Training. Man kann sich jedes Konzept als weiche Ja-Nein-Frage an den Satz vorstellen. Mit n Konzepten kann das Netz bis zu 2 hoch n verschiedene Kombinationen unterscheiden. Zum Zufall: Wenn alle Konzepte gleich starten, sehen sie dieselben Eingaben und bekommen dieselbe Schuld. Sie ändern sich dann immer gleich und bleiben identische Kopien. Der Zufall bricht diese Symmetrie, jedes Konzept startet an einer anderen Stelle und wird dadurch zu einem anderen Spezialisten. Bei uns: np.random.seed(0), Zufallszahlen mal 0.5. Das passiert in echten LLMs genauso, dort nur mit Milliarden Gewichten.", "Das ist der Grund für die versteckte Schicht. Ohne sie kann das Netz Kombinationen wie \"kein\" plus \"bier\" nicht sauber abbilden. Die großen Zahlen sind der aussagekräftige Test: zwölf Sätze, die in keinem Trainingsbeispiel vorkamen, zum Beispiel \"kein bier bitte\" oder \"ich will wein\". Die Matrix erkennt acht davon, zwei Schichten alle zwölf. Die kleinen Zahlen darunter sind nur die Trainingsbeispiele: Dort liegt die Matrix bei 223 von 230, zwei Schichten bei 230 von 230. Das zeigt nur, wie gut das Netz die Beispiele abbilden kann. Ob es auch bei neuen Sätzen funktioniert, zeigt erst der Test. Alle Zahlen stammen aus dem Befehl vergleich im aktuellen Modell und ändern sich mit den Daten. Die Testsätze sind im Code festgelegt, es sind nur zwölf, die Zahl ist also ein Hinweis und kein Beweis.", "Unser Barkeeper ist ein Klassifikator: Er ordnet einen Satz einer von 34 festen Antworten zu und kennt keine Wortreihenfolge. Ein Sprachmodell beantwortet eine andere Frage, nämlich welches Wort als Nächstes kommt, und erzeugt Text Wort für Wort. Das Prinzip lässt sich übertragen: Man könnte unser Netz umbauen, indem man die Ausgabeschicht auf alle bekannten Wörter legt und es darauf trainiert, aus den vorigen Wörtern das nächste vorherzusagen. Der Vorteil: Dafür braucht man keine von Hand beschrifteten Beispiele, der Text selbst liefert die richtige Antwort. Mit 230 Beispielen wäre das Ergebnis aber kaum brauchbar, echte Sprachmodelle brauchen Milliarden Gewichte und Billionen Wörter.", "Der wichtigste Unterschied neben der Größe ist die Eingabe. Im Barkeeper ist jedes Wort eine eigene Spalte ohne Beziehung zu den anderen. Ein LLM lernt Embeddings: Wörter mit ähnlicher Verwendung, etwa \"kein\" und \"no\", bekommen ähnliche Vektoren, und alles, was über das eine Wort gelernt wurde, gilt auch für das andere. Außerdem sagt ein LLM das nächste Wort voraus, statt eine feste Antwort aus 34 zu wählen. Die Lernmechanik ist aber dieselbe wie in diesem Vortrag.", "Zum Schluss ein Hinweis zum Ausprobieren. Wer die Zahlen selbst verfolgen will, startet das Mini-Modell mit nur vier Konzepten und lässt sich nach jedem beigebrachten Satz die Matrix mit show_matrix.py anzeigen. In der Konsole zeigt das Entscheidungs-Log unter jeder Antwort die ganze Rechnung dieser Präsentation mit den echten Zahlen."];
+const NOTES = ["Einstieg: Der Titel sagt bewusst nicht \"LLM\", denn unser Barkeeper ist kein Sprachmodell, sondern ein kleines neuronales Netz, das Sätze einer von 34 Antworten zuordnet. Wir schauen uns nicht ein echtes LLM an, sondern ein winziges neuronales Netz mit rund 4.000 Gewichten. Es nutzt dieselben Grundideen, ist aber so klein, dass wir jede einzelne Zahl sehen können. Am Ende wissen alle, wie aus einem Satz eine Antwort wird und wie das Netz lernt.", "Teil 1 ist der Vorwärtsweg: Aus dem Satz werden Zahlen, daraus Konzepte, daraus Punktzahlen, Prozente und am Ende die Antwort. Die Gewichte sind dabei fest, es wird noch nichts gelernt.", "Links ein Beispiel für das Lernen: Ohne Beispiel für \"kein\" erkennt der Barkeeper nur das Wort \"bier\" und antwortet falsch mit bier. Erst nachdem wir ihm \"kein bier = wein\" beigebracht haben, antwortet er richtig mit wein. Der Barkeeper bekommt einen Satz und den Kontext, also was bisher bestellt wurde. Derselbe Satz \"noch eins\" bedeutet je nach Kontext etwas anderes: nach einem Bier noch ein Bier, am Anfang dagegen \"du hast noch nichts bestellt\". Wichtig zu sagen: Das ist kein LLM, aber es verwendet dieselben Bausteine. Zahlen stammen vom aktuellen Modell und ändern sich, wenn man neue Beispiele beibringt.", "Der Unterschied: \"bier\" ohne Klammern ist ein Wort, das der Gast gerade gesagt hat. \"[bier]\" in eckigen Klammern ist der Kontext, also der Gesprächsstand: Der Gast hat vorher schon ein Bier bestellt. Deshalb kann derselbe Satz \"noch eins\" einmal ein weiteres Bier bedeuten, nämlich im Kontext [bier], und einmal \"du hast noch nichts bestellt\", nämlich im Kontext [start]. Für das Netz sind \"bier\" und \"[bier]\" zwei völlig getrennte Spalten, es weiß nicht, dass sie zusammengehören. Hier steht „kein bier“ im Kontext [wein]: Die Spalten kein, bier und [wein] haben eine 1. Das Netz kann nur mit Zahlen rechnen, deshalb bekommt jedes Wort seine eigene Spalte. Bei echten LLMs ersetzen Embeddings diese einfache 0/1-Darstellung.", "Hier ein echtes Konzept (Nr. 15) aus dem Modell. Links stehen die Gewichte der Wörter im Satz: \"bier\" schiebt das Konzept mit +1.23 nach oben, \"kein\" mit +1.82 noch stärker, der Kontext \"[wein]\" zieht mit −0.85 ab. Dieses Konzept fragt also in etwa: Kommt kein zusammen mit bier vor? Rechts die Herkunft: Gewichte und Bias werden nicht berechnet, sondern gelernt. Beide starten mit Zufallszahlen bzw. 0 und werden in 1500 Trainingsrunden schrittweise korrigiert, jeweils ein kleines Stück gegen den Fehler. Der Bias ist technisch ein Gewicht, dessen Eingang immer 1 ist, deshalb lernt er nach derselben Regel. Er bedeutet die Tendenz ohne Eingabe. Alles zusammen ergibt 1.96, tanh macht daraus 0.96. Das ist der Wert h dieses Konzepts, er steht in der letzten Zeile links. Wichtig ist tanh aus zwei Gründen: Es begrenzt die Werte auf minus 1 bis plus 1, kein Konzept kann also alles andere übertönen. Und es ist gekrümmt: Ohne diese Biegung wären Schicht 1 und Schicht 2 zusammen mathematisch nur eine einzige Matrix, und das Netz könnte keine Kombinationen wie kein plus bier lernen.", "Das ist die Fortsetzung von Folie 5: Dort hat Konzept 15 den Wert h = +0.96 bekommen. Hier stimmen vier Konzepte für die Antworten wein und bier ab. Die Zeile Aktivierung h zeigt, wie stark jedes Konzept bei kein bier anspringt (+1 ja, −1 nein). Jede Zahl darunter ist eine Stimme: Gewicht W2 mal Aktivierung h. Das Konzept c2 ist zum Beispiel −1.00 (nein) und hat für wein das Gewicht −3.31, also −3.31 mal −1.00 gleich +3.31 für wein. Die Spalte 20 weitere fasst die übrigen Konzepte zusammen, danach ist Σ die Summe aller 24 Stimmen. Dazu kommt der Bias der Antwort, und das Ergebnis ist die Punktzahl s: wein +11.4 gegen bier +6.5. Das sind genau die Zahlen, die Softmax auf Folie 9 in Prozente umrechnet. Alle Zahlen stammen aus dem aktuellen Modell für den Satz kein bier im Kontext wein (kleine Abweichungen durch Rundung).", "W1 ist die Gewichtstabelle von Schicht 1 mit 24 Zeilen und 141 Spalten, also 3.384 Zahlen. Eine Zeile gehört zu einem Konzept und enthält für jedes Wort ein Gewicht. Niemand programmiert die Konzepte. Wir legen nur fest, wie viele es gibt, bei uns 24, und die Rechenform tanh. Alles andere entsteht im Training. Man kann sich jedes Konzept als weiche Ja-Nein-Frage an den Satz vorstellen. Mit n Konzepten kann das Netz bis zu 2 hoch n verschiedene Kombinationen unterscheiden. Zum Zufall: Wenn alle Konzepte gleich starten, sehen sie dieselben Eingaben und bekommen dieselbe Schuld. Sie ändern sich dann immer gleich und bleiben identische Kopien. Der Zufall bricht diese Symmetrie, jedes Konzept startet an einer anderen Stelle und wird dadurch zu einem anderen Spezialisten. Bei uns: np.random.seed(0), Zufallszahlen mal 0.5. Das passiert in echten LLMs genauso, dort nur mit Milliarden Gewichten.", "Auf der Folie davor hast du die Stimmen der Konzepte gesehen. Hier sind die Zahlen dahinter: W2 und b2, die gelernten Zahlen von Schicht 2. W2 ist eine Tabelle mit einer Zeile pro Antwort und einer Spalte pro Konzept, bei uns 34 mal 24, also 816 Zahlen. Eine Zahl sagt, wie stark das Konzept für die Antwort stimmt oder dagegen. Die Stimme ist Gewicht mal Aktivierung h. b2 ist der Bias, eine Zahl pro Antwort, die Grundneigung unabhängig vom Satz. Gerechnet wird s gleich W2 mal h plus b2, das Ergebnis sind die 34 Punktzahlen. Wie W1 und b1 werden auch W2 und b2 im Training gelernt, zusammen sind es 4258 Zahlen im ganzen Netz. Der Ausschnitt zeigt echte Werte des aktuellen Modells.", "Softmax macht aus den Rohwerten Wahrscheinlichkeiten. Die Tabelle zeigt unseren Satz \"kein bier\" im Kontext [wein] mit den Zahlen des aktuellen Modells. Softmax läuft über alle 34 Antworten, deshalb steht unten die Zeile für die 31 übrigen. Gerechnet wird mit dem Abstand zur besten Punktzahl, das ergibt dieselben Prozente und vermeidet riesige Zahlen: wein hat e hoch 11.4, das sind rund 85.000. Der Abstand ist entscheidend: Bei Punktzahlen von 5 gegen 1 gegen 0 wären es schon 98 %, 2 % und 1 %.", "Der letzte Schritt ist einfach: Aus den Prozenten wird eine Antwort. Die Antwort mit dem höchsten Wert gewinnt, bei kein bier ist das wein mit 98.9 Prozent. Der Barkeeper sucht sich dann zufällig einen der Antwortsätze aus, die für wein im Seed stehen, und gibt ihn aus. Das Netz selbst formuliert nichts, es wählt nur eine von 34 vorbereiteten Antworten. Es gibt eine Sicherheitsschwelle: Liegt der beste Wert unter 40 Prozent, sind kaum Wörter bekannt oder mehr als die Hälfte unbekannt, sagt der Barkeeper stattdessen Hä? Wie bitte? Die Schwelle und der Text stehen im Seed unter fallback und lassen sich ändern. Unten noch einmal der Kontrast: Vor dem Lernen kannte das Netz kein nicht und antwortete mit bier, nach dem Lernen mit wein. Die nächste Folie fasst den ganzen Weg von Text bis Antwort zusammen.", "Das ist der ganze Vorwärtsweg in fünf Schritten. Die blauen Zeilen zeigen, welche Werte von Schritt zu Schritt weitergegeben werden, hier am Beispiel \"kein bier\" im Zustand vor dem Lernen. Das Netz kennt \"kein\" noch nicht, ignoriert es und sieht nur \"bier\" mit [start]. Es antwortet mit 99.9 Prozent bier und liegt damit falsch. Die Rechenschritte sind nach dem Lernen genau dieselben, es ändern sich nur die Gewichte. Die Zahlen stammen aus einem Modell, das ohne die kein-Beispiele trainiert wurde. Die rechte Spalte erklärt jeden Schritt in einfachen Worten. Der wichtigste Schritt ist Schritt 2: Ein Konzept ist keine fest programmierte Regel, sondern eine Art Ja/Nein-Frage an den Satz, zum Beispiel \"kommt kein zusammen mit bier vor?\". Das Netz kennt die Frage nicht in Worten, es hat nur Zahlen, die bei genau dieser Wortkombination stark ausschlagen. Welche Fragen sich lohnen, entscheidet das Training. Mit tanh werden die Werte der Konzepte auf −1 bis +1 gedrückt: nahe +1 heißt \"ja\", nahe −1 \"nein\", um 0 \"unentschieden\". Das ist auch der Grund, warum es tanh braucht: Ohne diese Biegung wäre Schicht 2 mal Schicht 1 mathematisch nur eine einzige Matrix, und das Netz könnte keine Kombinationen wie \"kein\" plus \"bier\" lernen (siehe Folien 22 bis 24). Das Ergebnis von tanh heißt h, das ist der Wert, der in Schritt 3 weiterverwendet wird. Ein konkretes Beispiel mit tanh(+1.96) = +0.96 sieht man auf Folie 5. W1, W2, b1 und b2 sind die Gewichte, also die Zahlen, die beim Training gelernt werden.", "Teil 2 erklärt das Lernen: Beispiele beibringen, das Netz trainieren, die Lernformel und die Schuldverteilung per Backpropagation. Am Ende stehen die Gewichte, die Teil 1 benutzt hat.", "So wird aus einem Satz ein gelernter Zusammenhang. Der Gast tippt in der Konsole \"kein bier = wein\". Das Beispiel wird in der Tabelle examples gespeichert. Weil \"kein\" im Vokabular noch fehlt, entsteht eine neue Spalte in W1. Dann wird das gesamte Netz neu trainiert: aus dem Zufallsstart, mit allen gespeicherten Beispielen, 1500 Runden. Es wird also nicht nur das Wort \"kein\" geändert, sondern alle Gewichte werden neu berechnet. Wie genau die Gewichte dabei geschoben werden, zeigen die Folien zu Backpropagation. Wichtig: Das Netz bekommt keine Regel \"kein dreht die Antwort um\". Es findet Gewichte, die für die Beispiele funktionieren. Deshalb braucht es mehrere Beispiele, in unserem Modell sind es 14 mit \"kein\", damit auch ähnliche Sätze wie \"kein wein\" oder \"bitte kein bier\" richtig laufen. Die Zahlen unten stammen aus einem Modell mit diesen 14 Beispielen im Vergleich zu einem Modell ganz ohne sie.", "Hier ist der Unterschied zwischen Lehren und Fragen. Beim Lehren wird das ganze Modell von Grund auf neu trainiert, mit denselben zufälligen Startwerten und allen Beispielen. Deshalb sind die Konzepte nach dem Lernen nicht die alten mit einer Korrektur, sondern ein neuer Satz Ja/Nein-Fragen. Beim Fragen werden nur die gespeicherten Gewichte geladen und einmal vorwärts gerechnet, das dauert Millisekunden, und die Konzepte gibt es nur als Zwischenergebnis h. Wenn man etwa kein wein gleich bier lehrt, muss das Netz zwischen kein bier und kein wein unterscheiden. Dafür braucht es Konzepte, die kein mit dem jeweiligen Getränk kombinieren, und genau das leistet tanh in Schicht 1. Ob es klappt, hängt davon ab, wie viele ähnliche Beispiele es gibt: Ein einzelnes Beispiel gegen vierzehn gegenläufige kann sich schwer durchsetzen. Die Alternative, nur ein paar Schritte mit dem neuen Beispiel zu trainieren, wäre schneller, aber das Netz würde Altes vergessen (catastrophic forgetting).", "Die Gewichte werden nicht berechnet, sondern schrittweise gelernt. Am Anfang sind sie zufällig. In jeder der 1500 Runden raten wir, messen den Fehler, verteilen die Schuld rückwärts und schieben jedes Gewicht ein kleines Stück in die Richtung, die den Fehler verkleinert. Das ist Gradientenabstieg, derselbe Mechanismus wie beim Training großer Modelle.", "Das ist die eine Formel, nach der jedes einzelne Gewicht im Netz lernt, auch jeder Bias. Sie hat drei Zutaten. Der Fehler sagt, wie falsch die Antwort war: positiv heißt zu stark, negativ zu schwach. Der Eingang sagt, ob das Wort überhaupt im Satz war: Nur dann kann sein Gewicht schuld sein, sonst ist der Eingang 0 und das Gewicht bleibt, wie es ist. Beim Bias ist der Eingang immer 1, er lernt also bei jedem Beispiel mit. Die Lernrate bestimmt die Schrittgröße. Rechts ein winziges Beispiel mit einer einzigen Matrix: Alle Gewichte starten bei 0, das Netz sagt also 50 zu 50. Wein ist um 0.5 zu schwach, der Fehler ist minus 0.5. Minus Lernrate mal minus 0.5 mal 1 ergibt plus 0.25, das Gewicht steigt. Runde für Runde wird wein wahrscheinlicher, der Fehler kleiner und damit auch der Schritt: Das Lernen bremst sich selbst, wenn es sich dem Ziel nähert. Wichtig: Dieser eine Satz schiebt auch das Wort bier Richtung wein. Erst das Beispiel bier gleich bier schiebt es wieder zurück. Deshalb braucht man viele verschiedene Beispiele, und deshalb wird über alle Beispiele gemittelt. Zur Abgrenzung: Gewichte und Bias sind das Gelernte, diese Formel ist das Lernen. Im echten Barkeeper kommt noch Momentum dazu, und bei zwei Schichten wird der Fehler für Schicht 1 erst per Backpropagation berechnet, das zeigen die nächsten Folien.", "Das sind echte Zahlen aus dem Training des Barkeepers, Seed 0, 230 Beispiele. Runde 0 ist der Start mit Zufallsgewichten: Das Netz rät, der Verlust ist hoch, und von „kein bier“ sagt es mit 21 Prozent wie geht es dir. Schon nach 10 Runden stimmt gut die Hälfte der Beispiele, und kein bier geht Richtung wein. Nach 100 Runden stimmen alle 230 Trainingsbeispiele, danach sinkt der Verlust nur noch langsam: Das Netz wird sicherer, aber nicht mehr richtiger. Wichtig: Die Trefferquote gilt für die Trainingsbeispiele. Wie gut das Netz bei neuen Sätzen ist, zeigt der Befehl vergleich. Der Verlust ist der Durchschnitt von minus Logarithmus der Wahrscheinlichkeit, die das Netz der richtigen Antwort gegeben hat. Die Schleife aus der Folie davor, jede Runde mit der Lernformel, hat dieses Ergebnis erzeugt.", "Backpropagation heißt Rückwärts-Weitergabe des Fehlers. Beim Raten läuft die Rechnung vorwärts von den Wörtern über die Konzepte zur Antwort. Beim Lernen läuft die Schuld den umgekehrten Weg. Zuerst wird der Fehler am Ausgang gemessen: Vermutung minus richtige Antwort, das ist D2. Dann wird er durch W2 zurück zu den Konzepten gereicht: Jedes Konzept bekommt den Teil der Schuld, den es über seine Gewichte zur falschen Antwort beigetragen hat. Der Faktor 1 minus h hoch 2 ist die Steigung von tanh, ein Konzept, das schon fast bei plus oder minus 1 klebt, ändert sich kaum. Daraus ergibt sich die Schuld jedes Gewichts in W1 und W2, die nächste Folie zeigt, welche Gewichte sich dabei konkret ändern. Dieser Mechanismus ist in großen Sprachmodellen derselbe.", "Ein winziges Beispiel mit drei Antworten und zwei Konzepten. Das Netz rät wein mit 61 Prozent, richtig wäre bier. Schritt 1: D2 ist Vermutung minus richtige Antwort. Bier ist mit minus 0.74 viel zu schwach, wein mit plus 0.61 viel zu stark. Schritt 2: Der Fehler jeder Antwort wird mit dem Gewicht W2 des Konzepts multipliziert und aufaddiert. Konzept 0 stimmt mit Gewicht 1.5 stark für wein und bekommt deshalb viel Schuld, plus 0.56. Schritt 3: Der Faktor 1 minus h hoch 2 ist die Steigung von tanh. Konzept 0 hat die Aktivierung 0.9 und sitzt fast am Anschlag, der Faktor ist nur 0.19. Konzept 1 liegt mit minus 0.5 in der Mitte, der Faktor ist 0.75. Am Ende haben beide Konzepte die gleiche Schuld, 0.11. Daraus werden dann die Änderungen der Gewichte berechnet.", "Das ist die Antwort auf die Frage, wie der Fehler die richtige Stelle in der Matrix findet. Jedes Gewicht hat eine Adresse aus Ausgang und Eingang. Es ändert sich nur, wenn der Fehler an seinem Ausgang ankommt und sein Eingang aktiv war. Bei Wörtern, die im Satz nicht vorkommen, ist der Eingang 0, also bleibt das Gewicht unberührt. Der Schritt ergibt sich aus 0.9 mal dem alten Schritt minus 0.5 mal dem Gradienten: Runde 1 gibt 0.35, Runde 2 gibt 0.9 mal 0.35 plus 0.25, also 0.565. In Wirklichkeit wird der Gradient über alle 230 Beispiele gemittelt, hier zur Veranschaulichung nur ein Beispiel.", "Teil 3 ist die Einordnung: Warum es zwei Schichten braucht, was das kleine Netz kann und wo der Unterschied zu einem großen Sprachmodell liegt.", "Das ist der Grund für die versteckte Schicht. Ohne sie kann das Netz Kombinationen wie \"kein\" plus \"bier\" nicht sauber abbilden. Die großen Zahlen sind der aussagekräftige Test: zwölf Sätze, die in keinem Trainingsbeispiel vorkamen, zum Beispiel \"kein bier bitte\" oder \"ich will wein\". Die Matrix erkennt acht davon, zwei Schichten alle zwölf. Die kleinen Zahlen darunter sind nur die Trainingsbeispiele: Dort liegt die Matrix bei 223 von 230, zwei Schichten bei 230 von 230. Das zeigt nur, wie gut das Netz die Beispiele abbilden kann. Ob es auch bei neuen Sätzen funktioniert, zeigt erst der Test. Alle Zahlen stammen aus dem Befehl vergleich im aktuellen Modell und ändern sich mit den Daten. Die Testsätze sind im Code festgelegt, es sind nur zwölf, die Zahl ist also ein Hinweis und kein Beweis.", "Ein Mini-Netz mit nur zwei Konzepten, die Zahlen sind von Hand gewählt, damit man jeden Schritt nachrechnen kann. Die Situation: Der Barkeeper fragt \"Bier oder Wein?\". Weil es nur zwei Möglichkeiten gibt, bedeutet \"kein Bier\" Wein und \"kein Wein\" Bier. Das Netz kennt diese Frage nicht, das Wissen steckt nur in den vier Beispielen. Das Wort bier braucht kein eigenes Gewicht: Steht wein nicht im Satz, war es Bier. Jetzt die Bedeutung der Zahlen. Jedes Wort bringt 3 Punkte, möglich sind also 0, 3 oder 6. Der Bias ist eine Hürde, die abgezogen wird. tanh schaut danach nur noch, ob der Rest positiv ist, dann ist das Konzept an, oder negativ, dann ist es aus. Konzept c0 hat die Hürde 1.5, ein Wort reicht schon darüber: c0 heißt \"wein oder kein\". Konzept c1 hat die Hürde 4.5, erst beide Wörter zusammen schaffen das: c1 heißt \"wein und kein\". Gleiche Gewichte, nur eine andere Hürde, und aus einem ODER wird ein UND. Die Hürden liegen genau in der Mitte zwischen den Punktzahlen, damit jeder Satz klar an oder aus ist. Die Gewichte 3 sind groß genug, damit tanh nahe an plus oder minus 1 kommt. Schicht 2 rechnet dann wein-Punkte gleich 2 mal c0 minus 2 mal c1, also ODER, aber nicht UND. Das heißt in der Fachsprache XOR, das klassische Beispiel, das eine einzelne Matrix nicht lernen kann. Im echten Barkeeper wählt niemand diese Zahlen, das Training findet Gewichte und Hürden selbst. Die Gewichte in der Größenordnung 3 bis 4 aus dem Log, etwa bier plus 3.9, sind die Gegenstücke zu diesen 3ern.", "Dasselbe Mini-Netz wie auf der vorigen Folie, einmal mit und einmal ohne tanh. Links mit tanh: Alle vier Sätze sind richtig. Rechts ohne tanh gehen die rohen Summen direkt in Schicht 2. Dann bekommt jeder Satz genau 6 wein-Punkte, und der Barkeeper sagt immer wein. Die Rechnung darunter zeigt den Grund: Die Anteile der Wörter heben sich exakt auf, übrig bleibt nur der Unterschied der beiden Hürden. Das ist kein Pech mit den Zahlen, das gilt für alle Gewichte: Ohne die Biegung lassen sich zwei Matrizen zu einer einzigen zusammenrechnen, und eine Matrix kann nur Stimmen addieren. tanh knickt die Summe: Ab etwa plus oder minus 2 ist das Konzept praktisch voll an oder voll aus. Aus der Summe wird ein Schalter, und Schalter lassen sich zu UND und ODER kombinieren. Ein zweiter Vorteil: Die Werte bleiben zwischen minus 1 und plus 1, auch bei sehr langen Sätzen. \"kein kein kein wein wein wein\" hätte ohne tanh die Summe 16.5 und würde alles übertönen, mit tanh bleibt es bei 1.00. Große LLMs verwenden statt tanh meist GELU oder ReLU, die Aufgabe ist dieselbe.", "Unser Barkeeper ist ein Klassifikator: Er ordnet einen Satz einer von 34 festen Antworten zu und kennt keine Wortreihenfolge. Ein Sprachmodell beantwortet eine andere Frage, nämlich welches Wort als Nächstes kommt, und erzeugt Text Wort für Wort. Das Prinzip lässt sich übertragen: Man könnte unser Netz umbauen, indem man die Ausgabeschicht auf alle bekannten Wörter legt und es darauf trainiert, aus den vorigen Wörtern das nächste vorherzusagen. Der Vorteil: Dafür braucht man keine von Hand beschrifteten Beispiele, der Text selbst liefert die richtige Antwort. Mit 230 Beispielen wäre das Ergebnis aber kaum brauchbar, echte Sprachmodelle brauchen Milliarden Gewichte und Billionen Wörter.", "Der wichtigste Unterschied neben der Größe ist die Eingabe. Im Barkeeper ist jedes Wort eine eigene Spalte ohne Beziehung zu den anderen. Ein LLM lernt Embeddings: Wörter mit ähnlicher Verwendung, etwa \"kein\" und \"no\", bekommen ähnliche Vektoren, und alles, was über das eine Wort gelernt wurde, gilt auch für das andere. Außerdem sagt ein LLM das nächste Wort voraus, statt eine feste Antwort aus 34 zu wählen. Die Lernmechanik ist aber dieselbe wie in diesem Vortrag.", "Zum Schluss ein Hinweis zum Ausprobieren. Wer die Zahlen selbst verfolgen will, startet das Mini-Modell mit nur vier Konzepten und lässt sich nach jedem beigebrachten Satz die Matrix mit show_matrix.py anzeigen. In der Konsole zeigt das Entscheidungs-Log unter jeder Antwort die ganze Rechnung dieser Präsentation mit den echten Zahlen."];
 const secs = Array.from(document.querySelectorAll('#canvas section'));
 const stage = document.getElementById('stage'), canvas = document.getElementById('canvas');
 let cur = 0;

@@ -3,18 +3,18 @@
 <h2 style="font-family:'Domine', Georgia, serif;font-size:64px;font-weight:600;line-height:1.1">Woher kommen die Konzepte?</h2>
 <div style="display:flex;gap:32px">
 <div style="flex:1;display:flex;flex-direction:column;gap:14px;background:#FFFDF8;padding:28px;border:1px solid #DDD3C0;border-radius:16px">
-<p style="font-size:36px;font-weight:700;color:#9A5F0B">Start: Zufall</p>
-<p style="font-size:30px;line-height:1.35;color:#5B5348">Jedes Konzept ist eine Zeile in W1 und beginnt mit anderen Zufallszahlen. Würden alle mit demselben Wert starten (zum Beispiel 0), bekäme jedes Konzept im Training exakt dieselbe Schuld und dieselben Änderungen. Alle blieben für immer gleich, 24 Konzepte wären nur eines. Erst der zufällige Start macht sie verschieden.</p>
+<p style="font-size:32px;font-weight:700;color:#9A5F0B">Start: Zufall</p>
+<p style="font-size:26px;line-height:1.3;color:#5B5348">W1 ist die Gewichtstabelle von Schicht 1: 24 Zeilen (Konzepte) × 141 Spalten (Wörter). Jedes Konzept ist eine Zeile darin, eine Zahl pro Wort, und beginnt mit anderen Zufallszahlen. Würden alle mit demselben Wert starten (zum Beispiel 0), bekäme jedes Konzept im Training exakt dieselbe Schuld und dieselben Änderungen. Alle blieben für immer gleich, 24 Konzepte wären nur eines. Erst der zufällige Start macht sie verschieden.</p>
 </div>
 <div style="flex:1;display:flex;flex-direction:column;gap:14px;background:#FFFDF8;padding:28px;border:1px solid #DDD3C0;border-radius:16px">
-<p style="font-size:36px;font-weight:700;color:#9A5F0B">Training formt sie</p>
-<p style="font-size:30px;line-height:1.35;color:#5B5348">Die Beispiele schieben die Zeilen. Es entstehen Spezialisten, zum Beispiel für „kein“ + „bier“.</p>
+<p style="font-size:32px;font-weight:700;color:#9A5F0B">Training formt sie</p>
+<p style="font-size:26px;line-height:1.3;color:#5B5348">Die Beispiele schieben die Zeilen. Es entstehen Spezialisten, zum Beispiel für „kein“ + „bier“.</p>
 </div>
 <div style="flex:1;display:flex;flex-direction:column;gap:14px;background:#FFFDF8;padding:28px;border:1px solid #DDD3C0;border-radius:16px">
-<p style="font-size:36px;font-weight:700;color:#9A5F0B">Namen sind Deutung</p>
-<p style="font-size:30px;line-height:1.35;color:#5B5348">Das Netz kennt nur „Konzept 15“. Die Bedeutung lesen wir aus den treibenden Wörtern ab.</p>
+<p style="font-size:32px;font-weight:700;color:#9A5F0B">Namen sind Deutung</p>
+<p style="font-size:26px;line-height:1.3;color:#5B5348">Das Netz kennt nur „Konzept 15“. Die Bedeutung lesen wir aus den treibenden Wörtern ab.</p>
 </div>
 </div>
-<p style="font-size:34px;line-height:1.4">Die Anzahl der Konzepte bestimmt die Feinabstufung der Entscheidungen: zu wenige sind zu grob, zu viele lernen die Beispiele auswendig.</p>
-<aside>Niemand programmiert die Konzepte. Wir legen nur fest, wie viele es gibt, bei uns 24, und die Rechenform tanh. Alles andere entsteht im Training. Man kann sich jedes Konzept als weiche Ja-Nein-Frage an den Satz vorstellen. Mit n Konzepten kann das Netz bis zu 2 hoch n verschiedene Kombinationen unterscheiden. Zum Zufall: Wenn alle Konzepte gleich starten, sehen sie dieselben Eingaben und bekommen dieselbe Schuld. Sie ändern sich dann immer gleich und bleiben identische Kopien. Der Zufall bricht diese Symmetrie, jedes Konzept startet an einer anderen Stelle und wird dadurch zu einem anderen Spezialisten. Bei uns: np.random.seed(0), Zufallszahlen mal 0.5. Das passiert in echten LLMs genauso, dort nur mit Milliarden Gewichten.</aside>
+<p style="font-size:30px;line-height:1.35">Die Anzahl der Konzepte bestimmt die Feinabstufung der Entscheidungen: zu wenige sind zu grob, zu viele lernen die Beispiele auswendig.</p>
+<aside>W1 ist die Gewichtstabelle von Schicht 1 mit 24 Zeilen und 141 Spalten, also 3.384 Zahlen. Eine Zeile gehört zu einem Konzept und enthält für jedes Wort ein Gewicht. Niemand programmiert die Konzepte. Wir legen nur fest, wie viele es gibt, bei uns 24, und die Rechenform tanh. Alles andere entsteht im Training. Man kann sich jedes Konzept als weiche Ja-Nein-Frage an den Satz vorstellen. Mit n Konzepten kann das Netz bis zu 2 hoch n verschiedene Kombinationen unterscheiden. Zum Zufall: Wenn alle Konzepte gleich starten, sehen sie dieselben Eingaben und bekommen dieselbe Schuld. Sie ändern sich dann immer gleich und bleiben identische Kopien. Der Zufall bricht diese Symmetrie, jedes Konzept startet an einer anderen Stelle und wird dadurch zu einem anderen Spezialisten. Bei uns: np.random.seed(0), Zufallszahlen mal 0.5. Das passiert in echten LLMs genauso, dort nur mit Milliarden Gewichten.</aside>
 </section>

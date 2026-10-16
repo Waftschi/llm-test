@@ -1,0 +1,33 @@
+<section id="tanhproof" data-transition="fade" style="background:#F6F1E7;color:#1E1B18;font-family:'DM Sans', Arial, sans-serif;padding:80px 128px 100px;display:flex;flex-direction:column;gap:20px">
+<p style="font-size:24px;color:#9A5F0B;letter-spacing:2px;text-transform:uppercase">Einordnung – Mini-Beispiel</p>
+<h2 style="font-family:'Domine', Georgia, serif;font-size:64px;font-weight:600;line-height:1.1">Ohne tanh geht es nicht</h2>
+<div style="display:flex;gap:40px">
+<div style="flex:1;display:flex;flex-direction:column;gap:12px;background:#FFFDF8;border:1px solid #DDD3C0;padding:24px 28px;border-radius:16px">
+<p style="font-size:30px;font-weight:700;color:#9A5F0B">Mit tanh – 4 von 4 richtig</p>
+<table style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px">
+<tr><th style="width:30%">Satz</th><th style="width:16%">c0</th><th style="width:16%">c1</th><th style="width:20%">wein</th><th style="width:18%">→</th></tr>
+<tr><td>bier</td><td>−0.91</td><td>−1.00</td><td>+0.19</td><td>bier ✓</td></tr>
+<tr><td>wein</td><td>+0.91</td><td>−0.91</td><td>+3.62</td><td>wein ✓</td></tr>
+<tr><td>kein bier</td><td>+0.91</td><td>−0.91</td><td>+3.62</td><td>wein ✓</td></tr>
+<tr><td>kein wein</td><td>+1.00</td><td>+0.91</td><td>+0.19</td><td>bier ✓</td></tr>
+</table>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:12px;background:#FFFDF8;border:1px solid #DDD3C0;padding:24px 28px;border-radius:16px">
+<p style="font-size:30px;font-weight:700;color:#1F6F8B">Ohne tanh – 2 von 4 richtig</p>
+<table style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px">
+<tr><th style="width:30%">Satz</th><th style="width:16%">c0</th><th style="width:16%">c1</th><th style="width:20%">wein</th><th style="width:18%">→</th></tr>
+<tr><td>bier</td><td>−1.5</td><td>−4.5</td><td>+6.00</td><td>wein ✗</td></tr>
+<tr><td>wein</td><td>+1.5</td><td>−1.5</td><td>+6.00</td><td>wein ✓</td></tr>
+<tr><td>kein bier</td><td>+1.5</td><td>−1.5</td><td>+6.00</td><td>wein ✓</td></tr>
+<tr><td>kein wein</td><td>+4.5</td><td>+1.5</td><td>+6.00</td><td>wein ✗</td></tr>
+</table>
+</div>
+</div>
+<div style="background:#FFFDF8;border:1px solid #DDD3C0;padding:18px 36px;border-radius:16px;border-left:8px solid #1F6F8B;display:flex;flex-direction:column;gap:8px">
+<p style="font-size:26px;line-height:1.3;color:#5B5348"><b>wein</b> = 1, wenn das Wort im Satz steht, sonst 0. Genauso <b>kein</b>. „3·wein“ heißt: 3 Punkte, wenn wein vorkommt. <b>c0</b> und <b>c1</b> sind die zwei Schalter von Folie 23: c0 = ODER (an ab einem Wort), c1 = UND (an nur mit beiden).</p>
+<p style="font-size:30px;line-height:1.4">2·(3·wein + 3·kein − 1.5) − 2·(3·wein + 3·kein − 4.5) = <b style="color:#1F6F8B">6</b> &nbsp;für jeden Satz</p>
+<p style="font-size:26px;line-height:1.3;color:#5B5348">Die Wortpunkte (3·wein + 3·kein) stehen in beiden Klammern und fallen weg. Übrig: 2·(−1.5) − 2·(−4.5) = −3 + 9 = 6. Dazu: wein-Punkte = 2·c0 − 2·c1, bier-Punkte immer 1. Deshalb gewinnt wein immer.</p>
+</div>
+<p style="font-size:28px;line-height:1.35">Ohne tanh heben sich die Wörter auf: Zwei Schichten sind dann nur eine Matrix. Erst tanh macht aus den Summen <b style="color:#9A5F0B">Schalter</b> (an/aus), und erst Schalter erlauben UND und ODER.</p>
+<aside>Dasselbe Mini-Netz wie auf der vorigen Folie, einmal mit und einmal ohne tanh. Links mit tanh: Alle vier Sätze sind richtig. Rechts ohne tanh gehen die rohen Summen direkt in Schicht 2. Dann bekommt jeder Satz genau 6 wein-Punkte, und der Barkeeper sagt immer wein. Die Rechnung darunter zeigt den Grund: Die Anteile der Wörter heben sich exakt auf, übrig bleibt nur der Unterschied der beiden Hürden. Das ist kein Pech mit den Zahlen, das gilt für alle Gewichte: Ohne die Biegung lassen sich zwei Matrizen zu einer einzigen zusammenrechnen, und eine Matrix kann nur Stimmen addieren. tanh knickt die Summe: Ab etwa plus oder minus 2 ist das Konzept praktisch voll an oder voll aus. Aus der Summe wird ein Schalter, und Schalter lassen sich zu UND und ODER kombinieren. Ein zweiter Vorteil: Die Werte bleiben zwischen minus 1 und plus 1, auch bei sehr langen Sätzen. "kein kein kein wein wein wein" hätte ohne tanh die Summe 16.5 und würde alles übertönen, mit tanh bleibt es bei 1.00. Große LLMs verwenden statt tanh meist GELU oder ReLU, die Aufgabe ist dieselbe.</aside>
+</section>

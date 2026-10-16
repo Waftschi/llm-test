@@ -1,0 +1,41 @@
+<section id="hurdle" data-transition="fade" style="background:#F6F1E7;color:#1E1B18;font-family:'DM Sans', Arial, sans-serif;padding:96px 128px 120px;display:flex;flex-direction:column;gap:24px">
+<p style="font-size:24px;color:#9A5F0B;letter-spacing:2px;text-transform:uppercase">Einordnung – Mini-Beispiel</p>
+<h2 style="font-family:'Domine', Georgia, serif;font-size:64px;font-weight:600;line-height:1.1">Gewicht = Punkte, Bias = Hürde</h2>
+<div style="display:flex;gap:48px">
+<div style="width:560px;display:flex;flex-direction:column;gap:16px;background:#FFFDF8;padding:28px;border:1px solid #DDD3C0;border-radius:16px">
+<p style="font-size:30px;font-weight:700;color:#9A5F0B">Barkeeper: „Bier oder Wein?“</p>
+<table style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:28px">
+<tr style="background:#EAE2D0"><th style="width:55%">Gast</th><th style="width:45%">bekommt</th></tr>
+<tr><td>bier</td><td>bier</td></tr>
+<tr><td>wein</td><td>wein</td></tr>
+<tr><td>kein bier</td><td><b>wein</b></td></tr>
+<tr><td>kein wein</td><td><b>bier</b></td></tr>
+</table>
+<p style="font-size:24px;line-height:1.35;color:#5B5348">Nur zwei Möglichkeiten: „kein“ dreht das genannte Getränk um. Das Netz kennt die Frage nicht, es sieht nur diese vier Beispiele.</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:18px">
+<p style="font-size:28px;line-height:1.35">Jedes der Wörter <b>wein</b> und <b>kein</b> bringt <b>3 Punkte</b>. Der Bias ist die <b>Hürde</b>: Liegt die Summe darüber, ist das Konzept an.</p>
+<div style="display:flex;flex-direction:column;gap:6px;background:#FFFDF8;padding:18px 28px;border:1px solid #DDD3C0;border-radius:16px">
+<div style="display:flex;justify-content:space-between;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:28px"><span>0 Wörter: 0</span><span style="color:#9A5F0B">│1.5│</span><span>1 Wort: 3</span><span style="color:#9A5F0B">│4.5│</span><span>2 Wörter: 6</span></div>
+<p style="font-size:22px;color:#5B5348">Punkte vor der Hürde – die Hürden liegen genau in der Mitte</p>
+</div>
+<div style="display:flex;gap:20px">
+<div style="flex:1;display:flex;flex-direction:column;gap:6px;background:#FFFDF8;padding:18px 24px;border:1px solid #DDD3C0;border-radius:16px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#9A5F0B">c0 = tanh(3·wein + 3·kein − 1.5)</p>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px">−1.5 / +1.5 / +4.5</p>
+<p style="font-size:26px;line-height:1.3">An ab <b>einem</b> Wort: <b>ODER</b></p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:6px;background:#FFFDF8;padding:18px 24px;border:1px solid #DDD3C0;border-radius:16px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#9A5F0B">c1 = tanh(3·wein + 3·kein − 4.5)</p>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px">−4.5 / −1.5 / +1.5</p>
+<p style="font-size:26px;line-height:1.3">An nur mit <b>beiden</b>: <b>UND</b></p>
+</div>
+</div>
+<div style="background:#FFFDF8;border:1px solid #DDD3C0;border-left:8px solid #9A5F0B;padding:16px 28px;border-radius:16px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:28px;color:#9A5F0B">wein-Punkte = 2·c0 − 2·c1;  bier-Punkte = 1</p>
+<p style="font-size:24px;line-height:1.3;color:#5B5348">ODER, aber nicht UND (= XOR): genau so ergibt „kein bier“ wein</p>
+</div>
+</div>
+</div>
+<aside>Ein Mini-Netz mit nur zwei Konzepten, die Zahlen sind von Hand gewählt, damit man jeden Schritt nachrechnen kann. Die Situation: Der Barkeeper fragt "Bier oder Wein?". Weil es nur zwei Möglichkeiten gibt, bedeutet "kein Bier" Wein und "kein Wein" Bier. Das Netz kennt diese Frage nicht, das Wissen steckt nur in den vier Beispielen. Das Wort bier braucht kein eigenes Gewicht: Steht wein nicht im Satz, war es Bier. Jetzt die Bedeutung der Zahlen. Jedes Wort bringt 3 Punkte, möglich sind also 0, 3 oder 6. Der Bias ist eine Hürde, die abgezogen wird. tanh schaut danach nur noch, ob der Rest positiv ist, dann ist das Konzept an, oder negativ, dann ist es aus. Konzept c0 hat die Hürde 1.5, ein Wort reicht schon darüber: c0 heißt "wein oder kein". Konzept c1 hat die Hürde 4.5, erst beide Wörter zusammen schaffen das: c1 heißt "wein und kein". Gleiche Gewichte, nur eine andere Hürde, und aus einem ODER wird ein UND. Die Hürden liegen genau in der Mitte zwischen den Punktzahlen, damit jeder Satz klar an oder aus ist. Die Gewichte 3 sind groß genug, damit tanh nahe an plus oder minus 1 kommt. Schicht 2 rechnet dann wein-Punkte gleich 2 mal c0 minus 2 mal c1, also ODER, aber nicht UND. Das heißt in der Fachsprache XOR, das klassische Beispiel, das eine einzelne Matrix nicht lernen kann. Im echten Barkeeper wählt niemand diese Zahlen, das Training findet Gewichte und Hürden selbst. Die Gewichte in der Größenordnung 3 bis 4 aus dem Log, etwa bier plus 3.9, sind die Gegenstücke zu diesen 3ern.</aside>
+</section>

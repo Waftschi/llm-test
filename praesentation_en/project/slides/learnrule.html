@@ -1,0 +1,36 @@
+<section id="learnrule" data-transition="fade" style="background:#F6F1E7;color:#1E1B18;font-family:'DM Sans', Arial, sans-serif;padding:96px 128px 120px;display:flex;flex-direction:column;gap:28px">
+<p style="font-size:24px;color:#9A5F0B;letter-spacing:2px;text-transform:uppercase">Learning</p>
+<h2 style="font-family:'Domine', Georgia, serif;font-size:64px;font-weight:600;line-height:1.1">The learning rule: how one weight moves</h2>
+<div style="background:#FFFDF8;border:1px solid #DDD3C0;padding:24px 36px;border-radius:16px;border-left:8px solid #9A5F0B">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:38px;color:#9A5F0B">new weight = old weight − learning rate × error × input</p>
+</div>
+<div style="display:flex;gap:48px">
+<div style="width:600px;display:flex;flex-direction:column;gap:16px">
+<div style="display:flex;flex-direction:column;gap:4px;background:#FFFDF8;border:1px solid #DDD3C0;padding:18px 24px;border-radius:14px">
+<p style="font-size:30px;font-weight:700;color:#9A5F0B">Error</p>
+<p style="font-size:26px;line-height:1.3">P − Y: how wrong was the answer? <b>P</b> = the network’s guess (0 to 1), <b>Y</b> = the right answer (1 = right, 0 = wrong). Positive = too strong, negative = too weak.</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:4px;background:#FFFDF8;border:1px solid #DDD3C0;padding:18px 24px;border-radius:14px">
+<p style="font-size:30px;font-weight:700;color:#9A5F0B">Input</p>
+<p style="font-size:26px;line-height:1.3">Was the word in the sentence? 1 = correct it, 0 = the weight stays. For the bias the input is always 1.</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:4px;background:#FFFDF8;border:1px solid #DDD3C0;padding:18px 24px;border-radius:14px">
+<p style="font-size:30px;font-weight:700;color:#9A5F0B">Learning rate</p>
+<p style="font-size:26px;line-height:1.3">Step size, here 0.5. Many small steps rather than one big jump.</p>
+</div>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:16px">
+<p style="font-size:26px;color:#5B5348">Mini example: “kein bier” should give wein. One matrix, starting at 0, no momentum.</p>
+<table style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:28px">
+<tr style="background:#EAE2D0"><th style="width:14%">Round</th><th style="width:30%">Weight kein→wein</th><th style="width:18%">P(wein)</th><th style="width:18%">Error</th><th style="width:20%">Step</th></tr>
+<tr><td>1</td><td>0.00</td><td>50 %</td><td style="color:#1F6F8B">−0.50</td><td style="color:#9A5F0B">+0.25</td></tr>
+<tr><td>2</td><td>+0.25</td><td>73 %</td><td style="color:#1F6F8B">−0.27</td><td style="color:#9A5F0B">+0.13</td></tr>
+<tr><td>3</td><td>+0.38</td><td>82 %</td><td style="color:#1F6F8B">−0.18</td><td style="color:#9A5F0B">+0.09</td></tr>
+<tr><td>4</td><td>+0.47</td><td>87 %</td><td style="color:#1F6F8B">−0.13</td><td style="color:#9A5F0B">+0.07</td></tr>
+</table>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px;color:#5B5348">Round 1: 0 − 0.5 × (−0.50) × 1 = +0.25</p>
+<p style="font-size:28px;line-height:1.35"><b>Minus times minus:</b> wein was too weak, so its weight goes up. The closer to the goal, the smaller the error and the smaller the step.</p>
+</div>
+</div>
+<aside>This is the one rule by which every single weight in the network learns, and every bias too. It has three ingredients. The error says how wrong the answer was: positive means too strong, negative too weak. The input says whether the word was in the sentence at all: only then can its weight be to blame, otherwise the input is 0 and the weight stays as it is. For the bias the input is always 1, so it learns along with every example. The learning rate sets the step size. On the right is a tiny example with a single matrix: all weights start at 0, so the network says 50 to 50. Wein is 0.5 too weak, the error is minus 0.5. Minus the learning rate times minus 0.5 times 1 gives plus 0.25, so the weight goes up. Round by round wein becomes more likely, the error gets smaller and so does the step: learning slows itself down as it approaches the goal. Important: this one sentence also pushes the word bier towards wein. Only the example bier equals bier pushes it back. That is why we need many different examples, and why the steps are averaged over all of them. To keep the terms apart: weights and biases are what is learned, this rule is the learning. The real barkeeper adds momentum, and with two layers the error for layer 1 first has to be computed by backpropagation, which the next slides show.</aside>
+</section>

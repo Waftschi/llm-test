@@ -1,0 +1,36 @@
+<section id="learnrule" data-transition="fade" style="background:#F6F1E7;color:#1E1B18;font-family:'DM Sans', Arial, sans-serif;padding:96px 128px 120px;display:flex;flex-direction:column;gap:28px">
+<p style="font-size:24px;color:#9A5F0B;letter-spacing:2px;text-transform:uppercase">Lernen</p>
+<h2 style="font-family:'Domine', Georgia, serif;font-size:64px;font-weight:600;line-height:1.1">Die Lernformel: wie ein Gewicht verschoben wird</h2>
+<div style="background:#FFFDF8;border:1px solid #DDD3C0;padding:24px 36px;border-radius:16px;border-left:8px solid #9A5F0B">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:38px;color:#9A5F0B">neues Gewicht = altes Gewicht − Lernrate × Fehler × Eingang</p>
+</div>
+<div style="display:flex;gap:48px">
+<div style="width:600px;display:flex;flex-direction:column;gap:16px">
+<div style="display:flex;flex-direction:column;gap:4px;background:#FFFDF8;border:1px solid #DDD3C0;padding:18px 24px;border-radius:14px">
+<p style="font-size:30px;font-weight:700;color:#9A5F0B">Fehler</p>
+<p style="font-size:26px;line-height:1.3">P − Y: Wie falsch lag die Antwort? <b>P</b> = Vermutung des Netzes (0 bis 1), <b>Y</b> = richtige Antwort (1 = richtig, 0 = falsch). Positiv = zu stark, negativ = zu schwach.</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:4px;background:#FFFDF8;border:1px solid #DDD3C0;padding:18px 24px;border-radius:14px">
+<p style="font-size:30px;font-weight:700;color:#9A5F0B">Eingang</p>
+<p style="font-size:26px;line-height:1.3">War das Wort im Satz? 1 = korrigieren, 0 = Gewicht bleibt. Beim Bias ist der Eingang immer 1.</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:4px;background:#FFFDF8;border:1px solid #DDD3C0;padding:18px 24px;border-radius:14px">
+<p style="font-size:30px;font-weight:700;color:#9A5F0B">Lernrate</p>
+<p style="font-size:26px;line-height:1.3">Schrittgröße, hier 0.5. Lieber viele kleine Schritte als ein großer Sprung.</p>
+</div>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:16px">
+<p style="font-size:26px;color:#5B5348">Mini-Beispiel: „kein bier“ soll wein ergeben. Eine Matrix, Start bei 0, ohne Momentum.</p>
+<table style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:28px">
+<tr style="background:#EAE2D0"><th style="width:14%">Runde</th><th style="width:30%">Gewicht kein→wein</th><th style="width:18%">P(wein)</th><th style="width:18%">Fehler</th><th style="width:20%">Schritt</th></tr>
+<tr><td>1</td><td>0.00</td><td>50 %</td><td style="color:#1F6F8B">−0.50</td><td style="color:#9A5F0B">+0.25</td></tr>
+<tr><td>2</td><td>+0.25</td><td>73 %</td><td style="color:#1F6F8B">−0.27</td><td style="color:#9A5F0B">+0.13</td></tr>
+<tr><td>3</td><td>+0.38</td><td>82 %</td><td style="color:#1F6F8B">−0.18</td><td style="color:#9A5F0B">+0.09</td></tr>
+<tr><td>4</td><td>+0.47</td><td>87 %</td><td style="color:#1F6F8B">−0.13</td><td style="color:#9A5F0B">+0.07</td></tr>
+</table>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px;color:#5B5348">Runde 1: 0 − 0.5 × (−0.50) × 1 = +0.25</p>
+<p style="font-size:28px;line-height:1.35"><b>Minus mal minus:</b> wein war zu schwach, also steigt sein Gewicht. Je näher am Ziel, desto kleiner der Fehler und desto kleiner der Schritt.</p>
+</div>
+</div>
+<aside>Das ist die eine Formel, nach der jedes einzelne Gewicht im Netz lernt, auch jeder Bias. Sie hat drei Zutaten. Der Fehler sagt, wie falsch die Antwort war: positiv heißt zu stark, negativ zu schwach. Der Eingang sagt, ob das Wort überhaupt im Satz war: Nur dann kann sein Gewicht schuld sein, sonst ist der Eingang 0 und das Gewicht bleibt, wie es ist. Beim Bias ist der Eingang immer 1, er lernt also bei jedem Beispiel mit. Die Lernrate bestimmt die Schrittgröße. Rechts ein winziges Beispiel mit einer einzigen Matrix: Alle Gewichte starten bei 0, das Netz sagt also 50 zu 50. Wein ist um 0.5 zu schwach, der Fehler ist minus 0.5. Minus Lernrate mal minus 0.5 mal 1 ergibt plus 0.25, das Gewicht steigt. Runde für Runde wird wein wahrscheinlicher, der Fehler kleiner und damit auch der Schritt: Das Lernen bremst sich selbst, wenn es sich dem Ziel nähert. Wichtig: Dieser eine Satz schiebt auch das Wort bier Richtung wein. Erst das Beispiel bier gleich bier schiebt es wieder zurück. Deshalb braucht man viele verschiedene Beispiele, und deshalb wird über alle Beispiele gemittelt. Zur Abgrenzung: Gewichte und Bias sind das Gelernte, diese Formel ist das Lernen. Im echten Barkeeper kommt noch Momentum dazu, und bei zwei Schichten wird der Fehler für Schicht 1 erst per Backpropagation berechnet, das zeigen die nächsten Folien.</aside>
+</section>

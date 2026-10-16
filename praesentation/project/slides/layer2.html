@@ -1,17 +1,17 @@
-<section id="layer2" data-transition="fade" style="background:#F6F1E7;color:#1E1B18;font-family:'DM Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:28px">
-<p style="font-size:24px;color:#9A5F0B;letter-spacing:2px;text-transform:uppercase">Schritt 3 · Schicht 2</p>
+<section id="layer2" data-transition="fade" style="background:#F6F1E7;color:#1E1B18;font-family:'DM Sans', Arial, sans-serif;padding:96px 128px 120px;display:flex;flex-direction:column;gap:22px">
+<p style="font-size:24px;color:#9A5F0B;letter-spacing:2px;text-transform:uppercase">Schritt 3 – Schicht 2</p>
 <h2 style="font-family:'Domine', Georgia, serif;font-size:64px;font-weight:600;line-height:1.1">Konzepte stimmen für Antworten</h2>
 <table style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:30px">
-<tr><th style="width:20%">Antwort</th><th style="width:10%">c0</th><th style="width:10%">c2</th><th style="width:10%">c1</th><th style="width:10%">c3</th><th style="width:13%">Σ</th><th style="width:13%">+ Bias</th><th style="width:14%">Punktzahl</th></tr>
-<tr style="background:#EAE2D0"><td>Aktivierung</td><td>+1.00</td><td>+0.91</td><td>−0.61</td><td>+0.42</td><td></td><td></td><td></td></tr>
-<tr><td><b>bier</b></td><td>+4.3</td><td>+3.5</td><td>+1.8</td><td>+0.1</td><td>+9.6</td><td>−1.2</td><td style="color:#9A5F0B"><b>+8.4</b></td></tr>
-<tr><td><b>wein</b></td><td>−2.3</td><td>−2.7</td><td>0.0</td><td>−1.7</td><td>−6.7</td><td>+2.1</td><td style="color:#1F6F8B"><b>−4.6</b></td></tr>
+<tr><th style="width:14%">Antwort</th><th style="width:10%">c11</th><th style="width:10%">c5</th><th style="width:10%">c2</th><th style="width:10%">c15</th><th style="width:12%">20 weitere</th><th style="width:10%">Σ</th><th style="width:10%">+ Bias</th><th style="width:14%">Punktzahl</th></tr>
+<tr style="background:#EAE2D0"><td>Aktivierung h</td><td>+1.00</td><td>+1.00</td><td>−1.00</td><td>+0.96</td><td></td><td></td><td></td><td></td></tr>
+<tr><td><b>wein</b></td><td>+1.03</td><td>+1.49</td><td>+3.31</td><td>−1.31</td><td>+6.72</td><td>+11.24</td><td>+0.11</td><td style="color:#9A5F0B"><b>+11.4</b></td></tr>
+<tr><td><b>bier</b></td><td>+3.36</td><td>+0.90</td><td>−0.81</td><td>+1.65</td><td>+0.78</td><td>+5.87</td><td>+0.60</td><td style="color:#1F6F8B"><b>+6.5</b></td></tr>
 </table>
 <div style="display:flex;flex-direction:column;gap:8px;background:#FFFDF8;padding:24px 32px;border:1px solid #DDD3C0;border-radius:16px">
-<p style="font-size:32px;font-weight:700;color:#9A5F0B">Was sind c0, c1, c2, c3?</p>
-<p style="font-size:28px;line-height:1.35">Konzepte aus Schicht 1: je eine Ja/Nein-Frage an den Satz, +1 heißt ja, −1 heißt nein. Das Netz hat sie selbst gelernt. Gezeigt sind die 4 aktivsten von 24, nach Aktivierung sortiert. Sie haben keine Namen, nur Nummern.</p>
+<p style="font-size:32px;font-weight:700;color:#9A5F0B">Was bedeuten die Zahlen?</p>
+<p style="font-size:26px;line-height:1.3"><b>c11, c5, c2, c15</b> sind vier der 24 Konzepte aus Schicht 1 (c15 kennst du von Folie 5). <b>Aktivierung h</b> ist ihr tanh-Ergebnis für „kein bier“: +1 heißt ja, −1 heißt nein. Die Zahlen darunter sind die <b>Stimmen</b> des Konzepts für die Antwort. „20 weitere“ fasst die übrigen Konzepte zusammen, damit Σ stimmt.</p>
 </div>
-<p style="font-size:34px;line-height:1.4">Stimme = Gewicht W2[Antwort, Konzept] × Aktivierung des Konzepts</p>
-<p style="font-size:30px;line-height:1.4;color:#5B5348">Beispiel c0 → bier: gelerntes Gewicht ≈ +4.3 × Aktivierung +1.00 = Stimme +4.3</p>
-<aside>Die Spalten c0 bis c3 sind Konzepte aus Schicht 1. Ein Konzept ist eine Art Ja-Nein-Frage an den Satz: Nahe +1 wurde sie mit ja beantwortet, nahe -1 mit nein. Welche Fragen es gibt, hat das Netz im Training selbst herausgefunden, deshalb haben sie keine Namen, nur Nummern. Gezeigt sind nur die vier aktivsten von 24 Konzepten. Jedes Konzept stimmt für jede Antwort mit einem eigenen Gewicht. Konzept 0 sagt zum Beispiel "ja, bier" mit +4.3 und "nein, wein" mit -2.3. Wir addieren alle Stimmen, rechnen den Bias dazu und erhalten für jede Antwort eine Punktzahl. Hier gewinnt bier mit +8.4 gegen wein mit -4.6. Die Gewichte sind aus den gerundeten Log-Zahlen zurückgerechnet, die genauen Werte stehen in show_matrix.py.</aside>
+<p style="font-size:32px;line-height:1.3">Stimme = Gewicht W2[Antwort, Konzept] × Aktivierung h des Konzepts</p>
+<p style="font-size:28px;line-height:1.3;color:#5B5348">Beispiel c2 → wein: Gewicht −3.31 × Aktivierung −1.00 = Stimme +3.31 (Minus mal Minus: c2 sagt „nein“, und „nein“ spricht für wein)</p>
+<aside>Das ist die Fortsetzung von Folie 5: Dort hat Konzept 15 den Wert h = +0.96 bekommen. Hier stimmen vier Konzepte für die Antworten wein und bier ab. Die Zeile Aktivierung h zeigt, wie stark jedes Konzept bei kein bier anspringt (+1 ja, −1 nein). Jede Zahl darunter ist eine Stimme: Gewicht W2 mal Aktivierung h. Das Konzept c2 ist zum Beispiel −1.00 (nein) und hat für wein das Gewicht −3.31, also −3.31 mal −1.00 gleich +3.31 für wein. Die Spalte 20 weitere fasst die übrigen Konzepte zusammen, danach ist Σ die Summe aller 24 Stimmen. Dazu kommt der Bias der Antwort, und das Ergebnis ist die Punktzahl s: wein +11.4 gegen bier +6.5. Das sind genau die Zahlen, die Softmax auf Folie 9 in Prozente umrechnet. Alle Zahlen stammen aus dem aktuellen Modell für den Satz kein bier im Kontext wein (kleine Abweichungen durch Rundung).</aside>
 </section>

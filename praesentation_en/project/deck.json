@@ -8,19 +8,29 @@
   "title": "How a neural network learns – with a barkeeper",
   "order": [
     "cover",
+    "part1",
     "example",
-    "pipeline",
     "numbers",
     "layer1",
     "layer2",
+    "concepts",
+    "w2",
     "softmax",
+    "answer",
+    "pipeline",
+    "part2",
     "learnkein",
+    "relearn",
     "training",
+    "learnrule",
+    "learncurve",
     "backprop",
     "backex",
     "address",
-    "concepts",
+    "part3",
     "twolayers",
+    "hurdle",
+    "tanhproof",
     "vslm",
     "vsllm",
     "tryit"
@@ -32,15 +42,15 @@
     },
     "s2": {
       "description": "Forward: how a sentence becomes an answer",
-      "start": "pipeline"
+      "start": "part1"
     },
     "s3": {
       "description": "Learning: how the weights come about",
-      "start": "learnkein"
+      "start": "part2"
     },
     "s4": {
       "description": "Context: why two layers and what an LLM does differently",
-      "start": "twolayers"
+      "start": "part3"
     }
   },
   "faces": {

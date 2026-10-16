@@ -3,17 +3,8 @@
   "createdOnFiles": {"v": 1, "at": "2026-10-11T12:00:00Z"},
   "lists": "css",
   "title": "Wie ein neuronales Netz lernt – am Barkeeper",
-  "order": ["cover", "example", "pipeline", "numbers", "layer1", "layer2", "softmax", "learnkein", "training", "backprop", "backex", "address", "concepts", "twolayers", "vslm", "vsllm", "tryit"],
-  "sections": {
-    "s1": {"description": "Die Aufgabe: ein Barkeeper, der Sätze versteht", "start": "cover"},
-    "s2": {"description": "Vorwärts: wie aus einem Satz eine Antwort wird", "start": "pipeline"},
-    "s3": {"description": "Lernen: wie die Gewichte entstehen", "start": "learnkein"},
-    "s4": {"description": "Einordnung: warum zwei Schichten und was ein LLM anders macht", "start": "twolayers"}
-  },
-  "faces": {
-    "domine": {"family": "Domine", "href": "https://fonts.googleapis.com/css2?family=Domine:wght@500..700&display=swap"},
-    "dm-sans": {"family": "DM Sans", "href": "https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap"},
-    "jetbrains-mono": {"family": "JetBrains Mono", "href": "https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap"}
-  },
+  "order": ["cover", "part1", "example", "numbers", "layer1", "layer2", "concepts", "w2", "softmax", "answer", "pipeline", "part2", "learnkein", "relearn", "training", "learnrule", "learncurve", "backprop", "backex", "address", "part3", "twolayers", "hurdle", "tanhproof", "vslm", "vsllm", "tryit"],
+  "sections": {"s1": {"description": "Die Aufgabe: ein Barkeeper, der Sätze versteht", "start": "cover"}, "s2": {"description": "Vorwärts: wie aus einem Satz eine Antwort wird", "start": "part1"}, "s3": {"description": "Lernen: wie die Gewichte entstehen", "start": "part2"}, "s4": {"description": "Einordnung: warum zwei Schichten und was ein LLM anders macht", "start": "part3"}},
+  "faces": {"domine": {"family": "Domine", "href": "https://fonts.googleapis.com/css2?family=Domine:wght@500..700&display=swap"}, "dm-sans": {"family": "DM Sans", "href": "https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap"}, "jetbrains-mono": {"family": "JetBrains Mono", "href": "https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap"}},
   "designSystems": []
 }
