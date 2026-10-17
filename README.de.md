@@ -44,7 +44,7 @@ Eine Weboberfläche gibt es bewusst noch nicht, siehe "Mögliche Weiterentwicklu
 | Eingabe | Wirkung |
 |---|---|
 | `ein bier`, `kein wein`, `zahlen bitte` | normal bestellen |
-| `noch eins = bier` | direkt beibringen (Kontext = aktueller Kontext) |
+| `noch eins = bier` | direkt beibringen (Kontext = aktueller Kontext). Ein Beispiel pro Zeile, nur ein `=`: `lambrusco = wein` und `kein lambrusco = bier` als zwei getrennte Zeilen eingeben |
 | `[wein] noch eins = wein` | beibringen mit explizitem Kontext |
 | `falsch` | letzte Antwort korrigieren (Liste, Nummer oder neue Antwort wählen) |
 | `skip` | Teach-Frage überspringen |

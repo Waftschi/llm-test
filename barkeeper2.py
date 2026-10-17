@@ -231,11 +231,40 @@ def predict(context, sentence):
 
 context, bill, show, last = "start", 0.0, True, None
 
+def show_blame(ctx, sentence, intent):
+    """Before retraining: how wrong is the current model for this example, and who is to blame?"""
+    feats, x, h, p = predict(ctx, sentence)
+    intents = m["intents"]
+    unknown = [f for f in feats if f not in m["vocab"]]
+    y = np.zeros(len(intents))
+    if intent in intents:
+        y[intents.index(intent)] = 1.0
+    D2 = p - y                                        # error of every answer
+    D1 = (m["W2"].T @ D2) * (1 - h**2)                # blame passed back to the concepts
+    print("    ═══ BLAME (before retraining) ═══")
+    if unknown:
+        print(f"    🆕 new words (get their own column in W1): {', '.join(unknown)}")
+    if intent not in intents:
+        print(f"    🆕 new answer '{intent}' (gets its own row in W2)")
+    print(f"\n    📉 ANSWERS with the most blame: error D2 = P − Y  (+ too strong, − too weak)")
+    for i in np.argsort(-np.abs(D2))[:3]:
+        print(f"    {intents[i]:16s} P = {p[i]:6.1%}   right = {y[i]:.0f}   D2 = {D2[i]:+.2f}  "
+              f"{'too strong' if D2[i] > 0 else 'too weak'}")
+    print(f"\n    🎯 CONCEPTS with the most blame: D1 = (D2 · W2) × (1 − h²)")
+    for k in np.argsort(-np.abs(D1))[:3]:
+        drivers = sorted([(m["W1"][k, j], m["vocab"][j]) for j in np.nonzero(x)[0]],
+                         key=lambda t: -abs(t[0]))[:3]
+        words = "  ".join(f"{w}({v:+.1f})" for v, w in drivers)
+        print(f"    Concept {k:<2d} blame {D1[k]:+.3f}   h = {h[k]:+.2f}   ← {words}")
+    print("    (the weights of the words in this sentence move, a little in each of the 1500 rounds)\n")
+
 def learn(ctx, sentence, intent):
     global examples, m
     for known in list(INTENTS) + m["intents"]:        # reuse known intent spelling
         if known.casefold() == intent.casefold():
             intent = known
+    if show:
+        show_blame(ctx, sentence, intent)
     old = db.execute("DELETE FROM examples WHERE context=? AND sentence=?",
                      (ctx, clean(sentence))).rowcount
     db.execute("INSERT INTO examples (context, sentence, intent) VALUES (?, ?, ?)",
@@ -341,6 +370,9 @@ while True:
             last = (ctx, sentence, intent, act(intent, 1.0))
         continue
 
+    if said.count("=") > 1:                          # two examples in one line would become one wrong answer
+        print("  ⚠️  one example per line, please use only one '=': sentence = answer")
+        print("     e.g. type  lambrusco = wein  and then  kein lambrusco = bier  separately\n"); continue
     if "=" in said:
         left, intent = [s.strip() for s in said.split("=", 1)]
         ctx = context

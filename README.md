@@ -44,7 +44,7 @@ There is deliberately no web interface yet, see "Possible next steps".
 | Input | Effect |
 |---|---|
 | `ein bier`, `kein wein`, `zahlen bitte` | order normally |
-| `noch eins = bier` | teach directly (context = current context) |
+| `noch eins = bier` | teach directly (context = current context). One example per line, only one `=`: type `lambrusco = wein` and `kein lambrusco = bier` as two separate lines |
 | `[wein] noch eins = wein` | teach with an explicit context |
 | `falsch` | correct the last answer (pick from a list, a number, or type a new answer) |
 | `skip` | skip the teaching question |

@@ -60,7 +60,7 @@ Start: `pip3 install -r requirements.txt`, then `python3 barkeeper2.py`.
 **Context matters:** `ein bier` followed directly by `kein bier` (without `reset`) is less sure of wein than
 `kein bier` for a new guest, because the context `[bier]` pulls the other way. A good talking point.
 
-**Teaching:** `noch eins = bier` teaches an example. This retrains the *whole* model from random weights
+**Teaching:** `noch eins = bier` teaches an example (one example per line, only one `=`: `lambrusco = wein` and `kein lambrusco = bier` are two separate inputs). This retrains the *whole* model from random weights
 (a few seconds) and changes `barkeeper2.db`. For a demo use the mini model (`python3 barkeeper2.py simple`) or copy the database first.
 
 ## Key numbers

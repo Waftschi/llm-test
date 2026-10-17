@@ -60,7 +60,7 @@ Start: `pip3 install -r requirements.txt`, dann `python3 barkeeper2.py`.
 **Kontext zählt:** `ein bier` und direkt danach `kein bier` (ohne `reset`) ist sich bei wein weniger sicher als
 `kein bier` bei einem neuen Gast, weil der Kontext `[bier]` in die andere Richtung zieht. Ein guter Gesprächsanlass.
 
-**Beibringen:** `noch eins = bier` lehrt ein Beispiel. Dabei wird das *ganze* Modell mit zufälligen Gewichten neu trainiert
+**Beibringen:** `noch eins = bier` lehrt ein Beispiel (ein Beispiel pro Zeile, nur ein `=`: `lambrusco = wein` und `kein lambrusco = bier` sind zwei getrennte Eingaben). Dabei wird das *ganze* Modell mit zufälligen Gewichten neu trainiert
 (einige Sekunden), und `barkeeper2.db` ändert sich. Für die Demo besser das Mini-Modell nehmen (`python3 barkeeper2.py simple`) oder die Datenbank vorher kopieren.
 
 ## Wichtige Zahlen
