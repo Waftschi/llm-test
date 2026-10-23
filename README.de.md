@@ -15,10 +15,14 @@ English version (default): [README.md](README.md)
 
 | Datei | Zweck |
 |---|---|
-| `barkeeper2.py` | Zwei Schichten (Wörter → Konzepte → Antwort), Konsole |
+| `barkeeper_core.py` | Das Modell: zwei Schichten (Wörter → Konzepte → Antwort), Training, Teachen, Entscheidungs-Log und Blame als Daten. Kein `print`/`input` |
+| `barkeeper2.py` | Konsole auf dem Kern |
+| `server.py` | Web-UI: kleine JSON-API (nur Standardbibliothek), die auch `web/index.html` ausliefert |
+| `web/index.html` | Die Webseite (reines HTML/JS, kein Build): links der Chat, rechts das Innenleben des Netzes |
 | `show_matrix.py` | Zeigt die gelernten Gewichte (Wörter, Konzepte, Antworten, CSV) |
 | `barkeeper_seed.json` | Antworten, Preise, Kontexte, Start-Beispiele und `fallback` (Antwort und Mindest-Sicherheit, wenn nichts verstanden wird) |
-| `barkeeper2.db` | SQLite: Trainingsbeispiele und trainiertes Modell (als JSON). Wird beim ersten Start erzeugt, liegt nicht im Repo |
+| `barkeeper_simple_seed.json`, `barkeeper_simple_en_seed.json` | Mini-Modelle auf Deutsch und Englisch (3 Antworten, 4 Konzepte). Enthalten auch `suggestions`: Beispielsätze als Buttons in der Web-UI und als "Try:" in der Konsole |
+| `barkeeper2.db`, `barkeeper_simple*.db` | SQLite: Trainingsbeispiele und trainiertes Modell (als JSON), eine Datenbank pro Profil. Wird beim ersten Start erzeugt, liegt nicht im Repo |
 | `praesentation/`, `praesentation_en/` | Folien auf Deutsch und Englisch (`build_presentation.py` erzeugt sie) |
 
 Voraussetzung: Python 3 mit `numpy`. Sonst wird nur die Standardbibliothek genutzt.
@@ -29,15 +33,38 @@ pip3 install -r requirements.txt
 
 ## Starten
 
-Konsole:
+### Profile (Sprache und Größe)
+
+| Profil | Modell | Sprache |
+|---|---|---|
+| *(keins)* | großes Modell, 24 Konzepte | Deutsch |
+| `simple` | Mini-Modell, 4 Konzepte (siehe README_SIMPLE.md) | Deutsch |
+| `simple-en` | Mini-Modell, 4 Konzepte | Englisch |
+
+Jedes Profil hat eine eigene Seed-Datei und eine eigene Datenbank, sie vermischen sich nie. Das Profil wird als Argument oder über die Umgebungsvariable `BARKEEPER_PROFILE` angegeben.
+
+### Konsole
 
 ```
-python3 barkeeper2.py            # großes Modell
-python3 barkeeper2.py simple     # Mini-Modell (siehe README_SIMPLE.md)
-python3 show_matrix.py           # gelernte Matrix ansehen
+python3 barkeeper2.py              # großes Modell
+python3 barkeeper2.py simple       # Mini-Modell, Deutsch
+python3 barkeeper2.py simple-en    # Mini-Modell, Englisch
+python3 show_matrix.py             # gelernte Matrix ansehen
 ```
 
-Eine Weboberfläche gibt es bewusst noch nicht, siehe "Mögliche Weiterentwicklung".
+### Web-UI
+
+```
+python3 server.py                  # http://localhost:8000
+python3 server.py simple-en        # Profil als Argument
+python3 server.py simple-en 8080   # und/oder anderer Port
+```
+
+- **Links:** der Chat wie in der Konsole: Beispiel-Buttons, `falsch`, `reset`, `Satz = Antwort`. Versteht der Barkeeper etwas nicht, bietet ein Lehrer-Panel die bekannten Antworten an (oder eine neue eintippen).
+- **Rechts (Tabs):** *Decision* (das Log durch beide Schichten, mit rotem Banner für unbekannte Wörter), *Blame* (beim Teachen), *Parameters* (Größen, Lernrate, Momentum, Runden, Seed, Fallback-Schwelle, Antworten, Vokabular), *Training data* und *1 matrix vs 2 layers*.
+- Gelerntes gilt für alle Browser-Tabs (ein Modell, eine Datenbank). Nur Kontext und Rechnung sind pro Tab getrennt.
+
+Noch nicht in der Web-UI: ein Tab mit den Konzept-Erklärungen aus den Folien.
 
 ## Bedienung
 
@@ -124,22 +151,17 @@ Niemand entwirft sie. Jedes der 24 Konzepte ist eine Zeile in `W1`, die mit Zufa
 
 ## Mögliche Weiterentwicklung
 
-Der Python-Kern läuft heute nur in der Konsole. Das Web-Frontend kommt später darauf:
+Heute: `barkeeper_core.py` (Modell) → Konsole und `server.py` + `web/index.html` (reines JS). Die API bleibt gleich, wenn die Schichten wachsen:
 
 ```
-Angular (Chat-UI, Log-Panel, Dashboard)
+Angular (Chat-UI, Log-Panel, Dashboard)        ← ersetzt web/index.html, wenn die UI für reines JS zu groß wird
    │  REST/JSON
-NestJS (Gateway: Auth, Sessions, Validierung, Rate-Limiting)
+NestJS (Gateway: Auth, Sessions, Validierung, Rate-Limiting)   ← erst bei Login oder öffentlichem Hosting
    │  REST/JSON (nur intern)
-Python-Kern (FastAPI): Modell, Training, Teachen, Erklärung, SQLite
+Python-Kern: barkeeper_core.py + server.py
 ```
 
-Sinnvolle Reihenfolge:
-
-1. Modellcode in ein importierbares `barkeeper_core.py` auslagern (aktuell steckt er noch in `barkeeper2.py` zusammen mit der Konsole).
-2. FastAPI mit Zustand pro Sitzung.
-3. Angular-Oberfläche gegen diese API.
-4. NestJS-Gateway, sobald Login oder öffentliches Hosting nötig sind.
+Ideen: ein Konzepte-Tab mit den Erklärungen aus den Folien, Trainingsdaten in der UI bearbeiten, Sprachumschalter in der UI.
 
 ## Lizenz
 
