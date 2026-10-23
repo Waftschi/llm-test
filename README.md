@@ -55,7 +55,7 @@ If the barkeeper does not understand a sentence ("Hä? Wie bitte?"), it automati
 More commands: `data` (check training data), `vergleich` (one matrix vs. two layers),
 `log` (decision log on/off).
 
-The decision log is printed under every answer and shows the most active concepts, their drivers,
+The decision log is printed under every answer and shows the 4 concepts with the biggest vote for the winning answer, their drivers,
 the votes, the sums, tanh and the softmax calculation.
 
 ## How it works

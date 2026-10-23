@@ -1,6 +1,7 @@
 {
   "info": "Minimaler Start: 3 Antworten, 6 Beispiele, nur 4 Konzepte",
   "hidden": 4,
+  "suggestions": ["hallo", "hi", "ein bier", "wein", "ein weißbier"],
   "fallback": {"reply": "Hä? Wie bitte?", "min_confidence": 0.4},
   "intents": {
     "gruss": {"replies": ["Servus! Was darf's sein?"], "price": 0, "context": null},

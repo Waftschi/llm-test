@@ -1,0 +1,19 @@
+{
+  "info": "Minimal start (English): 3 answers, 6 examples, only 4 concepts",
+  "hidden": 4,
+  "suggestions": ["hello", "hi", "a beer", "wine", "a lager"],
+  "fallback": {"reply": "Huh? Pardon?", "min_confidence": 0.4},
+  "intents": {
+    "greeting": {"replies": ["Hello! What can I get you?"], "price": 0, "context": null},
+    "beer":     {"replies": ["One beer, coming up!"], "price": 4.5, "context": "beer"},
+    "wine":     {"replies": ["A glass of wine, here you go."], "price": 6.0, "context": "wine"}
+  },
+  "examples": [
+    ["start", "hello", "greeting"],
+    ["start", "hi", "greeting"],
+    ["start", "a beer", "beer"],
+    ["start", "beer", "beer"],
+    ["start", "a wine", "wine"],
+    ["start", "wine", "wine"]
+  ]
+}

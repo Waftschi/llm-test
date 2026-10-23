@@ -55,7 +55,7 @@ Versteht der Barkeeper einen Satz nicht ("Hä? Wie bitte?"), fragt er automatisc
 Weitere Befehle: `data` (Trainingsdaten prüfen), `vergleich` (eine Matrix gegen zwei Schichten),
 `log` (Entscheidungs-Log an/aus).
 
-Das Entscheidungs-Log steht unter jeder Antwort und zeigt die aktivsten Konzepte, ihre Treiber,
+Das Entscheidungs-Log steht unter jeder Antwort und zeigt die 4 Konzepte mit der größten Stimme für die gewählte Antwort, ihre Treiber,
 die Stimmen, die Summen, tanh und die Softmax-Rechnung.
 
 ## Wie es funktioniert

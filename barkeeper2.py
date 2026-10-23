@@ -1,284 +1,89 @@
-"""Barkeeper with TWO LAYERS.
+"""Barkeeper with TWO LAYERS (console).
 
 A small intent classifier (seed file, chat commands), the model is
     h = tanh(W1 · x + b1)      layer 1: words + context -> hidden concepts
     p = softmax(W2 · h + b2)   layer 2: concepts -> what the barkeeper does
 so it can learn combinations like "kein bier" (-> not beer!).
 
+The model itself lives in barkeeper_core.py (also used by the web UI, server.py).
 New command:  vergleich   trains the old one-matrix model on the same data and compares.
 """
-import numpy as np
-import sqlite3, random, json, os, sys
+import os, sys
+from barkeeper_core import Barkeeper, Session
 
 # "python3 barkeeper2.py simple" starts a tiny model with its own database
-PROFILE   = os.environ.get("BARKEEPER_PROFILE") or (sys.argv[1] if len(sys.argv) > 1 else "")
-SIMPLE    = PROFILE == "simple"
-DB_FILE   = "barkeeper_simple.db" if SIMPLE else "barkeeper2.db"
-SEED_FILE = "barkeeper_simple_seed.json" if SIMPLE else "barkeeper_seed.json"
-HIDDEN    = 24                             # number of hidden concepts (layer 1 size)
+PROFILE = os.environ.get("BARKEEPER_PROFILE") or (sys.argv[1] if len(sys.argv) > 1 else "")
 
-# ---------- 1. Intents and seed examples ----------
-INTENTS = {
-    "gruss":           (["Servus! Was darf's sein?"], 0, None),
-    "bier":            (["Ein Bier, gern!"], 4.50, "bier"),
-    "wein":            (["Ein Glas Wein, bitte schön."], 6.00, "wein"),
-    "zahlen":          (["Das macht {bill:.2f} €. Danke dir!"], 0, "start"),
-    "nichts_bestellt": (["Du hast doch noch gar nichts bestellt!"], 0, None),
-    "tschuess":        (["Mach's gut, bis bald!"], 0, "start"),
-}
-FALLBACK = {"reply": "Hä? Wie bitte?", "min_confidence": 0.4}   # when nothing is understood (can be set in the seed)
-seed_examples = [
-    ("start", "hallo", "gruss"), ("start", "ein bier bitte", "bier"), ("start", "ein wein", "wein"),
-    ("bier", "noch eins", "bier"), ("start", "noch eins", "nichts_bestellt"),
-    ("bier", "zahlen bitte", "zahlen"), ("start", "zahlen bitte", "nichts_bestellt"),
-    ("start", "tschüss", "tschuess"),
-]
-if os.path.exists(SEED_FILE):
-    seed = json.load(open(SEED_FILE, encoding="utf-8"))
-    INTENTS = {k: (v["replies"], v["price"], v["context"]) for k, v in seed["intents"].items()}
-    seed_examples = [tuple(e) for e in seed["examples"]]
-    HIDDEN = seed.get("hidden", HIDDEN)
-    FALLBACK = {**FALLBACK, **seed.get("fallback", {})}
-
-# Examples that need COMBINATIONS: "kein" flips the meaning of the drink.
-# Our guest drinks only beer or wine, so "kein bier" means wine and vice versa.
-# A single matrix cannot learn these, two layers can.
-KEIN_EXAMPLES = [
-    ("start", "kein bier", "wein"),       ("start", "kein wein", "bier"),
-    ("start", "bitte kein bier", "wein"), ("start", "bitte kein wein", "bier"),
-    ("start", "heute kein bier", "wein"), ("start", "heute kein wein", "bier"),
-    ("bier",  "jetzt kein bier mehr", "wein"), ("wein", "jetzt kein wein mehr", "bier"),
-    # balance: the plain words must also be learned WITHOUT "kein"
-    ("start", "bier", "bier"),            ("start", "wein", "wein"),
-    ("start", "heute bier", "bier"),      ("start", "heute wein", "wein"),
-    ("start", "ein wein bitte", "wein"),  ("start", "bitte ein bier", "bier"),
-]
-
-# New sentences the model has NEVER seen. "vergleich" tests both models on them.
-TEST_SENTENCES = [
-    ("start", "kein bier bitte", "wein"),     ("start", "kein wein bitte", "bier"),
-    ("start", "lieber kein bier", "wein"),    ("start", "lieber kein wein", "bier"),
-    ("start", "ich will kein wein", "bier"),  ("start", "heute kein bier bitte", "wein"),
-    ("start", "bier bitte", "bier"),          ("start", "wein bitte", "wein"),
-    ("start", "ich will bier", "bier"),       ("start", "ich will wein", "wein"),
-    ("start", "heute ein bier", "bier"),      ("start", "heute ein wein", "wein"),
-]
-if not SIMPLE:
-    seed_examples += KEIN_EXAMPLES
-
-# ---------- 2. Text -> numbers ----------
-def clean(text):
-    text = text.casefold()
-    for ch in "?!.,;:":
-        text = text.replace(ch, "")
-    return " ".join(text.split())
-
-def features(context, sentence):           # words + context = input
-    return clean(sentence).split() + [f"[{context}]"]
-
-def to_matrix(examples, vocab, intents):   # all examples at once: X (inputs), Y (targets)
-    col = {f: j for j, f in enumerate(vocab)}
-    X = np.zeros((len(examples), len(vocab)))
-    Y = np.zeros((len(examples), len(intents)))
-    for n, (c, s, i) in enumerate(examples):
-        for f in features(c, s):
-            if f in col:
-                X[n, col[f]] = 1
-        Y[n, intents.index(i)] = 1
-    return X, Y
-
-def softmax(Z):
-    E = np.exp(Z - Z.max(axis=-1, keepdims=True))
-    return E / E.sum(axis=-1, keepdims=True)
-
-# ---------- 3. The two-layer model ----------
-def forward(m, X):
-    Hd = np.tanh(X @ m["W1"].T + m["b1"])            # layer 1: concepts
-    P  = softmax(Hd @ m["W2"].T + m["b2"])           # layer 2: answers
-    return Hd, P
-
-def train(examples, rounds=1500, lr=0.5):
-    vocab   = sorted({f for c, s, _ in examples for f in features(c, s)})
-    intents = sorted({i for _, _, i in examples})
-    X, Y = to_matrix(examples, vocab, intents)
-    np.random.seed(0)                                # same start every time -> repeatable
-    m = {"vocab": vocab, "intents": intents,
-         "W1": np.random.randn(HIDDEN, len(vocab)) * 0.5, "b1": np.zeros(HIDDEN),
-         "W2": np.random.randn(len(intents), HIDDEN) * 0.5, "b2": np.zeros(len(intents))}
-    # "momentum": keep a bit of the last step, so learning rolls faster downhill
-    v = {k: np.zeros_like(m[k]) for k in ("W1", "b1", "W2", "b2")}
-    for _ in range(rounds):
-        Hd, P = forward(m, X)                        # guess (for all examples at once)
-        D2 = (P - Y) / len(examples)                 # error at the output
-        D1 = (D2 @ m["W2"]) * (1 - Hd**2)            # error passed back to layer 1
-        grads = {"W2": D2.T @ Hd, "b2": D2.sum(0),   # blame for every weight
-                 "W1": D1.T @ X,  "b1": D1.sum(0)}
-        for k in grads:                              # correct
-            v[k] = 0.9 * v[k] - lr * grads[k]
-            m[k] += v[k]
-    return m
-
-def train_one_matrix(examples, rounds=1500, lr=0.5):  # the old model, for "vergleich"
-    vocab   = sorted({f for c, s, _ in examples for f in features(c, s)})
-    intents = sorted({i for _, _, i in examples})
-    X, Y = to_matrix(examples, vocab, intents)
-    W, v = np.zeros((len(intents), len(vocab))), 0
-    for _ in range(rounds):
-        P = softmax(X @ W.T)
-        v = 0.9 * v - lr * (P - Y).T @ X / len(examples)
-        W += v
-    return lambda X_: softmax(X_ @ W.T), vocab, intents
-
-# ---------- 4. Database: model stored as readable JSON ----------
-def open_db():
-    db = sqlite3.connect(DB_FILE)
-    db.execute("CREATE TABLE IF NOT EXISTS examples (id INTEGER PRIMARY KEY, context TEXT, sentence TEXT, intent TEXT)")
-    db.execute("CREATE TABLE IF NOT EXISTS model (name TEXT PRIMARY KEY, value TEXT)")
-    if not db.execute("SELECT 1 FROM examples").fetchone():
-        db.executemany("INSERT INTO examples (context, sentence, intent) VALUES (?, ?, ?)",
-                       [(c, clean(s), i) for c, s, i in seed_examples])
-        db.commit()
-    return db
-
-def load_examples(db):
-    return db.execute("SELECT context, sentence, intent FROM examples ORDER BY id").fetchall()
-
-def save_model(db, m):
-    db.execute("DELETE FROM model")
-    db.executemany("INSERT INTO model VALUES (?, ?)",
-                   [(k, json.dumps(v.tolist() if isinstance(v, np.ndarray) else v, ensure_ascii=False))
-                    for k, v in m.items()])
-    db.commit()
-
-def load_model(db):
-    rows = dict(db.execute("SELECT name, value FROM model").fetchall())
-    if not rows:
-        return None
-    m = {k: json.loads(v) for k, v in rows.items()}
-    for k in ("W1", "b1", "W2", "b2"):
-        m[k] = np.array(m[k])
-    return m
-
-# ---------- 5. Decision log through both layers ----------
-def show_log(feats, m, x, h, p):
-    vocab, intents = m["vocab"], m["intents"]
-    unknown = [f for f in feats if f not in vocab]
-    top_i = np.argsort(p)[::-1][:2]                   # the 2 best answers
-    strong = np.argsort(-np.abs(h))[:4]               # the 4 most active concepts
-
+# ---------- decision log through both layers ----------
+def print_log(d):
     print("    ═══ TWO-LAYER DECISION LOG ═══")
-    if unknown:
-        print(f"    ⚠️  unknown words (ignored): {', '.join(unknown)}")
+    if d["unknown"]:
+        print(f"    ⚠️  unknown words (ignored): {', '.join(d['unknown'])}")
 
-    print(f"\n    📥 LAYER 1: Words → Concepts")
+    print(f"\n    📥 LAYER 1: Words → Concepts   (the 4 with the biggest vote for '{d['layer1']['top_intent']}')")
     print(f"    {'─' * 70}")
-    for k in strong:
-        drivers = sorted([(m["W1"][k, j], vocab[j]) for j in np.nonzero(x)[0]],
-                         key=lambda t: -abs(t[0]))[:3]
-        driven = "  ".join(f"{w}({v:+.1f})" for v, w in drivers)
-        concept_activation = h[k]
-        concept_meaning = "↑ STRONG" if concept_activation > 0.5 else ("↓ WEAK" if concept_activation < -0.5 else "~ neutral")
-        print(f"    Concept {k:<2d} [{concept_activation:+.2f} {concept_meaning}]")
-        print(f"              ← {driven}")
-        word_sum = float(m["W1"][k] @ x)                    # all active word weights added up
-        z = word_sum + m["b1"][k]
-        print(f"              Σ words {word_sum:+.2f}  + bias {m['b1'][k]:+.2f}  = {z:+.2f}   → tanh({z:+.2f}) = {np.tanh(z):+.2f}")
+    for c in d["layer1"]["concepts"]:
+        meaning = {"strong": "↑ STRONG", "weak": "↓ WEAK", "neutral": "~ neutral"}[c["label"]]
+        print(f"    Concept {c['concept']:<2d} [{c['activation']:+.2f} {meaning}]")
+        print(f"              ← " + "  ".join(f"{t['word']}({t['weight']:+.1f})" for t in c["drivers"]))
+        print(f"              Σ words {c['word_sum']:+.2f}  + bias {c['bias']:+.2f}  = {c['z']:+.2f}"
+              f"   → tanh({c['z']:+.2f}) = {c['tanh']:+.2f}")
 
+    l2 = d["layer2"]
     print(f"\n    📤 LAYER 2: Concepts → Answer")
     print(f"    {'─' * 70}")
     print(f"    Which concepts influenced each answer:")
-    print(f"    {'':16s}  concepts:      " + " / ".join(f"c{k}" for k in strong))
-    for i in top_i:
-        votes = [m["W2"][i, k] * h[k] for k in strong]
-        shown = sum(votes)
-        others = float(m["W2"][i] @ h) - shown            # concepts not listed above
-        score = shown + others + m["b2"][i]               # this goes into softmax
-        print(f"    {intents[i]:16s}  concepts vote: " + " / ".join(f"{v:+.1f}" for v in votes)
-              + f"  = {shown:+.1f}")
-        print(f"    {'':16s}  + others {others:+.1f}  + bias {m['b2'][i]:+.1f}  → score {score:+.1f}")
+    print(f"    {'':16s}  concepts:      " + " / ".join(f"c{k}" for k in l2["concepts"]))
+    for a in l2["answers"]:
+        print(f"    {a['intent']:16s}  concepts vote: " + " / ".join(f"{v:+.1f}" for v in a["votes"])
+              + f"  = {a['shown']:+.1f}")
+        print(f"    {'':16s}  + others {a['others']:+.1f}  + bias {a['bias']:+.1f}  → score {a['score']:+.1f}")
 
-    scores = m["W2"] @ h + m["b2"]                    # score of every answer
-    E = np.exp(scores - scores.max())                 # softmax step 1 (shifted by the best score)
+    sm = d["softmax"]
     print(f"\n    🧮 SOFTMAX: e^(score − best score), then share of the total")
     print(f"    {'─' * 70}")
-    for i in top_i:
-        print(f"    {intents[i]:16s}  {scores[i]:+6.1f} − {scores.max():+.1f} = {scores[i] - scores.max():+6.1f}"
-              f"   e^ = {E[i]:.4f}   share = {E[i]:.4f} / {E.sum():.4f} = {E[i] / E.sum():.1%}")
-    rest = E.sum() - sum(E[i] for i in top_i)
-    print(f"    {'all other ' + str(len(intents) - len(top_i)):16s}  {'':24s}e^ = {rest:.4f}   (sum of the remaining answers)")
-    print(f"    {'total':16s}  {'':24s}e^ = {E.sum():.4f}")
+    for a in sm["answers"]:
+        print(f"    {a['intent']:16s}  {a['score']:+6.1f} − {sm['best_score']:+.1f} = {a['shifted']:+6.1f}"
+              f"   e^ = {a['exp']:.4f}   share = {a['exp']:.4f} / {sm['total_exp']:.4f} = {a['share']:.1%}")
+    print(f"    {'all other ' + str(sm['others_count']):16s}  {'':24s}e^ = {sm['others_exp']:.4f}   (sum of the remaining answers)")
+    print(f"    {'total':16s}  {'':24s}e^ = {sm['total_exp']:.4f}")
 
     print(f"\n    🎯 FINAL DECISION")
     print(f"    {'─' * 70}")
-    print("    " + " vs ".join(f"{intents[i]} = {p[i]:3.0%}" for i in top_i))
+    print("    " + " vs ".join(f"{f['intent']} = {f['p']:3.0%}" for f in d["final"]))
 
-# ---------- 6. Start ----------
-db = open_db()
-examples = load_examples(db)
-m = load_model(db)
-if m is None:
-    print("🔄 training two-layer neural network ...")
-    print(f"   layer 1: {len(set(f for c, s, _ in examples for f in features(c, s)))} words+context → {HIDDEN} hidden concepts")
-    print(f"   layer 2: {HIDDEN} concepts → {len({i for _, _, i in examples})} possible answers")
-    m = train(examples); save_model(db, m)
-    print(f"✅ model ready with {m['W1'].size + m['W2'].size} trained weights")
-
-def predict(context, sentence):
-    feats = features(context, sentence)
-    x = np.array([1.0 if f in feats else 0.0 for f in m["vocab"]])
-    h, p = forward(m, x)
-    return feats, x, h, p
-
-context, bill, show, last = "start", 0.0, True, None
-
-def show_blame(ctx, sentence, intent):
-    """Before retraining: how wrong is the current model for this example, and who is to blame?"""
-    feats, x, h, p = predict(ctx, sentence)
-    intents = m["intents"]
-    unknown = [f for f in feats if f not in m["vocab"]]
-    y = np.zeros(len(intents))
-    if intent in intents:
-        y[intents.index(intent)] = 1.0
-    D2 = p - y                                        # error of every answer
-    D1 = (m["W2"].T @ D2) * (1 - h**2)                # blame passed back to the concepts
+def print_blame(b):
     print("    ═══ BLAME (before retraining) ═══")
-    if unknown:
-        print(f"    🆕 new words (get their own column in W1): {', '.join(unknown)}")
-    if intent not in intents:
-        print(f"    🆕 new answer '{intent}' (gets its own row in W2)")
+    if b["new_words"]:
+        print(f"    🆕 new words (get their own column in W1): {', '.join(b['new_words'])}")
+    if b["new_intent"]:
+        print(f"    🆕 new answer '{b['new_intent']}' (gets its own row in W2)")
     print(f"\n    📉 ANSWERS with the most blame: error D2 = P − Y  (+ too strong, − too weak)")
-    for i in np.argsort(-np.abs(D2))[:3]:
-        print(f"    {intents[i]:16s} P = {p[i]:6.1%}   right = {y[i]:.0f}   D2 = {D2[i]:+.2f}  "
-              f"{'too strong' if D2[i] > 0 else 'too weak'}")
+    for a in b["answers"]:
+        print(f"    {a['intent']:16s} P = {a['p']:6.1%}   right = {a['right']:.0f}   D2 = {a['d2']:+.2f}  "
+              f"{'too strong' if a['d2'] > 0 else 'too weak'}")
     print(f"\n    🎯 CONCEPTS with the most blame: D1 = (D2 · W2) × (1 − h²)")
-    for k in np.argsort(-np.abs(D1))[:3]:
-        drivers = sorted([(m["W1"][k, j], m["vocab"][j]) for j in np.nonzero(x)[0]],
-                         key=lambda t: -abs(t[0]))[:3]
-        words = "  ".join(f"{w}({v:+.1f})" for v, w in drivers)
-        print(f"    Concept {k:<2d} blame {D1[k]:+.3f}   h = {h[k]:+.2f}   ← {words}")
+    for c in b["concepts"]:
+        words = "  ".join(f"{t['word']}({t['weight']:+.1f})" for t in c["drivers"])
+        print(f"    Concept {c['concept']:<2d} blame {c['blame']:+.3f}   h = {c['h']:+.2f}   ← {words}")
     print("    (the weights of the words in this sentence move, a little in each of the 1500 rounds)\n")
 
-def learn(ctx, sentence, intent):
-    global examples, m
-    for known in list(INTENTS) + m["intents"]:        # reuse known intent spelling
-        if known.casefold() == intent.casefold():
-            intent = known
+def print_learned(l):
     if show:
-        show_blame(ctx, sentence, intent)
-    old = db.execute("DELETE FROM examples WHERE context=? AND sentence=?",
-                     (ctx, clean(sentence))).rowcount
-    db.execute("INSERT INTO examples (context, sentence, intent) VALUES (?, ?, ?)",
-               (ctx, clean(sentence), intent)); db.commit()
-    if old:
-        print(f"  (replaced {old} old example)")
-    examples = load_examples(db)
-    print(f"  🔄 retraining both layers ({len(examples)} examples total) ...")
-    m = train(examples); save_model(db, m)
-    print(f"  ✅ learned: [{ctx}] '{clean(sentence)}' -> {intent}")
-    return intent
+        print_blame(l["blame"])
+    if l["replaced"]:
+        print(f"  (replaced {l['replaced']} old example)")
+    print(f"  🔄 retraining both layers ({l['examples']} examples total) ...")
+    print(f"  ✅ learned: [{l['context']}] '{l['sentence']}' -> {l['intent']}")
 
-def ask_teacher():
-    choices = list(INTENTS) + [i for i in m["intents"] if i not in INTENTS]
+def print_act(a):
+    if a["blocked"]:
+        print(f"\n  🍺 Barkeeper: {a['reply']}\n")
+        return
+    print(f"\n  🍺 Barkeeper: {a['reply']}   ({a['intent']}, {a['prob']:.0%})")
+    print("     (wrong? type: falsch)\n")
+
+def ask_teacher(choices):
     print("  🎓 What should I have done? Pick a number or type a new answer:")
     for n, c in enumerate(choices, 1):
         print(f"     {n:2d}. {c}")
@@ -289,111 +94,78 @@ def ask_teacher():
         return choices[int(pick) - 1]
     return pick
 
-def act(intent, prob):
-    global context, bill
-    before = (context, bill)
-    replies, price, new_ctx = INTENTS.get(intent, ([intent], 0, None))
-    if intent == "tschuess" and bill > 0:
-        print(f"\n  🍺 Barkeeper: Halt! Erst zahlen, {bill:.2f} € bitte!\n"); return before
-    reply = random.choice(replies).format(bill=bill)
-    if intent == "zahlen":
-        bill = 0.0
-    bill += price
-    if new_ctx:
-        context = new_ctx
-    print(f"\n  🍺 Barkeeper: {reply}   ({intent}, {prob:.0%})")
-    print("     (wrong? type: falsch)\n")
-    return before
+# ---------- Start ----------
+bar = Barkeeper(PROFILE)
+if bar.trained_on_start:
+    p = bar.params()
+    print("🔄 training two-layer neural network ...")
+    print(f"   layer 1: {p['vocab_size']} words+context → {bar.hidden} hidden concepts")
+    print(f"   layer 2: {bar.hidden} concepts → {p['n_intents']} possible answers")
+    print(f"✅ model ready with {p['w1_size'] + p['w2_size']} trained weights")
 
-print(f"🍺🍺 Two-layer barkeeper: {len(examples)} examples, "
-      f"{len(m['vocab'])} features -> {HIDDEN} concepts -> {len(m['intents'])} answers "
-      f"= {m['W1'].size + m['W2'].size + HIDDEN + len(m['intents'])} weights")
-print("Try:    kein bier  /  heute kein wein  /  ein weißbier  /  noch eins")
+p = bar.params()
+print(f"🍺🍺 Two-layer barkeeper: {p['n_examples']} examples, "
+      f"{p['vocab_size']} features -> {bar.hidden} concepts -> {p['n_intents']} answers "
+      f"= {p['n_weights']} weights")
+print("Try:    " + "  /  ".join(bar.suggestions))
 print("Teach:  if I don't understand, I'll ask you;  wrong answer -> falsch")
 print("        or directly: noch eins = bier  /  [wein] noch eins = wein")
 print("Other:  data | vergleich | log | reset | exit\n")
 
+s, show = Session(), True
+
+def teach_pending(choices):
+    intent = ask_teacher(choices)
+    if not intent:
+        s.pending = None
+        return
+    r = bar.teach(s, intent)
+    print_learned(r["learned"])
+    print_act(r["act"])
+
 while True:
-    said = input(f"you [{context}, {bill:.2f} €]> ").strip()
+    said = input(f"you [{s.context}, {s.bill:.2f} €]> ").strip()
     cmd = said.lower()
     if cmd in ("exit", "quit", ""):
         break
     if cmd == "log":
         show = not show; print(f"  log {'on' if show else 'off'}\n"); continue
-    if cmd == "reset":
-        context, bill, last = "start", 0.0, None
-        print("  (a new guest walks in)\n"); continue
 
     if cmd in ("data", "daten"):
-        X, _ = to_matrix(examples, m["vocab"], m["intents"])
-        _, P = forward(m, X)
-        ok = 0
-        for n, ((c, s, i), p) in enumerate(zip(examples, P), 1):
-            guess = m["intents"][p.argmax()]; ok += guess == i
-            mark = "✓" if guess == i else f"✗ says {guess}"
-            print(f"  {n:3d}. [{c:9s}] {s:28s} = {i:16s} {mark}")
-        print(f"\n  {ok}/{len(examples)} correct\n"); continue
+        d = bar.data()
+        for r in d["rows"]:
+            mark = "✓" if r["ok"] else f"✗ says {r['guess']}"
+            print(f"  {r['n']:3d}. [{r['context']:9s}] {r['sentence']:28s} = {r['intent']:16s} {mark}")
+        print(f"\n  {d['correct']}/{d['total']} correct\n"); continue
 
     if cmd in ("vergleich", "compare"):              # one matrix vs two layers, same data
         print("  training the old one-matrix model on the same examples ...")
-        one, v1, i1 = train_one_matrix(examples)
-        X1, _ = to_matrix(examples, v1, i1)
-        guess1 = [i1[k] for k in one(X1).argmax(1)]
-        X2, _ = to_matrix(examples, m["vocab"], m["intents"])
-        guess2 = [m["intents"][k] for k in forward(m, X2)[1].argmax(1)]
-        ok1 = sum(g == i for g, (_, _, i) in zip(guess1, examples))
-        ok2 = sum(g == i for g, (_, _, i) in zip(guess2, examples))
-        print(f"\n  ONE MATRIX:  {ok1}/{len(examples)} correct")
-        print(f"  TWO LAYERS:  {ok2}/{len(examples)} correct\n")
+        c = bar.compare()
+        print(f"\n  ONE MATRIX:  {c['one_ok']}/{c['total']} correct")
+        print(f"  TWO LAYERS:  {c['two_ok']}/{c['total']} correct\n")
         print("  NEW sentences (never trained):")
-        tests = [(c, clean(s), i) for c, s, i in TEST_SENTENCES]
-        T1, _ = to_matrix(tests, v1, i1)
-        T2, _ = to_matrix(tests, m["vocab"], m["intents"])
-        t1 = [i1[k] for k in one(T1).argmax(1)]
-        t2 = [m["intents"][k] for k in forward(m, T2)[1].argmax(1)]
         print("    " + "sentence".ljust(24) + "should be".ljust(11) + "one matrix".ljust(14) + "two layers")
-        for (c, s, i), g1, g2 in zip(tests, t1, t2):
-            print(f"    {s:24s}{i:11s}{g1:9s}{'✓' if g1 == i else '✗':5s}{g2:9s}{'✓' if g2 == i else '✗'}")
-        print(f"    {'':35s}{sum(g == t[2] for g, t in zip(t1, tests)):2d}/{len(tests)}"
-              f"         {sum(g == t[2] for g, t in zip(t2, tests)):2d}/{len(tests)}\n")
+        for t in c["tests"]:
+            print(f"    {t['sentence']:24s}{t['expected']:11s}{t['one']:9s}{'✓' if t['one'] == t['expected'] else '✗':5s}"
+                  f"{t['two']:9s}{'✓' if t['two'] == t['expected'] else '✗'}")
+        print(f"    {'':35s}{c['one_test_ok']:2d}/{len(c['tests'])}         {c['two_test_ok']:2d}/{len(c['tests'])}\n")
         continue
 
-    if cmd in ("falsch", "wrong"):
-        if not last:
-            print("  nothing to correct yet\n"); continue
-        ctx, sentence, wrong, (old_ctx, old_bill) = last
-        print(f"  you said '{sentence}' in [{ctx}], I did: {wrong}")
-        intent = ask_teacher()
-        if intent:
-            context, bill = old_ctx, old_bill
-            intent = learn(ctx, sentence, intent)
-            last = (ctx, sentence, intent, act(intent, 1.0))
-        continue
-
-    if said.count("=") > 1:                          # two examples in one line would become one wrong answer
-        print("  ⚠️  one example per line, please use only one '=': sentence = answer")
-        print("     e.g. type  lambrusco = wein  and then  kein lambrusco = bier  separately\n"); continue
-    if "=" in said:
-        left, intent = [s.strip() for s in said.split("=", 1)]
-        ctx = context
-        if left.startswith("[") and "]" in left:
-            ctx, left = left[1:left.index("]")].strip().lower(), left[left.index("]") + 1:]
-        if not clean(left) or not intent:
-            print("  please write: sentence = answer\n"); continue
-        learn(ctx, left, intent); print(); continue
-
-    # ---- normal talking ----
-    feats, x, h, p = predict(context, said)
-    intent = m["intents"][p.argmax()]
-    known_words = [f for f in feats[:-1] if f in m["vocab"]]
-    if show:
-        show_log(feats, m, x, h, p)
-    too_few = len(known_words) < len(feats[:-1]) / 2
-    if not known_words or too_few or p.max() < FALLBACK["min_confidence"]:
-        print(f"\n  🍺 Barkeeper: {FALLBACK['reply']}   (best guess: {intent}, {p.max():.0%})")
-        intent = ask_teacher()
-        if intent:
-            intent = learn(context, said, intent)
-            last = (context, clean(said), intent, act(intent, 1.0))
-        continue
-    last = (context, clean(said), intent, act(intent, p.max()))
+    r = bar.handle(s, said)
+    if r["type"] == "reset":
+        print("  (a new guest walks in)\n")
+    elif r["type"] == "error":
+        print(f"  {'⚠️  ' if '=' in r['message'] else ''}{r['message']}\n")
+    elif r["type"] == "learned":
+        print_learned(r["learned"]); print()
+    elif r["type"] == "wrong":
+        print(f"  you said '{r['sentence']}' in [{r['context']}], I did: {r['wrong_intent']}")
+        teach_pending(r["choices"])
+    elif r["type"] == "say":
+        if show:
+            print_log(r["log"])
+        if r["understood"]:
+            print_act(r["act"])
+        else:
+            print(f"\n  🍺 Barkeeper: {r['reply']}   (best guess: {r['intent']}, {r['confidence']:.0%})")
+            teach_pending(r["choices"])

@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Barkeeper Neural Net</title>
+<style>
+  :root {
+    --bg: #f6f5f1; --panel: #ffffff; --ink: #1f2328; --muted: #6a7077; --line: #dcdad2;
+    --accent: #b7791f; --good: #2f855a; --bad: #c53030; --user: #e9e4d4; --bot: #fdf3dc;
+    --bar: #d69e2e;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #181a1d; --panel: #22262a; --ink: #e8e6e1; --muted: #9aa0a6; --line: #373c42;
+            --accent: #ecc94b; --good: #68d391; --bad: #fc8181; --user: #34393f; --bot: #3a3322; --bar: #d69e2e; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 14px/1.45 system-ui, sans-serif;
+         height: 100vh; display: grid; grid-template-columns: minmax(320px, 2fr) 3fr; gap: 12px; padding: 12px; }
+  section { background: var(--panel); border: 1px solid var(--line); border-radius: 10px;
+            display: flex; flex-direction: column; min-height: 0; }
+  h1 { font-size: 15px; margin: 0; padding: 10px 14px; border-bottom: 1px solid var(--line); display: flex; gap: 8px; align-items: center; }
+  h1 .state { margin-left: auto; font-weight: 400; color: var(--muted); font-size: 13px; }
+  h3 { font-size: 13px; margin: 16px 0 6px; color: var(--accent); }
+  h3 small { color: var(--muted); font-weight: 400; }
+  #msgs, .pane { flex: 1; overflow-y: auto; padding: 12px 14px; min-height: 0; }
+  .m { max-width: 85%; padding: 7px 11px; border-radius: 10px; margin: 6px 0; white-space: pre-wrap; }
+  .m.u { background: var(--user); margin-left: auto; }
+  .m.b { background: var(--bot); }
+  .m.s { background: none; color: var(--muted); font-size: 12px; max-width: 100%; padding: 2px 0; }
+  .m small { display: block; color: var(--muted); font-size: 11px; }
+  form { display: flex; gap: 6px; padding: 10px 14px; border-top: 1px solid var(--line); }
+  input[type=text] { flex: 1; padding: 8px 10px; border: 1px solid var(--line); border-radius: 8px;
+                     background: var(--bg); color: var(--ink); font: inherit; }
+  button { padding: 6px 11px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg);
+           color: var(--ink); font: inherit; cursor: pointer; }
+  button:hover { border-color: var(--accent); }
+  .chips { display: flex; flex-wrap: wrap; gap: 5px; padding: 0 14px 8px; }
+  .chips button { font-size: 12px; padding: 3px 8px; }
+  #teacher { padding: 8px 14px; border-top: 1px solid var(--line); background: var(--bot); display: none; }
+  #teacher .chips { padding: 6px 0 0; }
+  .tabs { display: flex; gap: 2px; padding: 8px 10px 0; border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .tabs button { border: none; border-radius: 8px 8px 0 0; background: none; color: var(--muted); }
+  .tabs button.on { background: var(--bg); color: var(--ink); font-weight: 600; border-bottom: 2px solid var(--accent); }
+  .pane { display: none; }
+  .pane.on { display: block; }
+  table { border-collapse: collapse; width: 100%; font-size: 13px; }
+  th, td { text-align: left; padding: 3px 8px 3px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; }
+  .num { font-variant-numeric: tabular-nums; text-align: right; }
+  .card { border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; margin: 6px 0; }
+  .card b { color: var(--accent); }
+  .muted { color: var(--muted); }
+  .good { color: var(--good); } .bad { color: var(--bad); }
+  .eq { font-family: ui-monospace, Menlo, monospace; font-size: 12px; }
+  .bar { height: 14px; background: var(--line); border-radius: 4px; overflow: hidden; min-width: 120px; }
+  .bar i { display: block; height: 100%; background: var(--bar); }
+  .pos { color: var(--good); } .neg { color: var(--bad); }
+  .kv { display: grid; grid-template-columns: max-content 1fr; gap: 3px 16px; }
+  .kv span:nth-child(odd) { color: var(--muted); }
+  .words { display: flex; flex-wrap: wrap; gap: 4px; }
+  .banner { border: 2px solid var(--bad); background: color-mix(in srgb, var(--bad) 14%, transparent);
+            border-radius: 8px; padding: 10px 12px; margin: 0 0 10px; }
+  .banner b { color: var(--bad); font-size: 15px; }
+  .words span.unk { border-color: var(--bad); color: var(--bad); background: color-mix(in srgb, var(--bad) 14%, transparent);
+                    font-weight: 700; text-decoration: underline wavy; }
+  .words span { background: var(--bg); border: 1px solid var(--line); border-radius: 6px; padding: 1px 6px; font-size: 12px; }
+  @media (max-width: 800px) { body { grid-template-columns: 1fr; height: auto; } section { height: 90vh; } }
+</style>
+</head>
+<body>
+
+<section>
+  <h1>🍺 Barkeeper <span class="state" id="state"></span></h1>
+  <div id="msgs"></div>
+  <div id="teacher"><b>🎓 What should I have done?</b> <button id="skip">skip</button><div class="chips" id="choices"></div></div>
+  <div class="chips">
+    <span id="sugg" style="display:contents"></span>
+    <button data-say="falsch">falsch</button><button data-say="reset">reset</button>
+  </div>
+  <form id="form"><input type="text" id="text" autocomplete="off" placeholder="say something, or: noch eins = bier" autofocus><button>Send</button></form>
+</section>
+
+<section>
+  <h1>🧠 Inside the network</h1>
+  <div class="tabs" id="tabs">
+    <button data-t="decision" class="on">Decision</button><button data-t="blame">Blame</button>
+    <button data-t="params">Parameters</button><button data-t="data">Training data</button>
+    <button data-t="compare">1 matrix vs 2 layers</button>
+  </div>
+  <div class="pane on" id="decision"><p class="muted">Say something – the decision log through both layers appears here.</p></div>
+  <div class="pane" id="blame"><p class="muted">Teach the barkeeper (answer a question or type <code>sentence = answer</code>) – then you see who is to blame for the error.</p></div>
+  <div class="pane" id="params"></div>
+  <div class="pane" id="data"></div>
+  <div class="pane" id="compare"></div>
+</section>
+
+<script>
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const f = (v, d = 2) => (v >= 0 ? '+' : '') + v.toFixed(d);
+const sg = (v, d = 2) => `<span class="${v >= 0 ? 'pos' : 'neg'}">${f(v, d)}</span>`;
+const pct = v => (v * 100).toFixed(1) + '%';
+const sid = Math.random().toString(36).slice(2);
+const api = (path, body) => fetch('/api/' + path, body === undefined ? {} :
+  { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ sid, ...body }) }).then(r => r.json());
+
+// ---------- chat ----------
+function msg(cls, text, small) {
+  const d = document.createElement('div');
+  d.className = 'm ' + cls;
+  d.textContent = text;
+  if (small) { const s = document.createElement('small'); s.textContent = small; d.appendChild(s); }
+  $('msgs').appendChild(d); $('msgs').scrollTop = 1e9;
+}
+function setState(r) { if (r.context !== undefined) $('state').textContent = `[${r.context}, ${r.bill.toFixed(2)} €]`; }
+function askTeacher(choices) {
+  $('choices').innerHTML = choices.map(c => `<button>${esc(c)}</button>`).join('');
+  $('teacher').style.display = 'block';
+}
+function closeTeacher() { $('teacher').style.display = 'none'; }
+function learnedLine(l) {
+  return `✅ learned: [${l.context}] '${l.sentence}' → ${l.intent}` + (l.replaced ? ` (replaced ${l.replaced} old)` : '') + ` · ${l.examples} examples, retrained`;
+}
+function actMsg(a) { msg('b', a.reply, a.blocked ? '' : `${a.intent}, ${(a.prob * 100).toFixed(0)}%` + (a.prob < 1 ? ' · wrong? type "falsch"' : '')); }
+
+function show(r) {
+  setState(r);
+  if (r.type === 'say') {
+    renderDecision(r);
+    if (r.log.unknown.length) msg('s', `⚠️ unknown word${r.log.unknown.length > 1 ? 's' : ''} ignored: ${r.log.unknown.join(', ')}`);
+    if (r.understood) actMsg(r.act);
+    else { msg('b', r.reply, `best guess: ${r.intent}, ${(r.confidence * 100).toFixed(0)}%`); askTeacher(r.choices); }
+  } else if (r.type === 'wrong') {
+    msg('s', `you said '${r.sentence}' in [${r.context}], I did: ${r.wrong_intent}`); askTeacher(r.choices);
+  } else if (r.type === 'taught') {
+    closeTeacher(); msg('s', learnedLine(r.learned)); renderBlame(r.learned.blame); actMsg(r.act);
+    refreshParams(); refreshData();
+  } else if (r.type === 'learned') {
+    msg('s', learnedLine(r.learned)); renderBlame(r.learned.blame); refreshParams(); refreshData();
+  } else if (r.type === 'reset') {
+    closeTeacher(); msg('s', '(a new guest walks in)');
+  } else if (r.type === 'error') msg('s', '⚠️ ' + r.message);
+}
+async function send(text) {
+  text = text.trim(); if (!text) return;
+  // while the teacher question is open, a typed line that is not a command is the new answer
+  if ($('teacher').style.display === 'block' && !text.includes('=') && !/^(falsch|wrong|reset|data|compare|vergleich)$/i.test(text)) {
+    msg('u', '🎓 ' + text); return show(await api('teach', { intent: text }));
+  }
+  msg('u', text); closeTeacher();
+  if (text.toLowerCase() === 'data') return tab('data');
+  if (text.toLowerCase() === 'compare' || text.toLowerCase() === 'vergleich') return tab('compare');
+  show(await api('chat', { text }));
+}
+$('form').onsubmit = e => { e.preventDefault(); const t = $('text').value; $('text').value = ''; send(t); };
+document.querySelectorAll('.chips').forEach(c => c.addEventListener('click', e => { if (e.target.dataset.say) send(e.target.dataset.say); }));
+$('choices').onclick = async e => { if (e.target.tagName === 'BUTTON') { msg('u', '🎓 ' + e.target.textContent); show(await api('teach', { intent: e.target.textContent })); } };
+$('skip').onclick = async () => { await api('skip', {}); closeTeacher(); msg('s', 'ok, skipped'); };
+
+// ---------- tabs ----------
+function tab(name) {
+  document.querySelectorAll('.pane').forEach(p => p.classList.toggle('on', p.id === name));
+  document.querySelectorAll('.tabs button').forEach(b => b.classList.toggle('on', b.dataset.t === name));
+  if (name === 'compare' && !$('compare').dataset.loaded) loadCompare();
+}
+$('tabs').onclick = e => { if (e.target.dataset.t) tab(e.target.dataset.t); };
+
+// ---------- decision ----------
+function drivers(c) { return c.drivers.map(t => `${esc(t.word)} ${sg(t.weight, 1)}`).join(' &nbsp; '); }
+function renderDecision(r) {
+  const d = r.log, sm = d.softmax;
+  let h = '';
+  if (d.unknown.length) h += `<div class="banner"><b>⚠️ ${d.unknown.length} unknown word${d.unknown.length > 1 ? 's' : ''}: ${d.unknown.map(esc).join(', ')}</b><br>
+    <span>Not in the vocabulary, so they have no column in W1 and are <b>ignored</b> – the network only decides on the known words.
+    ${r.understood ? '' : 'Too little is known, so the barkeeper asks you.'} Teach them with <code>${esc(d.unknown[0])} = answer</code>.</span></div>`;
+  h += `<h3>📝 Input <small>words + context become a 0/1 vector x</small></h3>
+    <div class="words">${r.features.map(w => `<span class="${d.unknown.includes(w) ? 'unk' : ''}">${esc(w)}</span>`).join('')}</div>`;
+
+  h += `<h3>📥 Layer 1: words → concepts <small>h = tanh(W1·x + b1) – the 4 concepts with the biggest vote for “${esc(d.layer1.top_intent)}”</small></h3>`;
+  h += d.layer1.concepts.map(c => `<div class="card"><b>Concept ${c.concept}</b> &nbsp; ${sg(c.activation)}
+      <span class="muted">${{ strong: '↑ STRONG', weak: '↓ WEAK', neutral: '~ neutral' }[c.label]}</span><br>
+      <span class="muted">← </span>${drivers(c)}<br>
+      <span class="eq">Σ words ${f(c.word_sum)} + bias ${f(c.bias)} = ${f(c.z)} → tanh(${f(c.z)}) = ${f(c.tanh)}</span></div>`).join('');
+
+  h += `<h3>📤 Layer 2: concepts → answer <small>score = W2·h + b2</small></h3>
+    <table><tr><th>answer</th>${d.layer2.concepts.map(k => `<th class="num">c${k}</th>`).join('')}<th class="num">= shown</th><th class="num">+ others</th><th class="num">+ bias</th><th class="num">score</th></tr>
+    ${d.layer2.answers.map(a => `<tr><td><b>${esc(a.intent)}</b></td>${a.votes.map(v => `<td class="num">${sg(v, 1)}</td>`).join('')}
+      <td class="num">${f(a.shown, 1)}</td><td class="num">${f(a.others, 1)}</td><td class="num">${f(a.bias, 1)}</td><td class="num"><b>${f(a.score, 1)}</b></td></tr>`).join('')}</table>`;
+
+  h += `<h3>🧮 Softmax <small>e^(score − best score), then share of the total</small></h3>
+    <table><tr><th>answer</th><th class="num">score − best</th><th class="num">e^</th><th class="num">share</th><th></th></tr>
+    ${sm.answers.map(a => `<tr><td><b>${esc(a.intent)}</b></td><td class="num">${f(a.score, 1)} − ${f(sm.best_score, 1)} = ${f(a.shifted, 1)}</td>
+      <td class="num">${a.exp.toFixed(4)}</td><td class="num">${pct(a.share)}</td><td><div class="bar"><i style="width:${a.share * 100}%"></i></div></td></tr>`).join('')}
+    <tr class="muted"><td>all other ${sm.others_count}</td><td></td><td class="num">${sm.others_exp.toFixed(4)}</td><td></td><td></td></tr>
+    <tr class="muted"><td>total</td><td></td><td class="num">${sm.total_exp.toFixed(4)}</td><td></td><td></td></tr></table>`;
+
+  h += `<h3>🎯 Final decision</h3><p>${d.final.map(x => `<b>${esc(x.intent)}</b> = ${(x.p * 100).toFixed(0)}%`).join(' &nbsp;vs&nbsp; ')}
+    <span class="muted"> · fallback below ${(model.min_confidence * 100).toFixed(0)}% confidence</span></p>`;
+  $('decision').innerHTML = h; tab('decision');
+}
+
+// ---------- blame ----------
+function renderBlame(b) {
+  let h = `<h3>Example <small>[${esc(b.context)}] “${esc(b.sentence)}” → ${esc(b.intent)}</small></h3>`;
+  if (b.new_words.length) h += `<p>🆕 new words (get their own column in W1): ${b.new_words.map(esc).join(', ')}</p>`;
+  if (b.new_intent) h += `<p>🆕 new answer “${esc(b.new_intent)}” (gets its own row in W2)</p>`;
+  h += `<h3>📉 Answers with the most blame <small>D2 = P − Y (+ too strong, − too weak)</small></h3>
+    <table><tr><th>answer</th><th class="num">P</th><th class="num">right</th><th class="num">D2</th><th></th></tr>
+    ${b.answers.map(a => `<tr><td><b>${esc(a.intent)}</b></td><td class="num">${pct(a.p)}</td><td class="num">${a.right}</td>
+      <td class="num">${sg(a.d2)}</td><td>${a.d2 > 0 ? 'too strong' : 'too weak'}</td></tr>`).join('')}</table>
+    <h3>🎯 Concepts with the most blame <small>D1 = (D2 · W2) × (1 − h²)</small></h3>
+    ${b.concepts.map(c => `<div class="card"><b>Concept ${c.concept}</b> &nbsp; blame ${sg(c.blame, 3)} &nbsp; h = ${f(c.h)}<br><span class="muted">← </span>${drivers(c)}</div>`).join('')}
+    <p class="muted">The weights of the words in this sentence move a little in each of the ${model.rounds} rounds.</p>`;
+  $('blame').innerHTML = h; tab('blame');
+}
+
+// ---------- parameters ----------
+let model = { min_confidence: 0.4, rounds: 1500 };
+async function refreshParams() {
+  const p = model = await api('params');
+  $('sugg').innerHTML = p.suggestions.map(s => `<button data-say="${esc(s)}">${esc(s)}</button>`).join('');
+  const kv = rows => `<div class="kv">${rows.map(([k, v]) => `<span>${k}</span><span>${v}</span>`).join('')}</div>`;
+  $('params').innerHTML = `
+    <h3>Model <small>profile: ${esc(p.profile)}</small></h3>
+    ${kv([['Training examples', p.n_examples], ['Input features (words + context)', p.vocab_size],
+          ['Hidden concepts (layer 1 size)', p.hidden], ['Possible answers', p.n_intents],
+          ['W1', `${p.w1_shape[0]} × ${p.w1_shape[1]} = ${p.w1_size}`], ['b1', p.b1_size],
+          ['W2', `${p.w2_shape[0]} × ${p.w2_shape[1]} = ${p.w2_size}`], ['b2', p.b2_size],
+          ['<b>Total weights</b>', `<b>${p.n_weights}</b>`]])}
+    <h3>Training</h3>
+    ${kv([['Rounds', p.rounds], ['Learning rate', p.learning_rate], ['Momentum', p.momentum],
+          ['Random seed', p.seed], ['Start values', `random × ${p.init_scale}`], ['Activation', 'tanh (layer 1), softmax (layer 2)']])}
+    <h3>Barkeeper</h3>
+    ${kv([['Fallback below confidence', p.min_confidence], ['Fallback reply', esc(p.fallback_reply)]])}
+    <h3>Answers (intents)</h3>
+    <table><tr><th>intent</th><th>reply</th><th class="num">price</th><th>new context</th></tr>
+    ${Object.entries(p.intent_defs).map(([k, v]) => `<tr><td><b>${esc(k)}</b></td><td>${esc(v.replies[0])}</td><td class="num">${v.price}</td><td>${esc(v.context || '–')}</td></tr>`).join('')}</table>
+    <h3>Vocabulary <small>${p.vocab_size} columns of W1</small></h3>
+    <div class="words">${p.vocab.map(w => `<span>${esc(w)}</span>`).join('')}</div>`;
+}
+
+// ---------- data / compare ----------
+async function refreshData() {
+  const d = await api('data');
+  $('data').innerHTML = `<p><b>${d.correct}/${d.total}</b> correct</p><table><tr><th>#</th><th>context</th><th>sentence</th><th>answer</th><th></th></tr>
+    ${d.rows.map(r => `<tr><td>${r.n}</td><td>[${esc(r.context)}]</td><td>${esc(r.sentence)}</td><td>${esc(r.intent)}</td>
+      <td class="${r.ok ? 'good' : 'bad'}">${r.ok ? '✓' : '✗ says ' + esc(r.guess)}</td></tr>`).join('')}</table>`;
+  $('compare').dataset.loaded = '';
+}
+async function loadCompare() {
+  $('compare').innerHTML = '<p class="muted">training the old one-matrix model on the same examples …</p>';
+  const c = await api('compare'); $('compare').dataset.loaded = '1';
+  const ok = (a, b) => `<span class="${a === b ? 'good' : 'bad'}">${esc(a)} ${a === b ? '✓' : '✗'}</span>`;
+  $('compare').innerHTML = `<h3>Same training data</h3>
+    <div class="kv"><span>ONE MATRIX</span><span>${c.one_ok}/${c.total} correct</span><span>TWO LAYERS</span><span>${c.two_ok}/${c.total} correct</span></div>
+    <h3>NEW sentences <small>never trained</small></h3>
+    <table><tr><th>sentence</th><th>should be</th><th>one matrix</th><th>two layers</th></tr>
+    ${c.tests.map(t => `<tr><td>${esc(t.sentence)}</td><td>${esc(t.expected)}</td><td>${ok(t.one, t.expected)}</td><td>${ok(t.two, t.expected)}</td></tr>`).join('')}
+    <tr><td></td><td></td><td><b>${c.one_test_ok}/${c.tests.length}</b></td><td><b>${c.two_test_ok}/${c.tests.length}</b></td></tr></table>`;
+}
+
+refreshParams(); refreshData();
+</script>
+</body>
+</html>
